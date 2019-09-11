@@ -1,0 +1,5 @@
+C:\dev\RainDrop\Raindrop\.mono\temp\bin\Tools\RainDrop.dll
+C:\dev\RainDrop\Raindrop\.mono\temp\bin\Tools\RainDrop.pdb
+C:\dev\RainDrop\Raindrop\.mono\temp\obj\Tools\RainDrop.csprojResolveAssemblyReference.cache
+C:\dev\RainDrop\Raindrop\.mono\temp\obj\Tools\RainDrop.dll
+C:\dev\RainDrop\Raindrop\.mono\temp\obj\Tools\RainDrop.pdb

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/powerup.png-68b4bd14d5b88f93a5b9b4b377358e3b.stex"
+path="res://.import/raindrop.png-e97d0a03d6526f95b8e08b571b6fde47.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Graphics/powerup.png"
-dest_files=[ "res://.import/powerup.png-68b4bd14d5b88f93a5b9b4b377358e3b.stex" ]
+source_file="res://Graphics/raindrop.png"
+dest_files=[ "res://.import/raindrop.png-e97d0a03d6526f95b8e08b571b6fde47.stex" ]
 
 [params]
 
