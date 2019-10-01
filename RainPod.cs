@@ -8,7 +8,7 @@ public class RainPod : KinematicBody2D
     // private int a = 2;
     // private string b = "text";
     [Export]
-    int Speed = 10;
+    int Speed = 100;
 
     [Export]
     int LateralAcceleration = 5;

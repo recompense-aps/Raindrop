@@ -50,9 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainScene.cs" />
-    <Compile Include="new_script.cs" />
+    <Compile Include="Modes\FreeFall.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RainDropPod.cs" />
     <Compile Include="RainPod.cs" />
     <Compile Include="Util.cs" />
   </ItemGroup>
