@@ -21,6 +21,9 @@ public class RainPod : KinematicBody2D
     private bool decelRight = false;
     private bool decelLeft = false;
 
+    [Signal]
+    public delegate void HitObstacle();
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -58,7 +61,7 @@ public class RainPod : KinematicBody2D
         if(c != null)
         {
             // there was a collision
-            Position = new Vector2(500, 0);
+            EmitSignal(nameof(HitObstacle), this);
         }
 
         if (decelRight)
