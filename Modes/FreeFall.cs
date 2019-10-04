@@ -40,6 +40,10 @@ public class FreeFall : Node2D
                 GenerateNextObstacleWave(lastOb.Position.y);
             }
         }
+        if (Input.IsActionJustPressed("ui_cancel"))
+        {
+            GetTree().ChangeScene("res://Modes/StartMenu.tscn");
+        }
     }
 
     private void GenerateNextObstacleWave(float startY = 0)
