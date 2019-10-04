@@ -34,7 +34,11 @@ public class FreeFall : Node2D
     {
         if (_spawnedObstacles.Count > 0)
         {
-            //if ()
+            Node2D lastOb = _spawnedObstacles[_spawnedObstacles.Count - 1];
+            if (_pod.Position.y > lastOb.Position.y)
+            {
+                GenerateNextObstacleWave(lastOb.Position.y);
+            }
         }
     }
 
@@ -62,10 +66,11 @@ public class FreeFall : Node2D
         }
     }
 
-    private void OnDropHitObstacle(RainPod r)
+    private void OnDropHitObstacle(RainPod r, KinematicCollision2D collision)
     {
-        r.Position = new Vector2(r.Position.x, -300);
-        ClearSpawnedObstacles();
-        GenerateNextObstacleWave();
+        StaticBody2D obstacle = collision.Collider as StaticBody2D;
+        Node obp = obstacle.GetParent().GetParent();
+        obp.RemoveChild(obstacle.GetParent());
+        score -= 10;
     }
 }

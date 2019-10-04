@@ -61,7 +61,7 @@ public class RainPod : KinematicBody2D
         if(c != null)
         {
             // there was a collision
-            EmitSignal(nameof(HitObstacle), this);
+            EmitSignal(nameof(HitObstacle), this, c);
         }
 
         if (decelRight)
