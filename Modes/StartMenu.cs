@@ -14,6 +14,7 @@ public class StartMenu : Node2D
         levelsButton.Connect("Click", this, nameof(OnLevelsButtonClick));
 
         (GetNode(new NodePath("FreeFallButton")) as Button).Connect("Click", this, nameof(OnFreeFallButtonClick));
+        (GetNode(new NodePath("SettingsButton")) as Button).Connect("Click", this, nameof(OnSettingsButtonClick));
     }
 
     private void OnLevelsButtonClick(Button button)
@@ -26,9 +27,14 @@ public class StartMenu : Node2D
         GetTree().ChangeScene("res://Modes/FreeFall.tscn");
     }
 
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+    private void OnSettingsButtonClick(Button button)
+    {
+        GetTree().ChangeScene("res://Modes/Settings.tscn");
+    }
+
+    //  // Called every frame. 'delta' is the elapsed time since the previous frame.
+    //  public override void _Process(float delta)
+    //  {
+    //      
+    //  }
 }

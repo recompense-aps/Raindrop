@@ -33,3 +33,17 @@ margin_top = 31.0
 margin_right = 171.0
 margin_bottom = 88.0
 text = "Free Fall"
+
+[node name="SettingsButton" parent="." instance=ExtResource( 2 )]
+margin_left = 394.0
+margin_top = 317.0
+margin_right = 576.0
+margin_bottom = 402.0
+
+[node name="Label" type="Label" parent="SettingsButton"]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 60.0
+margin_top = 30.0
+margin_right = 111.0
+margin_bottom = 44.0
+text = "Settings"

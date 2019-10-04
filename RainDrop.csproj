@@ -52,6 +52,7 @@
     <Compile Include="MainScene.cs" />
     <Compile Include="Modes\FreeFall.cs" />
     <Compile Include="Modes\Levels.cs" />
+    <Compile Include="Modes\Settings.cs" />
     <Compile Include="Modes\StartMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RainPod.cs" />
