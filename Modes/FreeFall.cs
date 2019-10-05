@@ -16,12 +16,20 @@ public class FreeFall : Node2D
 
     private List<Node2D> _spawnedObstacles = new List<Node2D>();
 
+    // Exported attributes
+    [Export]
+    public float ObstacleStartY = 0;
+    [Export]
+    public float VerticalObstacleSpace = 100;
+    [Export]
+    public int ObstaclesPerLayer = 10;
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         _window = OS.GetRealWindowSize();
 
-        GenerateNextObstacleWave();
+        GenerateNextObstacleWave(ObstacleStartY);
 
         _pod = Util.LoadNode("RainPod") as RainPod;
         _pod.Position = new Vector2(_window.x / 2, -400);
@@ -46,17 +54,13 @@ public class FreeFall : Node2D
         }
     }
 
-    private void GenerateNextObstacleWave(float startY = 0)
+    private void GenerateNextObstacleWave(float startY)
     {
-        float startX = 0;
-        float ySpace = 100;
-        int obstaclesToGenerate = 10;
-
-        for (int i = 0; i < obstaclesToGenerate; i++)
+        for (int i = 0; i < ObstaclesPerLayer; i++)
         {
             Node2D ob = Util.LoadNode("Obstacle");
             AddChild(ob);
-            ob.Position = new Vector2(_rand.RandiRange(0, (int)OS.GetRealWindowSize().x), startY + ySpace * i);
+            ob.Position = new Vector2(_rand.RandiRange(0, (int)OS.GetRealWindowSize().x), startY + VerticalObstacleSpace * i);
             _spawnedObstacles.Add(ob);
         }
 

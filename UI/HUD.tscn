@@ -1,0 +1,11 @@
+[gd_scene format=2]
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="ScoreText" type="Label" parent="."]
+modulate = Color( 0.0313726, 1, 0, 1 )
+margin_left = 959.536
+margin_top = 577.338
+margin_right = 1010.54
+margin_bottom = 593.338
+text = "Score: 0"
