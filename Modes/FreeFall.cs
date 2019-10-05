@@ -58,9 +58,14 @@ public class FreeFall : Node2D
     {
         for (int i = 0; i < ObstaclesPerLayer; i++)
         {
-            Node2D ob = Util.LoadNode("Obstacle");
+            Obstacle ob = Util.LoadNode("Obstacles/Obstacle") as Obstacle;
+            ob.SetRandomObstacleType();
             AddChild(ob);
-            ob.Position = new Vector2(_rand.RandiRange(0, (int)OS.GetRealWindowSize().x), startY + VerticalObstacleSpace * i);
+
+            float posX = _rand.RandiRange(100, (int)OS.GetRealWindowSize().x - 100);
+            float posY = startY + VerticalObstacleSpace * i;
+
+            ob.Position = new Vector2(posX, posY);
             _spawnedObstacles.Add(ob);
         }
 
