@@ -19,5 +19,10 @@ namespace RainDrop
         {
             context.GetTree().ChangeScene("res://" + scenePath + ".tscn");
         }
+        public static Node FindNode(Node root, string path)
+        {
+            NodePath nodePath = new NodePath(path);
+            return root.GetNode(nodePath);
+        }
     }
 }

@@ -55,9 +55,11 @@
     <Compile Include="Modes\Settings.cs" />
     <Compile Include="Modes\StartMenu.cs" />
     <Compile Include="Obstacles\Obstacle.cs" />
+    <Compile Include="PowerUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RainPod.cs" />
     <Compile Include="UI\Button.cs" />
+    <Compile Include="UI\HUD.cs" />
     <Compile Include="Util.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

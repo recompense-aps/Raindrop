@@ -9,7 +9,6 @@ public class FreeFall : Node2D
     // private int a = 2;
     // private string b = "text";
     private double standardVelocity = 500;
-    private int score = 0;
     private RandomNumberGenerator _rand = new RandomNumberGenerator();
     private Vector2 _window;
     private RainPod _pod;
@@ -29,11 +28,11 @@ public class FreeFall : Node2D
     {
         _window = OS.GetRealWindowSize();
 
-        GenerateNextObstacleWave(ObstacleStartY);
+        GenerateNextWave(ObstacleStartY);
 
         _pod = Util.LoadNode("RainPod") as RainPod;
         _pod.Position = new Vector2(_window.x / 2, -400);
-        _pod.Connect("HitObstacle", this, nameof(OnDropHitObstacle));
+        _pod.Connect("HitSomething", this, nameof(OnDropHitSomething));
         AddChild(_pod);
     }
 
@@ -45,7 +44,7 @@ public class FreeFall : Node2D
             Node2D lastOb = _spawnedObstacles[_spawnedObstacles.Count - 1];
             if (_pod.Position.y > lastOb.Position.y)
             {
-                GenerateNextObstacleWave(lastOb.Position.y);
+                GenerateNextWave(lastOb.Position.y);
             }
         }
         if (Input.IsActionJustPressed("ui_cancel"))
@@ -54,19 +53,30 @@ public class FreeFall : Node2D
         }
     }
 
-    private void GenerateNextObstacleWave(float startY)
+    private void GenerateNextWave(float startY)
     {
         for (int i = 0; i < ObstaclesPerLayer; i++)
         {
-            Obstacle ob = Util.LoadNode("Obstacles/Obstacle") as Obstacle;
-            ob.SetRandomObstacleType();
-            AddChild(ob);
+            _rand.Randomize();
 
             float posX = _rand.RandiRange(100, (int)OS.GetRealWindowSize().x - 100);
             float posY = startY + VerticalObstacleSpace * i;
 
-            ob.Position = new Vector2(posX, posY);
-            _spawnedObstacles.Add(ob);
+            if (_rand.RandiRange(1,10) < 9)
+            {
+                PowerUp p = Util.LoadNode("PowerUp") as PowerUp;
+                p.Position = new Vector2(posX, posY);
+                AddChild(p);
+            }
+            else
+            {
+                Obstacle ob = Util.LoadNode("Obstacles/Obstacle") as Obstacle;
+                ob.SetRandomObstacleType();
+                AddChild(ob);
+
+                ob.Position = new Vector2(posX, posY);
+                _spawnedObstacles.Add(ob);
+            }
         }
 
     }
@@ -79,11 +89,22 @@ public class FreeFall : Node2D
         }
     }
 
-    private void OnDropHitObstacle(RainPod r, KinematicCollision2D collision)
+    private void OnDropHitSomething(RainPod r, KinematicCollision2D collision)
     {
-        StaticBody2D obstacle = collision.Collider as StaticBody2D;
-        Node obp = obstacle.GetParent().GetParent();
-        obp.RemoveChild(obstacle.GetParent());
-        score -= 10;
+        StaticBody2D obj = collision.Collider as StaticBody2D;
+        Node objP = obj.GetParent();
+
+        if (objP is PowerUp)
+        {
+            //(Util.FindNode(this, "HUD") as HUD).Power += 1;
+        }
+        else
+        {
+            Node obp = obj.GetParent().GetParent();
+            obp.RemoveChild(obj.GetParent());
+
+            (Util.FindNode(this, "HUD") as HUD).Score -= 10;
+        }
+
     }
 }
