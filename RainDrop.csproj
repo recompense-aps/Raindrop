@@ -49,7 +49,6 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainScene.cs" />
     <Compile Include="Modes\FreeFall.cs" />
     <Compile Include="Modes\Levels.cs" />
     <Compile Include="Modes\Settings.cs" />
