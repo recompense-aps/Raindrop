@@ -12,6 +12,7 @@ public class FreeFall : Node2D
     private RandomNumberGenerator _rand = new RandomNumberGenerator();
     private Vector2 _window;
     private RainPod _pod;
+    private HUD _hud;
 
     private List<Node2D> _spawnedObstacles = new List<Node2D>();
 
@@ -27,7 +28,7 @@ public class FreeFall : Node2D
     public override void _Ready()
     {
         _window = OS.GetRealWindowSize();
-
+        _hud = (Util.FindNode(this, "HUD") as HUD);
         GenerateNextWave(ObstacleStartY);
 
         _pod = Util.LoadNode("RainPod") as RainPod;
@@ -94,16 +95,18 @@ public class FreeFall : Node2D
         StaticBody2D obj = collision.Collider as StaticBody2D;
         Node objP = obj.GetParent();
 
-        if (objP is PowerUp)
+        _hud.Debug = collision.Collider.GetType().ToString();
+
+        if (collision.Collider is PowerUp)
         {
-            //(Util.FindNode(this, "HUD") as HUD).Power += 1;
+            RemoveChild(collision.Collider as PowerUp);
+            _hud.Power += 1;
         }
         else
         {
             Node obp = obj.GetParent().GetParent();
-            obp.RemoveChild(obj.GetParent());
-
-            (Util.FindNode(this, "HUD") as HUD).Score -= 10;
+            obp.RemoveChild(obj.GetParent()); 
+            _hud.Score -= 10;
         }
 
     }
