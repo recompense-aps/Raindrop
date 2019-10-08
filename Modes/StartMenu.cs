@@ -10,16 +10,8 @@ public class StartMenu : Node2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        Button levelsButton = GetNode(new NodePath("LevelsButton")) as Button;
-        levelsButton.Connect("Click", this, nameof(OnLevelsButtonClick));
-
         (GetNode(new NodePath("FreeFallButton")) as Button).Connect("Click", this, nameof(OnFreeFallButtonClick));
         (GetNode(new NodePath("SettingsButton")) as Button).Connect("Click", this, nameof(OnSettingsButtonClick));
-    }
-
-    private void OnLevelsButtonClick(Button button)
-    {
-        GetTree().ChangeScene("res://Modes/Levels.tscn");
     }
 
     private void OnFreeFallButtonClick(Button button)

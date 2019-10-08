@@ -50,7 +50,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Modes\FreeFall.cs" />
-    <Compile Include="Modes\Levels.cs" />
     <Compile Include="Modes\Settings.cs" />
     <Compile Include="Modes\StartMenu.cs" />
     <Compile Include="Obstacles\Obstacle.cs" />
