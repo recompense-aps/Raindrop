@@ -31,6 +31,7 @@ public class RainPod : KinematicBody2D
         _decel = new Vector2(LateralDeceleration, 0);
     }
 
+
     public void GetInput()
     {
         if(Input.IsActionJustPressed("right"))
