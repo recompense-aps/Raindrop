@@ -8,18 +8,39 @@ public class ObstacleSpawner
     private RandomNumberGenerator _random = new RandomNumberGenerator();
     private static Dictionary<string, int> _cityStats = new Dictionary<string, int>()
     {
-        //city
-        {"Ufo", 2 }
+        {"Pigeon", 1 },
+        {"BrickPlatform", 1 },
+        {"SuperHero", 1 },
+        {"Airplane", 1 },
+        {"PlayGroundSlide",1 },
+        {"Javelin", 1 },
+        {"Football", 1 },
+        {"Ufo", 1 },
+        {"Car", 1 }
     };
 
     private Dictionary<string, int> _jungleStats = new Dictionary<string, int>()
     {
-        {"LogPlatform", 1 }
+        {"LogPlatform", 1 },
+        {"Snake", 1 },
+        {"Toucan", 1 },
+        {"Arrow", 1 },
+        {"DinoBird", 1 },
+        {"JunglePlane", 1 },
+        {"Rainbow", 1 },
+        {"MonkeyHead", 1 }
     };
 
     private Dictionary<string, int> _oceanStats = new Dictionary<string, int>()
     {
-        {"Seagull", 1 }
+        {"Seagull", 1 },
+        {"IcePlatform", 1 },
+        {"SeaPlane", 1 },
+        {"Shark", 1 },
+        {"Surfboard", 1 },
+        {"Submarine", 1 },
+        {"Fish", 1 },
+        {"Parachute", 1 }
     };
 
     List<string> _cityPool;
@@ -59,7 +80,7 @@ public class ObstacleSpawner
     private Obstacle SpawnRandomObstacle(List<string> pool)
     {
         _random.Randomize();
-        int index = _random.RandiRange(0, pool.Count);
+        int index = _random.RandiRange(0, pool.Count - 1);
         Obstacle ob = Util.LoadNode("Obstacles/Obstacle") as Obstacle;
         ob.SetObstacleType(pool[index]);
         return ob;

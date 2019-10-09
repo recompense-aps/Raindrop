@@ -60,6 +60,7 @@ public class RainPod : KinematicBody2D
         KinematicCollision2D c = MoveAndCollide(_velocity * delta);
         if(c != null)
         {
+            System.Diagnostics.Debug.WriteLine(c);
             // there was a collision
             EmitSignal(nameof(HitSomething), this, c);
         }

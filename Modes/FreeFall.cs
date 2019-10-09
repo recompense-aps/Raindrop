@@ -83,7 +83,7 @@ public class FreeFall : Node2D
             float posX = _rand.RandiRange(100, (int)OS.GetRealWindowSize().x - 100);
             float posY = startY + VerticalObstacleSpace * i;
 
-            if (_rand.RandiRange(1,10) < 9)
+            if (_rand.RandiRange(1,10) < 3)
             {
                 PowerUp p = Util.LoadNode("PowerUp") as PowerUp;
                 p.Position = new Vector2(posX, posY);
@@ -126,7 +126,7 @@ public class FreeFall : Node2D
         }
         else
         {
-            StaticBody2D obj = collision.Collider as StaticBody2D;
+            Node obj = collision.Collider as Node;
             Node obp = obj.GetParent().GetParent();
             obp.RemoveChild(obj.GetParent()); 
             _hud.Score -= 10;
