@@ -10,6 +10,7 @@ public class FreeFall : Node2D
     // private string b = "text";
     private double standardVelocity = 500;
     private RandomNumberGenerator _rand = new RandomNumberGenerator();
+    private ObstacleSpawner _obstacleSpawner = new ObstacleSpawner();
     private Vector2 _window;
     private RainPod _pod;
     private StormCloud _stormCloud;
@@ -90,8 +91,7 @@ public class FreeFall : Node2D
             }
             else
             {
-                Obstacle ob = Util.LoadNode("Obstacles/Obstacle") as Obstacle;
-                ob.SetRandomObstacleType();
+                Obstacle ob = _obstacleSpawner.Spawn("all");
                 AddChild(ob);
 
                 ob.Position = new Vector2(posX, posY);

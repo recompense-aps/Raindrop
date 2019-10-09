@@ -16,7 +16,6 @@ public class Obstacle : Node2D
     {
         
     }
-
     public void SetObstacleType(string type)
     {
         AddChild(Util.LoadNode("Obstacles/" + type + "Obstacle"));
