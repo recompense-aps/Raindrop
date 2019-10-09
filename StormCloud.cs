@@ -5,6 +5,11 @@ public class StormCloud : KinematicBody2D
 {
     private Node2D _nodeToFollow;
 
+    #region Exports
+    [Export]
+    public float Speed = 100;
+    #endregion
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
