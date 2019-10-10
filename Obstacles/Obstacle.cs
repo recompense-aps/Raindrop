@@ -4,11 +4,12 @@ using System;
 
 public class Obstacle : Node2D
 {
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
+    [Signal]
+    public delegate void PassedPlayer();
+
     RandomNumberGenerator rand = new RandomNumberGenerator();
     private string _obstacleType = "Football";
+    private Node2D _player;
     
 
     // Called when the node enters the scene tree for the first time.
@@ -20,20 +21,20 @@ public class Obstacle : Node2D
     {
         AddChild(Util.LoadNode("Obstacles/" + type + "Obstacle"));
     }
-
-    public void SetRandomObstacleType()
+    public void TrackPlayer(Node2D player)
     {
-        string[] types = new string[] { "Football", "Pigeon", "Airplane"};
-
-        rand.Randomize();
-        string type = types[rand.RandiRange(0, types.Length-1)];
-
-        SetObstacleType(type);
+        _player = player;
     }
 
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+    // Called every frame. 'delta' is the elapsed time since the previous frame.
+    public override void _Process(float delta)
+    {
+        if (_player != null)
+        {
+            if (_player.Position.y > Position.y + 25)
+            {
+                EmitSignal(nameof(PassedPlayer));
+            }
+        }
+    }
 }

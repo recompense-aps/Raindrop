@@ -5,16 +5,13 @@ using System.Collections.Generic;
 
 public class FreeFall : Node2D
 {
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
-    private double standardVelocity = 500;
     private RandomNumberGenerator _rand = new RandomNumberGenerator();
     private ObstacleSpawner _obstacleSpawner = new ObstacleSpawner();
     private Vector2 _window;
     private RainPod _pod;
     private StormCloud _stormCloud;
     private HUD _hud;
+    private ScoreKeeper _scoreKeeper = new ScoreKeeper();
 
     private List<Node2D> _spawnedObstacles = new List<Node2D>();
 
@@ -43,7 +40,6 @@ public class FreeFall : Node2D
     {
         _window = OS.GetRealWindowSize();
         _hud = (Util.FindNode(this, "HUD") as HUD);
-        GenerateNextWave(ObstacleStartY);
 
         _pod = Util.LoadNode("RainPod") as RainPod;
         _pod.Position = new Vector2(_window.x / 2, DropStartY);
@@ -55,6 +51,9 @@ public class FreeFall : Node2D
         AddChild(_stormCloud);
 
         _stormCloud.Follow(_pod);
+
+        _scoreKeeper.Connect("ScoreChanged", this, nameof(OnScoreChanged));
+        GenerateNextWave(ObstacleStartY);
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -88,14 +87,16 @@ public class FreeFall : Node2D
                 PowerUp p = Util.LoadNode("PowerUp") as PowerUp;
                 p.Position = new Vector2(posX, posY);
                 AddChild(p);
+                _scoreKeeper.ScorePowerUp(p);
             }
             else
             {
                 Obstacle ob = _obstacleSpawner.Spawn("all");
                 AddChild(ob);
-
+                ob.TrackPlayer(_pod);
                 ob.Position = new Vector2(posX, posY);
                 _spawnedObstacles.Add(ob);
+                _scoreKeeper.ScoreObstacle(ob);
             }
         }
 
@@ -116,7 +117,9 @@ public class FreeFall : Node2D
 
         if (collision.Collider is PowerUp)
         {
-            RemoveChild(collision.Collider as PowerUp);
+            PowerUp p = collision.Collider as PowerUp;
+            p.EmitSignal("Collected");
+            RemoveChild(p);
             _hud.Power += 1;
         }
         else if (collision.Collider is StormCloud)
@@ -129,8 +132,12 @@ public class FreeFall : Node2D
             Node obj = collision.Collider as Node;
             Node obp = obj.GetParent().GetParent();
             obp.RemoveChild(obj.GetParent()); 
-            _hud.Score -= 10;
         }
 
+    }
+    
+    private void OnScoreChanged()
+    {
+        _hud.Score = _scoreKeeper.Score;
     }
 }
