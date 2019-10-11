@@ -13,6 +13,10 @@ public class RainPod : KinematicBody2D
     [Export]
     int LateralAcceleration = 5;
     [Export]
+    int VerticalAcceleration = 5;
+    [Export]
+    int VerticalDeceleration = 1;
+    [Export]
     int LateralDeceleration = 1;
 
     private Vector2 _velocity;
@@ -33,18 +37,19 @@ public class RainPod : KinematicBody2D
 
     public void GetInput()
     {
-        if(Input.IsActionJustPressed("right"))
+        if(Input.IsActionJustPressed("move_right"))
         {
             _acceleration.Set(LateralAcceleration, 0);
             decelRight = true;
             decelLeft = false;
         }
-        if(Input.IsActionJustPressed("left"))
+        if(Input.IsActionJustPressed("move_left"))
         {
             _acceleration.Set(-LateralAcceleration, 0);
             decelRight = false;
             decelLeft = true;
         }
+
     }
 
     //  // Called every frame. 'delta' is the elapsed time since the previous frame.
