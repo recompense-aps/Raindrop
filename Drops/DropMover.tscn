@@ -4,4 +4,4 @@
 
 [node name="DropMover" type="Node"]
 script = ExtResource( 1 )
-AccelerationMagnitude = 25.0
+RegularWindMultiplier = 100.0
