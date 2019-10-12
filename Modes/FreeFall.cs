@@ -41,14 +41,14 @@ public class FreeFall : Node2D
         _window = OS.GetRealWindowSize();
         _hud = (Util.FindNode(this, "HUD") as HUD);
 
-        _pod = Util.LoadNode("RainPod") as RainPod;
+        _pod = Util.LoadNode("Drops/RainPod") as RainPod;
         _pod.Position = new Vector2(_window.x / 2, DropStartY);
         _pod.Connect("HitSomething", this, nameof(OnDropHitSomething));
         AddChild(_pod);
 
         _stormCloud = Util.LoadNode("StormCloud") as StormCloud;
         _stormCloud.Position = new Vector2(_window.x / 2, StormCloudStartY);
-        AddChild(_stormCloud);
+       // AddChild(_stormCloud);
 
         _stormCloud.Follow(_pod);
 
