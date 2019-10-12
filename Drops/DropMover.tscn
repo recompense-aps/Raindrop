@@ -4,4 +4,3 @@
 
 [node name="DropMover" type="Node"]
 script = ExtResource( 1 )
-RegularWindMultiplier = 100.0

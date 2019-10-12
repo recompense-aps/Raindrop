@@ -78,27 +78,7 @@ public class DropMover : Node
             _drop.EmitSignal("HitSomething", _drop, c);
         }
         _drop.Position = new Vector2(Mathf.Clamp(_drop.Position.x, 0, 1024), _drop.Position.y);
-
-        if(Input.IsActionJustPressed("ui_accept"))
-        {
-            _currentWindType += 1;
-            _currentWindType = (WindType)Mathf.Clamp((int)_currentWindType, (int)WindType.Small, (int)WindType.Power);
-
-            switch(_currentWindType)
-            {
-                case WindType.Small:
-                    _windMultiplier = SmallWindMultiplier;
-                    break;
-                case WindType.Regular:
-                    _windMultiplier = RegularWindMultiplier;
-                    break;
-                case WindType.Power:
-                    _windMultiplier = PowerWindMultiplier;
-                    break;
-                default:
-                    throw new Exception("Wind type");
-            }
-        }
+        Wind();
     }
 
     private void GetInput()
@@ -154,6 +134,33 @@ public class DropMover : Node
         }
     }
 
+    private void Wind()
+    {
+        if (Input.IsActionJustPressed("ui_accept"))
+        {
+            _currentWindType += 1;
+            
+            if (_currentWindType > WindType.Power)
+            {
+                _currentWindType = WindType.Small;
+            }
+
+            switch (_currentWindType)
+            {
+                case WindType.Small:
+                    _windMultiplier = SmallWindMultiplier;
+                    break;
+                case WindType.Regular:
+                    _windMultiplier = RegularWindMultiplier;
+                    break;
+                case WindType.Power:
+                    _windMultiplier = PowerWindMultiplier;
+                    break;
+                default:
+                    throw new Exception("Wind type");
+            }
+        }
+    }
     private void ResetX()
     {
         _acceleration.x =
