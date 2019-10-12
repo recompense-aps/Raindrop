@@ -4,9 +4,12 @@ using System;
 public class DropMover : Node
 {
     private KinematicBody2D _drop;
+    [Export]
     float Speed = 100;
-    float acelMagnitude = 20;
-    float decelMagnitude = 1;
+    [Export]
+    float AccelerationMagnitude = 20;
+    [Export]
+    float DecelerationMagnitude = 1;
 
     private Vector2 _velocity;
     private Vector2 _acceleration;
@@ -65,50 +68,59 @@ public class DropMover : Node
         {
             _drop.EmitSignal("HitSomething", _drop, c);
         }
+        _drop.Position = new Vector2(Mathf.Clamp(_drop.Position.x, 0, 1024), _drop.Position.y);
     }
 
     private void GetInput()
     {
         if (Input.IsActionJustPressed("move_right"))
         {
-            _acceleration.Set(acelMagnitude, 0);
+            _acceleration.Set(AccelerationMagnitude, 0);
             _accelerationTransform.Set(_acceleration);
-            _deceleration.Set(decelMagnitude * -1, 0);
+            _deceleration.Set(DecelerationMagnitude * -1, 0);
         }
         if (Input.IsActionJustPressed("move_left"))
         {
-            _acceleration.Set(-1 * acelMagnitude, 0);
+            _acceleration.Set(-1 * AccelerationMagnitude, 0);
             _accelerationTransform.Set(_acceleration);
-            _deceleration.Set(decelMagnitude, 0);
+            _deceleration.Set(DecelerationMagnitude, 0);
         }
         if (Input.IsActionJustPressed("move_up"))
         {
-            _acceleration.y = -1 * acelMagnitude;
-            _deceleration.y = decelMagnitude;
+            _acceleration.y = -1 * AccelerationMagnitude;
+            _deceleration.y = DecelerationMagnitude;
             _accelerationTransform.Set(_acceleration);
         }
         if (Input.IsActionJustPressed("move_down"))
         {
-            _acceleration.y = acelMagnitude;
-            _deceleration.y = -1 * decelMagnitude;
+            _acceleration.y = AccelerationMagnitude;
+            _deceleration.y = -1 * DecelerationMagnitude;
             _accelerationTransform.Set(_acceleration);
         }
 
-        if (Input.IsActionJustPressed("move_right"))
+        if (Input.IsActionJustPressed("move_right_up"))
         {
-
+            _acceleration.Set(AccelerationMagnitude, -AccelerationMagnitude);
+            _deceleration.Set(-DecelerationMagnitude, DecelerationMagnitude);
+            _accelerationTransform.Set(_acceleration);
         }
-        if (Input.IsActionJustPressed("move_right"))
+        if (Input.IsActionJustPressed("move_right_down"))
         {
-
+            _acceleration.Set(AccelerationMagnitude, AccelerationMagnitude);
+            _deceleration.Set(-DecelerationMagnitude, -DecelerationMagnitude);
+            _accelerationTransform.Set(_acceleration);
         }
-        if (Input.IsActionJustPressed("move_right"))
+        if (Input.IsActionJustPressed("move_left_down"))
         {
-
+            _acceleration.Set(-AccelerationMagnitude, AccelerationMagnitude);
+            _deceleration.Set(DecelerationMagnitude, -DecelerationMagnitude);
+            _accelerationTransform.Set(_acceleration);
         }
-        if (Input.IsActionJustPressed("move_right"))
+        if (Input.IsActionJustPressed("move_left_up"))
         {
-
+            _acceleration.Set(-AccelerationMagnitude, -AccelerationMagnitude);
+            _deceleration.Set(DecelerationMagnitude, DecelerationMagnitude);
+            _accelerationTransform.Set(_acceleration);
         }
     }
 

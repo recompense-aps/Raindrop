@@ -71,6 +71,7 @@ public class FreeFall : Node2D
         {
             GetTree().ChangeScene("res://Modes/StartMenu.tscn");
         }
+
     }
 
     private void GenerateNextWave(float startY)
