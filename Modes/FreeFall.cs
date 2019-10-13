@@ -19,6 +19,8 @@ public class FreeFall : Node2D
     //Drop
     [Export]
     public float DropStartY = -200;
+    [Export]
+    private float DropVolumeIncrease = 1.05f;
 
     //Storm cloud
     [Export]
@@ -46,7 +48,7 @@ public class FreeFall : Node2D
 
         _stormCloud = Util.LoadNode("StormCloud") as StormCloud;
         _stormCloud.Position = new Vector2(_window.x / 2, StormCloudStartY);
-        AddChild(_stormCloud);
+        //AddChild(_stormCloud);
         _stormCloud.Follow(_pod);
 
         _scoreKeeper.Connect("ScoreChanged", this, nameof(OnScoreChanged));
@@ -80,13 +82,19 @@ public class FreeFall : Node2D
 
             float posX = _rand.RandiRange(100, (int)OS.GetRealWindowSize().x - 100);
             float posY = startY + VerticalObstacleSpace * i;
-
-            if (_rand.RandiRange(1,10) < 3)
+            int rand = _rand.RandiRange(1, 10);
+            if (rand < 3)
             {
                 PowerUp p = Util.LoadNode("PowerUp") as PowerUp;
                 p.Position = new Vector2(posX, posY);
                 AddChild(p);
                 _scoreKeeper.ScorePowerUp(p);
+            }
+            else if (rand >= 3 /*&& rand <= 4*/)
+            {
+                RainDropPickUp rainDrop = Util.LoadNode("Drops/RainDropPickUp") as RainDropPickUp;
+                rainDrop.Position = new Vector2(posX, posY);
+                AddChild(rainDrop);
             }
             else
             {
@@ -120,6 +128,11 @@ public class FreeFall : Node2D
             p.EmitSignal("Collected");
             RemoveChild(p);
             _hud.Power += 1;
+        }
+        else if (collision.Collider is RainDropPickUp)
+        {
+            _pod.Grow(DropVolumeIncrease);
+            RemoveChild(collision.Collider as Node2D);
         }
         else if (collision.Collider is StormCloud)
         {

@@ -23,7 +23,13 @@ namespace RainDrop
         public static Node FindNode(Node root, string path)
         {
             NodePath nodePath = new NodePath(path);
-            return root.GetNode(nodePath);
+            Node n = root.GetNode(nodePath);
+
+            if (n == null)
+            {
+                throw new Exception("Could not find node: " + path);
+            }
+            return n;
         }
         public static Button GetButton(Node context, string path)
         {
