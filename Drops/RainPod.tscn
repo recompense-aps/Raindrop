@@ -2,11 +2,11 @@
 
 [ext_resource path="res://Drops/RainPod.cs" type="Script" id=1]
 [ext_resource path="res://Drops/DropMover.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Graphics/raindrop.png" type="Texture" id=3]
+[ext_resource path="res://Graphics/raindrop 2.png" type="Texture" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 15.7798
-height = 2.79955
+height = 15.6644
 
 [node name="RainPod" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -17,6 +17,7 @@ script = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 2, 2 )
 texture = ExtResource( 3 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
