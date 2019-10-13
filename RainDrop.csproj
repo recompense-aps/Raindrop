@@ -59,6 +59,7 @@
     <Compile Include="Modes\StartMenu.cs" />
     <Compile Include="Obstacles\Obstacle.cs" />
     <Compile Include="Obstacles\SpawnStats.cs" />
+    <Compile Include="PickBag.cs" />
     <Compile Include="PowerUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScoreKeeper.cs" />
