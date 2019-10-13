@@ -10,6 +10,7 @@ namespace RainDrop
 {
     public static class Util
     {
+        public static Dictionary<string, object> Globals = new Dictionary<string, object>();
         public static Node2D LoadNode(string path)
         {
             PackedScene o = GD.Load<PackedScene>("res://" + path + ".tscn");
@@ -23,6 +24,10 @@ namespace RainDrop
         {
             NodePath nodePath = new NodePath(path);
             return root.GetNode(nodePath);
+        }
+        public static Button GetButton(Node context, string path)
+        {
+            return (context.GetNode(new NodePath(path)) as Button);
         }
     }
 }

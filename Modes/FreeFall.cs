@@ -12,8 +12,8 @@ public class FreeFall : Node2D
     private StormCloud _stormCloud;
     private HUD _hud;
     private ScoreKeeper _scoreKeeper = new ScoreKeeper();
-
     private List<Node2D> _spawnedObstacles = new List<Node2D>();
+    private string _spawnType = "all";
 
     #region Exports
     //Drop
@@ -34,8 +34,6 @@ public class FreeFall : Node2D
 
     #endregion
 
-
-    // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         _window = OS.GetRealWindowSize();
@@ -49,14 +47,14 @@ public class FreeFall : Node2D
         _stormCloud = Util.LoadNode("StormCloud") as StormCloud;
         _stormCloud.Position = new Vector2(_window.x / 2, StormCloudStartY);
         AddChild(_stormCloud);
-
         _stormCloud.Follow(_pod);
 
         _scoreKeeper.Connect("ScoreChanged", this, nameof(OnScoreChanged));
+
+        _spawnType = Util.Globals.ContainsKey("SpawnType") ? Util.Globals["SpawnType"] as string : "all";
         GenerateNextWave(ObstacleStartY);
     }
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
         if (_spawnedObstacles.Count > 0)
@@ -92,7 +90,7 @@ public class FreeFall : Node2D
             }
             else
             {
-                Obstacle ob = _obstacleSpawner.Spawn("all");
+                Obstacle ob = _obstacleSpawner.Spawn(_spawnType);
                 AddChild(ob);
                 ob.TrackPlayer(_pod);
                 ob.Position = new Vector2(posX, posY);

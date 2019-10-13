@@ -52,6 +52,7 @@
     <Compile Include="Drops\DropMover.cs" />
     <Compile Include="Drops\RainPod.cs" />
     <Compile Include="Modes\FreeFall.cs" />
+    <Compile Include="Modes\LevelSelect.cs" />
     <Compile Include="Modes\Settings.cs" />
     <Compile Include="Modes\StartMenu.cs" />
     <Compile Include="Obstacles\Obstacle.cs" />

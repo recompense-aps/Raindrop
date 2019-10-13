@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Modes/LevelSelect.cs" type="Script" id=1]
+[ext_resource path="res://UI/Button.tscn" type="PackedScene" id=2]
+
+[node name="LevelSelect" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="CityButton" parent="." instance=ExtResource( 2 )]
+margin_left = 391.136
+margin_top = 80.8864
+margin_right = 573.136
+margin_bottom = 165.886
+
+[node name="Label" type="Label" parent="CityButton"]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 53.1635
+margin_top = 32.8643
+margin_right = 158.163
+margin_bottom = 88.8643
+text = "City"
+
+[node name="JungleButton" parent="." instance=ExtResource( 2 )]
+margin_left = 393.352
+margin_top = 186.15
+margin_right = 575.352
+margin_bottom = 271.15
+
+[node name="Label" type="Label" parent="JungleButton"]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 48.7535
+margin_top = 25.4848
+margin_right = 88.7535
+margin_bottom = 39.4848
+text = "Jungle"
+
+[node name="OceanButton" parent="." instance=ExtResource( 2 )]
+margin_left = 395.568
+margin_top = 289.197
+margin_right = 577.568
+margin_bottom = 374.197
+
+[node name="Label" type="Label" parent="OceanButton"]
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 55.4017
+margin_top = 26.5928
+margin_right = 96.4017
+margin_bottom = 40.5928
+text = "Ocean"

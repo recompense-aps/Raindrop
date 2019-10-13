@@ -11,7 +11,7 @@ public class StartMenu : Node2D
 
     private void OnFreeFallButtonClick(Button button)
     {
-        GetTree().ChangeScene("res://Modes/FreeFall.tscn");
+        GetTree().ChangeScene("res://Modes/LevelSelect.tscn");
     }
 
     private void OnSettingsButtonClick(Button button)
