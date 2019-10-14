@@ -12,7 +12,7 @@ namespace RainDrop
     public static class Util
     {
         public static Dictionary<string, object> Globals = new Dictionary<string, object>();
-        public static bool PermaLog = true;
+        public static bool PermaLog = false;
         public static bool ConsoleLog = false;
         public static string LogFilePath = @"C:/dev/raindrop.log";
 

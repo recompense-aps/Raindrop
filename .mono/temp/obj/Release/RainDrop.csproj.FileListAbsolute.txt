@@ -1,0 +1,6 @@
+C:\dev\RainDrop\Raindrop\.mono\temp\bin\Release\RainDrop.dll
+C:\dev\RainDrop\Raindrop\.mono\temp\bin\Release\RainDrop.pdb
+C:\dev\RainDrop\Raindrop\.mono\temp\obj\Release\RainDrop.csprojAssemblyReference.cache
+C:\dev\RainDrop\Raindrop\.mono\temp\obj\Release\RainDrop.csproj.CoreCompileInputs.cache
+C:\dev\RainDrop\Raindrop\.mono\temp\obj\Release\RainDrop.dll
+C:\dev\RainDrop\Raindrop\.mono\temp\obj\Release\RainDrop.pdb
