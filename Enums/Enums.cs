@@ -14,4 +14,14 @@ namespace RainDrop.Enums
     {
         Obstacle, PowerUp, Drop
     }
+
+    public enum DropType
+    {
+        Rain, Snow, Hail
+    }
+
+    public enum WindType
+    {
+        Small, Regular, Power
+    }
 }

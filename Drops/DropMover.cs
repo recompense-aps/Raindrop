@@ -1,11 +1,18 @@
 using Godot;
 using System;
+using RainDrop.Enums;
 
 public class DropMover : Node
 {
     private KinematicBody2D _drop;
     [Export]
     float Speed = 100;
+    [Export]
+    float RainSpeedMultiplier = 1.0f;
+    [Export]
+    float HailSpeedMultiplier = 1.5f;
+    [Export]
+    float SnowSpeedMultiplier = 0.5f;
     [Export]
     float AccelerationMagnitudeBase = 20;
     [Export]
@@ -33,6 +40,8 @@ public class DropMover : Node
         _deceleration = new Vector2(0, 0);
         _accelerationTransform = new Vector2(0, 0);
         _windMultiplier = RegularWindMultiplier;
+
+        _drop.Connect("DropTypeChanged", this, nameof(OnDropTypeChanged));
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -161,6 +170,7 @@ public class DropMover : Node
             }
         }
     }
+
     private void ResetX()
     {
         _acceleration.x =
@@ -177,11 +187,21 @@ public class DropMover : Node
         _velocity.y = Speed;
     }
 
-}
-
-
-public enum WindType
-{
-    Small, Regular, Power
+    private void OnDropTypeChanged(DropType dropType)
+    {
+        _velocity = _velocity.Normalized();
+        switch(dropType)
+        {
+            case DropType.Rain:
+                _velocity *= Speed * RainSpeedMultiplier;
+                break;
+            case DropType.Snow:
+                _velocity *= Speed * SnowSpeedMultiplier;
+                break;
+            case DropType.Hail:
+                _velocity *= Speed * HailSpeedMultiplier;
+                break;
+        }
+    }
 }
 
