@@ -57,9 +57,9 @@ public class FreeFall : Node2D
 
         _spawnType = Util.Globals.ContainsKey("SpawnType") ? Util.Globals["SpawnType"] as string : "all";
 
-        _waveBag.Add(10, LevelSpawnType.Obstacle);
-        _waveBag.Add(10, LevelSpawnType.PowerUp);
-        _waveBag.Add(80, LevelSpawnType.Drop);
+        _waveBag.Add(50, LevelSpawnType.Obstacle);
+        _waveBag.Add(25, LevelSpawnType.PowerUp);
+        _waveBag.Add(25, LevelSpawnType.Drop);
 
         Util.FlushLog();
         GenerateNextWave(ObstacleStartY);

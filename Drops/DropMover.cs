@@ -29,6 +29,7 @@ public class DropMover : Node
     private Vector2 _acceleration;
     private Vector2 _deceleration;
     private Vector2 _accelerationTransform;
+    private Vector2 _usualDirectionNormal = new Vector2(0, 1);
     private WindType _currentWindType = WindType.Regular;
     private float _windMultiplier;
 
@@ -95,6 +96,10 @@ public class DropMover : Node
 
     private void GetInput()
     {
+        if (_velocity.Normalized() != _usualDirectionNormal)
+        {
+           return;
+        }
         if (Input.IsActionJustPressed("move_right"))
         {
             _acceleration.Set(AccelerationMagnitudeBase, 0);
