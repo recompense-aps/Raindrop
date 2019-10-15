@@ -57,10 +57,11 @@ public class FreeFall : Node2D
 
         _spawnType = Util.Globals.ContainsKey("SpawnType") ? Util.Globals["SpawnType"] as string : "all";
 
-        _waveBag.Add(50, LevelSpawnType.Obstacle);
-        _waveBag.Add(25, LevelSpawnType.PowerUp);
-        _waveBag.Add(25, LevelSpawnType.Drop);
+        _waveBag.Add(10, LevelSpawnType.Obstacle);
+        _waveBag.Add(10, LevelSpawnType.PowerUp);
+        _waveBag.Add(80, LevelSpawnType.Drop);
 
+        Util.FlushLog();
         GenerateNextWave(ObstacleStartY);
     }
 
@@ -122,10 +123,8 @@ public class FreeFall : Node2D
         }
     }
 
-    private void OnDropHitSomething(RainPod r, KinematicCollision2D collision)
+    private void OnDropHitSomething(KinematicCollision2D collision)
     {
-
-        _hud.Debug = collision.Collider.GetType().ToString();
 
         if (collision.Collider is PowerUp)
         {
@@ -137,7 +136,8 @@ public class FreeFall : Node2D
         else if (collision.Collider is RainDropPickUp)
         {
             _pod.Grow(DropVolumeIncrease);
-            RemoveChild(collision.Collider as Node2D);
+            Node2D pu = collision.Collider as Node2D;
+            RemoveChild(pu);
         }
         else if (collision.Collider is StormCloud)
         {

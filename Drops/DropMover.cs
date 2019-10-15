@@ -1,10 +1,11 @@
 using Godot;
 using System;
+using RainDrop;
 using RainDrop.Enums;
 
 public class DropMover : Node
 {
-    private KinematicBody2D _drop;
+    private RainPod _drop;
     [Export]
     float Speed = 100;
     [Export]
@@ -33,7 +34,7 @@ public class DropMover : Node
 
     public override void _Ready()
     {
-        _drop = GetParent() as KinematicBody2D;
+        _drop = GetParent() as RainPod;
 
         _velocity = new Vector2(0, Speed);
         _acceleration = new Vector2(0, 0);
@@ -50,6 +51,8 @@ public class DropMover : Node
         GetInput();
         _acceleration += _deceleration;
         _velocity += _acceleration * _windMultiplier;
+
+        _drop.SetRotation(_velocity.Angle() - (float)Math.PI / 2);
 
         if (_accelerationTransform.x > 0)
         {
@@ -84,7 +87,7 @@ public class DropMover : Node
         KinematicCollision2D c = _drop.MoveAndCollide(_velocity * delta);
         if (c != null)
         {
-            _drop.EmitSignal("HitSomething", _drop, c);
+            _drop.EmitSignal("HitSomething", c);
         }
         _drop.Position = new Vector2(Mathf.Clamp(_drop.Position.x, 0, 1024), _drop.Position.y);
         Wind();

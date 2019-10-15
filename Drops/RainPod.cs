@@ -23,7 +23,7 @@ public class RainPod : KinematicBody2D
         _snowSprite = Util.FindNode(this, "SnowflakeSprite") as Sprite;
         _hailSprite = Util.FindNode(this, "HailstoneSprite") as Sprite;
         _sprite = _rainSprite;
-
+        _collisionShape = Util.FindNode(this, "CollisionShape2D") as Node2D;
         _hailSprite.Visible = false;
         _snowSprite.Visible = false;
     }
