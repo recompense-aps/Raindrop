@@ -7,7 +7,7 @@ public class DropMover : Node
 {
     private RainPod _drop;
     [Export]
-    float Speed = 100;
+    float Speed = 10000;
     [Export]
     float RainSpeedMultiplier = 1.0f;
     [Export]
@@ -92,6 +92,11 @@ public class DropMover : Node
         }
         _drop.Position = new Vector2(Mathf.Clamp(_drop.Position.x, 0, 1024), _drop.Position.y);
         Wind();
+
+        if (Input.IsActionJustPressed("ui_focus_prev"))
+        {
+            _velocity /= 100;
+        }
     }
 
     private void GetInput()

@@ -8,7 +8,7 @@ namespace RainDrop
         public delegate void ScoreChanged();
 
         int _score = 0;
-        int _objectsPassed = 1700;
+        int _objectsPassed = 0;
         int _powerUpsCollected = 0;
 
         public int Score

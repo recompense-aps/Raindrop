@@ -2,6 +2,7 @@ using Godot;
 using RainDrop;
 using System.Diagnostics;
 using System;
+using System.Reflection;
 
 public class HUD : CanvasLayer
 {
@@ -64,6 +65,7 @@ public class HUD : CanvasLayer
         _powerText = GetNode(new NodePath("PowerText")) as Label;
         _debugText = GetNode(new NodePath("DebugText")) as Label;
         _fpsLabel = Util.FindNode(this, "FpsText") as Label;
+
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.

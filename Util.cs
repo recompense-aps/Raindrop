@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Godot;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 
 namespace RainDrop
 {
@@ -61,6 +62,29 @@ namespace RainDrop
                     file.WriteLine("[" + DateTime.Now + "]\t" + message.ToString());
                 }
             }
+        }
+    }
+    
+    public class ClassInspector
+    {
+        private object _target;
+        Type _targetType;
+
+        public ClassInspector(object target)
+        {
+            _target = target;
+            _targetType = target.GetType();
+        }
+
+        public object Get(string key)
+        {
+            PropertyInfo myPropInfo = _targetType.GetProperty(key);
+            return myPropInfo.GetValue(_target, null);
+        }
+
+        public void Set(string key, object value)
+        {
+
         }
     }
 }

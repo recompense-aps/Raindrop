@@ -79,7 +79,6 @@ public class FreeFall : Node2D
         {
             GetTree().ChangeScene("res://Modes/StartMenu.tscn");
         }
-
     }
 
     private void GenerateNextWave(float startY)
@@ -135,7 +134,7 @@ public class FreeFall : Node2D
         }
         else if (collision.Collider is RainDropPickUp)
         {
-            _pod.Grow(DropVolumeIncrease);
+            //_pod.Grow(DropVolumeIncrease);
             Node2D pu = collision.Collider as Node2D;
             RemoveChild(pu);
         }
