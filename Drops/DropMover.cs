@@ -96,7 +96,7 @@ public class DropMover : Node
 
     private void GetInput()
     {
-        if (_velocity.Normalized() != _usualDirectionNormal)
+        if (_acceleration.Length() != 0)
         {
            return;
         }
