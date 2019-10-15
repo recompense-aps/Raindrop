@@ -40,10 +40,14 @@ public class RainPod : KinematicBody2D
 
     public void Grow(float amount)
     {
-        Vector2 sScale = _sprite.Transform.Scale * amount;
-        Vector2 bScale = _collisionShape.Transform.Scale * amount;
-        _sprite.SetTransform(_sprite.Transform.Scaled(sScale));
-        _collisionShape.SetTransform(_collisionShape.Transform.Scaled(bScale));
+        Vector2 sScale = _sprite.Transform.Scale;
+        Vector2 bScale = _collisionShape.Transform.Scale;
+
+        sScale.Set(sScale.x + amount, bScale.y + amount);
+        bScale.Set(bScale.x + amount, bScale.y + amount);
+
+        _sprite.SetScale(sScale);
+        _collisionShape.SetScale(bScale);
     }
     public void TransformDrop(DropType dropType)
     {

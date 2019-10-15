@@ -1,4 +1,5 @@
 using Godot;
+using RainDrop;
 using System.Diagnostics;
 using System;
 
@@ -9,6 +10,7 @@ public class HUD : CanvasLayer
     private Label _timeText;
     private Label _powerText;
     private Label _debugText;
+    private Label _fpsLabel;
 
     private int _score = 0;
     private int _power = 0;
@@ -61,11 +63,13 @@ public class HUD : CanvasLayer
         _timeText = GetNode(new NodePath("TimeText")) as Label;
         _powerText = GetNode(new NodePath("PowerText")) as Label;
         _debugText = GetNode(new NodePath("DebugText")) as Label;
+        _fpsLabel = Util.FindNode(this, "FpsText") as Label;
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
         _timeText.Text = _stopWatch.Elapsed.Seconds.ToString();
+        _fpsLabel.Text = Engine.GetFramesPerSecond().ToString() + "/" + Engine.TargetFps.ToString();
     }
 }
