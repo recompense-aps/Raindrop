@@ -4,13 +4,16 @@
 [ext_resource path="res://Graphics/cloud1.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 95, 44 )
+extents = Vector2( 534.61, 61.1021 )
 
 [node name="StormCloud" type="KinematicBody2D"]
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 504.054, -7.15985 )
+scale = Vector2( 5, 1 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 481.143, -4.2959 )
 shape = SubResource( 1 )

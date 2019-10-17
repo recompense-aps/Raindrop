@@ -49,7 +49,7 @@ public class FreeFall : Node2D
         AddChild(_pod);
 
         _stormCloud = Util.LoadNode("StormCloud") as StormCloud;
-        _stormCloud.Position = new Vector2(_window.x / 2, StormCloudStartY);
+        _stormCloud.Position = new Vector2(0, StormCloudStartY);
         AddChild(_stormCloud);
         _stormCloud.Follow(_pod);
 
