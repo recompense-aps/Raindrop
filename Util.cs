@@ -12,9 +12,10 @@ namespace RainDrop
 {
     public static class Util
     {
-        public static Dictionary<string, object> Globals = new Dictionary<string, object>();
-        public static bool PermaLog = true;
+        public static bool PermaLog = false;
         public static bool ConsoleLog = false;
+
+        public static Dictionary<string, object> Globals = new Dictionary<string, object>();
         public static string LogFilePath = @"C:/dev/raindrop.log";
 
         public static Node2D LoadNode(string path)
@@ -43,6 +44,8 @@ namespace RainDrop
         }
         public static void FlushLog()
         {
+            if (!PermaLog) return;
+
             StreamWriter w = new StreamWriter(LogFilePath, false);
             w.Write("[" + DateTime.Now + "]\tLog File Reset\n-----------------------------------\n");
             w.Close();

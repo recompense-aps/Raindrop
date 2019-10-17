@@ -61,7 +61,6 @@ public class FreeFall : Node2D
         _waveBag.Add(25, LevelSpawnType.PowerUp);
         _waveBag.Add(25, LevelSpawnType.Drop);
 
-        Util.FlushLog();
         GenerateNextWave(ObstacleStartY);
     }
 

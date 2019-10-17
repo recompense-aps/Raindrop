@@ -1,5 +1,6 @@
 C:\dev\RainDrop\Raindrop\.mono\temp\bin\Debug\RainDrop.dll
 C:\dev\RainDrop\Raindrop\.mono\temp\bin\Debug\RainDrop.pdb
-C:\dev\RainDrop\Raindrop\.mono\temp\obj\Debug\RainDrop.csprojResolveAssemblyReference.cache
 C:\dev\RainDrop\Raindrop\.mono\temp\obj\Debug\RainDrop.dll
 C:\dev\RainDrop\Raindrop\.mono\temp\obj\Debug\RainDrop.pdb
+C:\dev\RainDrop\Raindrop\.mono\temp\obj\Debug\RainDrop.csprojAssemblyReference.cache
+C:\dev\RainDrop\Raindrop\.mono\temp\obj\Debug\RainDrop.csproj.CoreCompileInputs.cache
