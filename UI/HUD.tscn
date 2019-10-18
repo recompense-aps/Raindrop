@@ -47,7 +47,6 @@ margin_bottom = 23.3308
 text = "0"
 
 [node name="TextEdit" type="TextEdit" parent="."]
-visible = false
 margin_left = 718.0
 margin_top = 5.0
 margin_right = 1015.0

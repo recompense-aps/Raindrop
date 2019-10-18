@@ -6,16 +6,21 @@ using System.Reflection;
 
 public class HUD : CanvasLayer
 {
+    [Signal]
+    public delegate void ConsoleInputEntered();
+
     private Stopwatch _stopWatch = new Stopwatch();
     private Label _scoreText;
     private Label _timeText;
     private Label _powerText;
     private Label _debugText;
     private Label _fpsLabel;
+    private TextEdit _textEdit;
 
     private int _score = 0;
     private int _power = 0;
     private string _debug = "";
+    private bool _consoleOn = false;
 
     public int Score
     {
@@ -56,6 +61,18 @@ public class HUD : CanvasLayer
         }
     }
 
+    public string ConsoleInput
+    {
+        get
+        {
+            return _textEdit.Text;
+        }
+        set
+        {
+            _textEdit.Text = value;
+        }
+    }
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -65,6 +82,7 @@ public class HUD : CanvasLayer
         _powerText = GetNode(new NodePath("PowerText")) as Label;
         _debugText = GetNode(new NodePath("DebugText")) as Label;
         _fpsLabel = Util.FindNode(this, "FpsText") as Label;
+        _textEdit = Util.FindNode(this, "TextEdit") as TextEdit;
 
     }
 
@@ -73,5 +91,54 @@ public class HUD : CanvasLayer
     {
         _timeText.Text = _stopWatch.Elapsed.Seconds.ToString();
         _fpsLabel.Text = Engine.GetFramesPerSecond().ToString() + "/" + Engine.TargetFps.ToString();
+
+        CheckConsole();
+    }
+
+    public void ToggleConsole(bool tog = true)
+    {
+        _textEdit.Visible = tog;
+        _consoleOn = tog;
+    }
+
+    private void CheckConsole()
+    {
+        if (!_consoleOn) return;
+        if (Input.IsActionJustPressed("ui_focus_next"))
+        {
+            string command = ConsoleInput;
+            ConsoleInput = "";
+
+            string[] commandSplit = command.Split(' ');
+
+            EmitSignal(nameof(ConsoleInputEntered), new ConsoleCommand(commandSplit[1], commandSplit[2], commandSplit[3]));
+        }
+    }
+}
+
+class ConsoleCommand
+{
+    string _key;
+    string _value;
+    string _category;
+
+    public string Category
+    {
+        get
+        {
+            return _category;
+        }
+    }
+
+    public ConsoleCommand(string category, string key, string value)
+    {
+        _key = key;
+        _value = value;
+        _category = category;
+    }
+
+    public void Execute(object instance)
+    {
+
     }
 }

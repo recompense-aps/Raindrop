@@ -1,0 +1,36 @@
+==========================================================
+===         THE DEV CONSOLE                            ===
+==========================================================
+
+Press |ctrl + tab| to open the console
+Press |enter| to execute the command
+
+WARNING! if you enter badly formatted values (like text where
+numbers should be) the game will probably crash
+
+use like this:
+set {category} {property} {value}
+
+example:
+set FreeFall ObstaclesPerLayer 20
+
+Here are the values you can set:
+[FreeFall]
+DropStartY(System.Single)
+StormCloudStartY(System.Single)
+ObstacleStartY(System.Single)
+VerticalObstacleSpace(System.Single)
+ObstaclesPerLayer(System.Int32)
+TestInt(System.Int32)
+[RainPod]
+[DropMover]
+Speed(System.Single)
+RainSpeedMultiplier(System.Single)
+HailSpeedMultiplier(System.Single)
+SnowSpeedMultiplier(System.Single)
+AccelerationMagnitudeBase(System.Single)
+DecelerationMagnitudeBase(System.Single)
+SmallWindMultiplier(System.Single)
+RegularWindMultiplier(System.Single)
+PowerWindMultiplier(System.Single)
+

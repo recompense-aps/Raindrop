@@ -3,6 +3,7 @@ using RainDrop;
 using RainDrop.Enums;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 public class FreeFall : Node2D
 {
@@ -37,6 +38,8 @@ public class FreeFall : Node2D
     public int ObstaclesPerLayer = 10;
 
     #endregion
+
+    public int TestInt = 0;
 
     public override void _Ready()
     {

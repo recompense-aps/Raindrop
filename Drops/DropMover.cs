@@ -7,23 +7,23 @@ public class DropMover : Node
 {
     private RainPod _drop;
     [Export]
-    float Speed = 100;
+    public float Speed = 100;
     [Export]
-    float RainSpeedMultiplier = 1.0f;
+    public float RainSpeedMultiplier = 1.0f;
     [Export]
-    float HailSpeedMultiplier = 1.5f;
+    public float HailSpeedMultiplier = 1.5f;
     [Export]
-    float SnowSpeedMultiplier = 0.5f;
+    public float SnowSpeedMultiplier = 0.5f;
     [Export]
-    float AccelerationMagnitudeBase = 20;
+    public float AccelerationMagnitudeBase = 20;
     [Export]
-    float DecelerationMagnitudeBase = 1;
+    public float DecelerationMagnitudeBase = 1;
     [Export]
-    float SmallWindMultiplier = 0.5f;
+    public float SmallWindMultiplier = 0.5f;
     [Export]
-    float RegularWindMultiplier = 1f;
+    public float RegularWindMultiplier = 1f;
     [Export]
-    float PowerWindMultiplier = 3f;
+    public float PowerWindMultiplier = 3f;
 
     private Vector2 _velocity;
     private Vector2 _acceleration;
@@ -210,6 +210,11 @@ public class DropMover : Node
                 _velocity *= Speed * HailSpeedMultiplier;
                 break;
         }
+    }
+    
+    private void ConsoleInputEntered(ConsoleCommand c)
+    {
+
     }
 }
 
