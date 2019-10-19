@@ -22,20 +22,6 @@ public class StormCloud : KinematicBody2D
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
-        //if(_nodeToFollow != null)
-        //{
-        //    Vector2 v = (Position - _nodeToFollow.Position).Normalized();
-        //    v.Set(0, v.y);
-        //    Position += v * 100 * delta * -1;
-        //}
-        if (_nodeToFollow != null)
-        {
-            Position = new Vector2(Position.x, _nodeToFollow.Position.y - OS.GetRealWindowSize().y / 2);
-        }
     }
 
-    public void Follow(Node2D node)
-    {
-        _nodeToFollow = node;
-    }
 }

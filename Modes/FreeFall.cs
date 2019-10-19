@@ -21,13 +21,13 @@ public class FreeFall : Node2D
     #region Exports
     //Drop
     [Export]
-    public float DropStartY = -200;
+    public float DropStartY = 150;
     [Export]
     private float DropVolumeIncrease = 1.05f;
 
     //Storm cloud
     [Export]
-    public float StormCloudStartY = -300;
+    public float StormCloudStartY = 0;
 
     //Obstacles
     [Export]
@@ -56,7 +56,6 @@ public class FreeFall : Node2D
         _stormCloud = Util.LoadNode("StormCloud") as StormCloud;
         _stormCloud.Position = new Vector2(0, StormCloudStartY);
         AddChild(_stormCloud);
-        _stormCloud.Follow(_pod);
 
         _scoreKeeper.Connect("ScoreChanged", this, nameof(OnScoreChanged));
 

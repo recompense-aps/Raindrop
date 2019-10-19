@@ -196,7 +196,8 @@ public class DropMover : Node
         {
             _drop.EmitSignal("HitSomething", c);
         }
-        _drop.Position = new Vector2(Mathf.Clamp(_drop.Position.x, 0, 1024), _drop.Position.y);
+        _drop.Position = new Vector2(Mathf.Clamp(_drop.Position.x, 0, OS.GetRealWindowSize().x), 
+            Mathf.Clamp(_drop.Position.y, 0, OS.GetRealWindowSize().y - 50));
     }
 
     private void OnDropTypeChanged(DropType dropType)
