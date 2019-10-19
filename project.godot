@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="RainDrop"
-run/main_scene="res://Modes/StartMenu.tscn"
+run/main_scene="res://Modes/FreeFall.tscn"
 config/icon="res://icon.png"
 
 [input]

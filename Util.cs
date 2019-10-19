@@ -66,6 +66,19 @@ namespace RainDrop
                 }
             }
         }
+        public static int Direction(float value)
+        {
+            if (value == 0)
+            {
+                return 0;
+            }
+            else if (value > 0)
+            {
+                return 1;
+            }
+            return -1;
+        }
+
     }
     
     public class ClassInspector

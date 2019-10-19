@@ -31,6 +31,8 @@ public class FreeFall : Node2D
 
     //Obstacles
     [Export]
+    public float CrawlSpeed = 100;
+    [Export]
     public float ObstacleStartY = 0;
     [Export]
     public float VerticalObstacleSpace = 100;
@@ -97,6 +99,7 @@ public class FreeFall : Node2D
                 case LevelSpawnType.PowerUp:
                     PowerUp p = Util.LoadNode("PowerUp") as PowerUp;
                     p.Position = new Vector2(posX, posY);
+                    p.Velocity = new Vector2(0, -CrawlSpeed);
                     AddChild(p);
                     _scoreKeeper.ScorePowerUp(p);
                     break;
@@ -105,12 +108,14 @@ public class FreeFall : Node2D
                     AddChild(ob);
                     ob.TrackPlayer(_pod);
                     ob.Position = new Vector2(posX, posY);
+                    ob.Velocity = new Vector2(0, -CrawlSpeed);
                     _spawnedObstacles.Add(ob);
                     _scoreKeeper.ScoreObstacle(ob);
                     break;
                 case LevelSpawnType.Drop:
                     RainDropPickUp rainDrop = Util.LoadNode("Drops/RainDropPickUp") as RainDropPickUp;
                     rainDrop.Position = new Vector2(posX, posY);
+                    rainDrop.Velocity = new Vector2(0, -CrawlSpeed);
                     AddChild(rainDrop);
                     break;
             }

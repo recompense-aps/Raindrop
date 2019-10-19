@@ -9,6 +9,8 @@ public class DropMover : Node
     [Export]
     public float Speed = 100;
     [Export]
+    public float MaxSpeed = 200;
+    [Export]
     public float RainSpeedMultiplier = 1.0f;
     [Export]
     public float HailSpeedMultiplier = 1.5f;
@@ -16,8 +18,6 @@ public class DropMover : Node
     public float SnowSpeedMultiplier = 0.5f;
     [Export]
     public float AccelerationMagnitudeBase = 20;
-    [Export]
-    public float DecelerationMagnitudeBase = 1;
     [Export]
     public float SmallWindMultiplier = 0.5f;
     [Export]
@@ -32,12 +32,16 @@ public class DropMover : Node
     private Vector2 _usualDirectionNormal = new Vector2(0, 1);
     private WindType _currentWindType = WindType.Regular;
     private float _windMultiplier;
+    private bool _acelX = false;
+    private bool _decelX = false;
+    private bool _acelY = false;
+    private bool _decelY = false;
 
     public override void _Ready()
     {
         _drop = GetParent() as RainPod;
 
-        _velocity = new Vector2(0, Speed);
+        _velocity = new Vector2(0,0);
         _acceleration = new Vector2(0, 0);
         _deceleration = new Vector2(0, 0);
         _accelerationTransform = new Vector2(0, 0);
@@ -50,47 +54,41 @@ public class DropMover : Node
     public override void _Process(float delta)
     {
         GetInput();
-        _acceleration += _deceleration;
+        if(Math.Abs(_velocity.x) > MaxSpeed && _acelX)
+        {
+            _acceleration.x = _acceleration.x * -0.5f;
+            _acelX = false;
+            _decelX = true;           
+        }
+        if(Math.Abs(_velocity.y) > MaxSpeed && _acelY)
+        {
+            _acceleration.y = _acceleration.y *= -0.5f;
+            _acelY = false;
+            _decelY = true;
+        }
+        if (_decelX && Util.Direction(_velocity.x) == Util.Direction(_acceleration.x))
+        {          
+            ResetX();
+            _decelX = false;
+        }
+        if (_decelY && Util.Direction(_velocity.y) == Util.Direction(_acceleration.y))
+        {
+            ResetY();
+            _decelY = false;
+        }
         _velocity += _acceleration * _windMultiplier;
 
-        _drop.SetRotation(_velocity.Angle() - (float)Math.PI / 2);
+        if (_velocity.Length() != 0)
+        {
+            _drop.SetRotation(_velocity.Angle() - (float)Math.PI / 2);
+        }
+        else
+        {
+            _drop.SetRotation(_velocity.Angle());
+        }
+        
 
-        if (_accelerationTransform.x > 0)
-        {
-            if (_acceleration.x <= 0)
-            {
-                ResetX();
-            }
-        }
-        else if (_accelerationTransform.x < 0)
-        {
-            if (_acceleration.x >= 0)
-            {
-                ResetX();
-            }
-        }
-
-        if (_accelerationTransform.y > 0)
-        {
-            if (_acceleration.y <= 0)
-            {
-                ResetY();
-            }
-        }
-        else if (_accelerationTransform.y < 0)
-        {
-            if (_acceleration.y >= 0)
-            {
-                ResetY();
-            }
-        }
-
-        KinematicCollision2D c = _drop.MoveAndCollide(_velocity * delta);
-        if (c != null)
-        {
-            _drop.EmitSignal("HitSomething", c);
-        }
-        _drop.Position = new Vector2(Mathf.Clamp(_drop.Position.x, 0, 1024), _drop.Position.y);
+        HandleCollision(delta);
         Wind();
     }
 
@@ -103,51 +101,47 @@ public class DropMover : Node
         if (Input.IsActionJustPressed("move_right"))
         {
             _acceleration.Set(AccelerationMagnitudeBase, 0);
-            _accelerationTransform.Set(_acceleration);
-            _deceleration.Set(DecelerationMagnitudeBase * -1, 0);
+            _acelX = true;
         }
         if (Input.IsActionJustPressed("move_left"))
         {
             _acceleration.Set(-1 * AccelerationMagnitudeBase, 0);
-            _accelerationTransform.Set(_acceleration);
-            _deceleration.Set(DecelerationMagnitudeBase, 0);
+            _acelX = true;
         }
         if (Input.IsActionJustPressed("move_up"))
         {
             _acceleration.y = -1 * AccelerationMagnitudeBase;
-            _deceleration.y = DecelerationMagnitudeBase;
-            _accelerationTransform.Set(_acceleration);
+            _acelY = true;
         }
         if (Input.IsActionJustPressed("move_down"))
         {
             _acceleration.y = AccelerationMagnitudeBase;
-            _deceleration.y = -1 * DecelerationMagnitudeBase;
-            _accelerationTransform.Set(_acceleration);
+            _acelY = true;
         }
 
         if (Input.IsActionJustPressed("move_right_up"))
         {
             _acceleration.Set(AccelerationMagnitudeBase, -AccelerationMagnitudeBase);
-            _deceleration.Set(-DecelerationMagnitudeBase, DecelerationMagnitudeBase);
-            _accelerationTransform.Set(_acceleration);
+            _acelX = true;
+            _acelY = true;
         }
         if (Input.IsActionJustPressed("move_right_down"))
         {
             _acceleration.Set(AccelerationMagnitudeBase, AccelerationMagnitudeBase);
-            _deceleration.Set(-DecelerationMagnitudeBase, -DecelerationMagnitudeBase);
-            _accelerationTransform.Set(_acceleration);
+            _acelX = true;
+            _acelY = true;
         }
         if (Input.IsActionJustPressed("move_left_down"))
         {
             _acceleration.Set(-AccelerationMagnitudeBase, AccelerationMagnitudeBase);
-            _deceleration.Set(DecelerationMagnitudeBase, -DecelerationMagnitudeBase);
-            _accelerationTransform.Set(_acceleration);
+            _acelX = true;
+            _acelY = true;
         }
         if (Input.IsActionJustPressed("move_left_up"))
         {
             _acceleration.Set(-AccelerationMagnitudeBase, -AccelerationMagnitudeBase);
-            _deceleration.Set(DecelerationMagnitudeBase, DecelerationMagnitudeBase);
-            _accelerationTransform.Set(_acceleration);
+            _acelX = true;
+            _acelY = true;
         }
     }
 
@@ -191,8 +185,18 @@ public class DropMover : Node
     {
         _acceleration.y =
         _deceleration.y =
-        _accelerationTransform.y = 0;
-        _velocity.y = Speed;
+        _accelerationTransform.y = 
+        _velocity.y = 0;
+    }
+
+    private void HandleCollision(float delta)
+    {
+        KinematicCollision2D c = _drop.MoveAndCollide(_velocity * delta);
+        if (c != null)
+        {
+            _drop.EmitSignal("HitSomething", c);
+        }
+        _drop.Position = new Vector2(Mathf.Clamp(_drop.Position.x, 0, 1024), _drop.Position.y);
     }
 
     private void OnDropTypeChanged(DropType dropType)

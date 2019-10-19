@@ -7,6 +7,8 @@ public class Obstacle : Node2D
     [Signal]
     public delegate void PassedPlayer();
 
+    public Vector2 Velocity;
+
     RandomNumberGenerator rand = new RandomNumberGenerator();
     private string _obstacleType = "Football";
     private Node2D _player;
@@ -15,7 +17,6 @@ public class Obstacle : Node2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        
     }
     public void SetObstacleType(string type)
     {
@@ -36,5 +37,6 @@ public class Obstacle : Node2D
                 EmitSignal(nameof(PassedPlayer));
             }
         }
+        Position += Velocity * delta;
     }
 }
