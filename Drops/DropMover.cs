@@ -24,6 +24,8 @@ public class DropMover : Node
     public float RegularWindMultiplier = 1f;
     [Export]
     public float PowerWindMultiplier = 3f;
+    [Export]
+    public float PowerCost = 10;
 
     private Vector2 _velocity;
     private Vector2 _acceleration;
@@ -94,7 +96,7 @@ public class DropMover : Node
 
     private void GetInput()
     {
-        if (_acceleration.Length() != 0)
+        if (_acceleration.Length() != 0 || Util.HUD.Power < 1)
         {
            return;
         }
@@ -102,22 +104,25 @@ public class DropMover : Node
         {
             _acceleration.Set(AccelerationMagnitudeBase, 0);
             _acelX = true;
-            Util.HUD.Power -= 10;
+            HandlePower();
         }
         if (Input.IsActionJustPressed("move_left"))
         {
             _acceleration.Set(-1 * AccelerationMagnitudeBase, 0);
             _acelX = true;
+            HandlePower();
         }
         if (Input.IsActionJustPressed("move_up"))
         {
             _acceleration.y = -1 * AccelerationMagnitudeBase;
             _acelY = true;
+            HandlePower();
         }
         if (Input.IsActionJustPressed("move_down"))
         {
             _acceleration.y = AccelerationMagnitudeBase;
             _acelY = true;
+            HandlePower();
         }
 
         if (Input.IsActionJustPressed("move_right_up"))
@@ -125,24 +130,28 @@ public class DropMover : Node
             _acceleration.Set(AccelerationMagnitudeBase, -AccelerationMagnitudeBase);
             _acelX = true;
             _acelY = true;
+            HandlePower();
         }
         if (Input.IsActionJustPressed("move_right_down"))
         {
             _acceleration.Set(AccelerationMagnitudeBase, AccelerationMagnitudeBase);
             _acelX = true;
             _acelY = true;
+            HandlePower();
         }
         if (Input.IsActionJustPressed("move_left_down"))
         {
             _acceleration.Set(-AccelerationMagnitudeBase, AccelerationMagnitudeBase);
             _acelX = true;
             _acelY = true;
+            HandlePower();
         }
         if (Input.IsActionJustPressed("move_left_up"))
         {
             _acceleration.Set(-AccelerationMagnitudeBase, -AccelerationMagnitudeBase);
             _acelX = true;
             _acelY = true;
+            HandlePower();
         }
     }
 
@@ -221,6 +230,11 @@ public class DropMover : Node
     private void ConsoleInputEntered(ConsoleCommand c)
     {
 
+    }
+    
+    private void HandlePower()
+    {
+        Util.HUD.Power -= PowerCost * _windMultiplier;
     }
 }
 

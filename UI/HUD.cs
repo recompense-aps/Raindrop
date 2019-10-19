@@ -10,6 +10,7 @@ public class HUD : CanvasLayer
     public delegate void ConsoleInputEntered();
 
     private Stopwatch _stopWatch = new Stopwatch();
+    private Stopwatch _powerStopWatch = new Stopwatch();
     private Label _scoreText;
     private Label _timeText;
     private Label _powerText;
@@ -48,6 +49,14 @@ public class HUD : CanvasLayer
             if (_power <= 0)
             {
                 _power = 0;
+            }
+            else if (_power < 100)
+            {
+                _powerStopWatch.Start();
+            }
+            if(_power > 100)
+            {
+                _power = 100;
             }
             _powerText.Text = _power.ToString();
             _powerBar.SetScale(new Vector2(_power / 100, 1));
@@ -96,10 +105,16 @@ public class HUD : CanvasLayer
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
-        _timeText.Text = _stopWatch.Elapsed.Seconds.ToString();
+        _timeText.Text = _powerStopWatch.Elapsed.Seconds.ToString();
         _fpsLabel.Text = Engine.GetFramesPerSecond().ToString() + "/" + Engine.TargetFps.ToString();
 
         CheckConsole();
+
+        if(_powerStopWatch.Elapsed.Seconds >= 2)
+        {
+            _powerStopWatch.Reset();
+            Power += 1;
+        }
     }
 
     public void ToggleConsole(bool tog = true)
