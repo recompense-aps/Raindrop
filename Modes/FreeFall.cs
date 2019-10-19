@@ -47,6 +47,7 @@ public class FreeFall : Node2D
     {
         _window = OS.GetRealWindowSize();
         _hud = (Util.FindNode(this, "HUD") as HUD);
+        Util.HUD = _hud;
 
         _pod = Util.LoadNode("Drops/RainPod") as RainPod;
         _pod.Position = new Vector2(_window.x / 2, DropStartY);
@@ -138,7 +139,6 @@ public class FreeFall : Node2D
             PowerUp p = collision.Collider as PowerUp;
             p.EmitSignal("Collected");
             RemoveChild(p);
-            _hud.Power += 1;
         }
         else if (collision.Collider is RainDropPickUp)
         {

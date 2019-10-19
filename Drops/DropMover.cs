@@ -102,6 +102,7 @@ public class DropMover : Node
         {
             _acceleration.Set(AccelerationMagnitudeBase, 0);
             _acelX = true;
+            Util.HUD.Power -= 10;
         }
         if (Input.IsActionJustPressed("move_left"))
         {

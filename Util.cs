@@ -12,11 +12,13 @@ namespace RainDrop
 {
     public static class Util
     {
-        public static bool PermaLog = true;
+        public static bool PermaLog = false;
         public static bool ConsoleLog = false;
 
         public static Dictionary<string, object> Globals = new Dictionary<string, object>();
         public static string LogFilePath = @"C:/dev/raindrop.log";
+
+        public static HUD HUD;
 
         public static Node2D LoadNode(string path)
         {

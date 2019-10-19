@@ -16,9 +16,10 @@ public class HUD : CanvasLayer
     private Label _debugText;
     private Label _fpsLabel;
     private TextEdit _textEdit;
+    private ColorRect _powerBar;
 
     private int _score = 0;
-    private int _power = 0;
+    private float _power = 100;
     private string _debug = "";
     private bool _consoleOn = false;
 
@@ -35,7 +36,7 @@ public class HUD : CanvasLayer
         }
     }
 
-    public int Power
+    public float Power
     {
         get
         {
@@ -44,7 +45,12 @@ public class HUD : CanvasLayer
         set
         {
             _power = value;
-            _powerText.Text = "Power: " + _power.ToString();
+            if (_power <= 0)
+            {
+                _power = 0;
+            }
+            _powerText.Text = _power.ToString();
+            _powerBar.SetScale(new Vector2(_power / 100, 1));
         }
     }
 
@@ -83,6 +89,7 @@ public class HUD : CanvasLayer
         _debugText = GetNode(new NodePath("DebugText")) as Label;
         _fpsLabel = Util.FindNode(this, "FpsText") as Label;
         _textEdit = Util.FindNode(this, "TextEdit") as TextEdit;
+        _powerBar = Util.FindNode(this, "Powerbar") as ColorRect;
 
     }
 

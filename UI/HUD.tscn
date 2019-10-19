@@ -9,9 +9,10 @@ script = ExtResource( 1 )
 modulate = Color( 0.0313726, 1, 0, 1 )
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_top = -600.0
-margin_right = 1024.0
-margin_bottom = -2.0
+margin_left = -1.16638
+margin_top = -598.834
+margin_right = 1022.83
+margin_bottom = -0.833618
 text = "Score: 0"
 align = 2
 valign = 2
@@ -25,11 +26,12 @@ text = "Time: 0"
 
 [node name="PowerText" type="Label" parent="."]
 modulate = Color( 1, 0, 0, 1 )
-margin_left = 20.9943
-margin_top = 578.51
-margin_right = 60.9943
-margin_bottom = 592.51
-text = "Power: 0"
+margin_left = 12.8298
+margin_top = 579.676
+margin_right = 52.8298
+margin_bottom = 610.676
+text = "100
+"
 
 [node name="DebugText" type="Label" parent="."]
 modulate = Color( 1, 0.937255, 0, 1 )
@@ -52,3 +54,10 @@ margin_left = 718.0
 margin_top = 5.0
 margin_right = 1015.0
 margin_bottom = 36.0
+
+[node name="Powerbar" type="ColorRect" parent="."]
+margin_left = 44.5124
+margin_top = 572.667
+margin_right = 215.512
+margin_bottom = 596.667
+color = Color( 1, 0, 0, 1 )
