@@ -90,7 +90,7 @@ public class FreeFall : Node2D
 
         for (int i = 0; i < ObstaclesPerLayer; i++)
         {
-            float posX = _rand.RandiRange(100, (int)OS.GetRealWindowSize().x - 100);
+            float posX = _rand.RandiRange(-100, (int)OS.GetRealWindowSize().x);
             float posY = startY + VerticalObstacleSpace * i;
 
             switch(_waveBag.Pick())
