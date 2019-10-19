@@ -45,6 +45,7 @@ public class FreeFall : Node2D
 
     public override void _Ready()
     {
+        Util.FlushLog();
         _window = OS.GetRealWindowSize();
         _hud = (Util.FindNode(this, "HUD") as HUD);
         Util.HUD = _hud;

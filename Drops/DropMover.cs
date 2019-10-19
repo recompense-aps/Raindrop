@@ -13,11 +13,13 @@ public class DropMover : Node
     [Export]
     public float RainSpeedMultiplier = 1.0f;
     [Export]
-    public float HailSpeedMultiplier = 1.5f;
+    public float HailSpeedMultiplier = 4f;
     [Export]
     public float SnowSpeedMultiplier = 0.5f;
     [Export]
-    public float AccelerationMagnitudeBase = 20;
+    public float AccelerationBase = 40;
+    [Export]
+    public float AccelerationMagnitude = 40;
     [Export]
     public float SmallWindMultiplier = 0.5f;
     [Export]
@@ -59,13 +61,13 @@ public class DropMover : Node
         GetInput();
         if(Math.Abs(_velocity.x) > _maxSpeed && _acelX)
         {
-            _acceleration.x = _acceleration.x * -0.5f;
+            _acceleration.x = _acceleration.x * -0.1f;
             _acelX = false;
             _decelX = true;           
         }
         if(Math.Abs(_velocity.y) > _maxSpeed && _acelY)
         {
-            _acceleration.y = _acceleration.y *= -0.5f;
+            _acceleration.y = _acceleration.y * -0.5f;
             _acelY = false;
             _decelY = true;
         }
@@ -104,53 +106,53 @@ public class DropMover : Node
         }
         if (Input.IsActionJustPressed("move_right"))
         {
-            _acceleration.Set(AccelerationMagnitudeBase, 0);
+            _acceleration.Set(AccelerationMagnitude, 0);
             _acelX = true;
             HandlePower();
         }
         if (Input.IsActionJustPressed("move_left"))
         {
-            _acceleration.Set(-1 * AccelerationMagnitudeBase, 0);
+            _acceleration.Set(-1 * AccelerationMagnitude, 0);
             _acelX = true;
             HandlePower();
         }
         if (Input.IsActionJustPressed("move_up"))
         {
-            _acceleration.y = -1 * AccelerationMagnitudeBase;
+            _acceleration.y = -1 * AccelerationMagnitude;
             _acelY = true;
             HandlePower();
         }
         if (Input.IsActionJustPressed("move_down"))
         {
-            _acceleration.y = AccelerationMagnitudeBase;
+            _acceleration.y = AccelerationMagnitude;
             _acelY = true;
             HandlePower();
         }
 
         if (Input.IsActionJustPressed("move_right_up"))
         {
-            _acceleration.Set(AccelerationMagnitudeBase, -AccelerationMagnitudeBase);
+            _acceleration.Set(AccelerationMagnitude, -AccelerationMagnitude);
             _acelX = true;
             _acelY = true;
             HandlePower();
         }
         if (Input.IsActionJustPressed("move_right_down"))
         {
-            _acceleration.Set(AccelerationMagnitudeBase, AccelerationMagnitudeBase);
+            _acceleration.Set(AccelerationMagnitude, AccelerationMagnitude);
             _acelX = true;
             _acelY = true;
             HandlePower();
         }
         if (Input.IsActionJustPressed("move_left_down"))
         {
-            _acceleration.Set(-AccelerationMagnitudeBase, AccelerationMagnitudeBase);
+            _acceleration.Set(-AccelerationMagnitude, AccelerationMagnitude);
             _acelX = true;
             _acelY = true;
             HandlePower();
         }
         if (Input.IsActionJustPressed("move_left_up"))
         {
-            _acceleration.Set(-AccelerationMagnitudeBase, -AccelerationMagnitudeBase);
+            _acceleration.Set(-AccelerationMagnitude, -AccelerationMagnitude);
             _acelX = true;
             _acelY = true;
             HandlePower();
@@ -159,7 +161,7 @@ public class DropMover : Node
 
     private void Wind()
     {
-        if (Input.IsActionJustPressed("ui_accept"))
+        if (Input.IsActionJustPressed("switch_wind"))
         {
             _currentWindType += 1;
             
@@ -182,8 +184,6 @@ public class DropMover : Node
                 default:
                     throw new Exception("Wind type");
             }
-
-            Util.HUD.Debug = _currentWindType.ToString();
         }
     }
 
@@ -216,20 +216,20 @@ public class DropMover : Node
 
     private void OnDropTypeChanged(DropType dropType)
     {
-        _velocity = _velocity.Normalized();
-        switch(dropType)
-        {
+       switch (dropType)
+       {
+            case DropType.Hail:
+                AccelerationMagnitude = AccelerationBase * HailSpeedMultiplier;
+                break;
             case DropType.Rain:
-                _velocity *= Speed * RainSpeedMultiplier;
+                AccelerationMagnitude = AccelerationBase * RainSpeedMultiplier;
                 break;
             case DropType.Snow:
-                _velocity *= Speed * SnowSpeedMultiplier;
-                break;
-            case DropType.Hail:
-                _velocity *= Speed * HailSpeedMultiplier;
+                AccelerationMagnitude = AccelerationBase * SnowSpeedMultiplier;
                 break;
         }
-        _maxSpeed = MaxSpeed * _windMultiplier;
+        Util.HUD.Debug = dropType.ToString();
+        Util.Log(AccelerationMagnitude);
     }
     
     private void ConsoleInputEntered(ConsoleCommand c)

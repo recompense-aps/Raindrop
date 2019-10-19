@@ -13,7 +13,7 @@ public class RainPod : KinematicBody2D
     private Sprite _rainSprite;
     private Sprite _hailSprite;
     private Sprite _snowSprite;
-
+    private DropType _currentDropType = DropType.Rain;
     private Node2D _collisionShape;
 
     // Called when the node enters the scene tree for the first time.
@@ -31,7 +31,12 @@ public class RainPod : KinematicBody2D
     {
         if(Input.IsActionJustPressed("ui_select"))
         {
-            TransformDrop(DropType.Hail);
+            _currentDropType++;
+            if ((int)_currentDropType > (int)DropType.Hail)
+            {
+                _currentDropType = DropType.Rain;
+            }
+            TransformDrop(_currentDropType);
         }
     }
     public override void _PhysicsProcess(float delta)
@@ -63,7 +68,6 @@ public class RainPod : KinematicBody2D
                 SwitchSprite(_hailSprite);
                 break;
         }
-
         EmitSignal(nameof(DropTypeChanged), dropType);
     }
 
