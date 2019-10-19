@@ -34,6 +34,7 @@ public class DropMover : Node
     private Vector2 _usualDirectionNormal = new Vector2(0, 1);
     private WindType _currentWindType = WindType.Regular;
     private float _windMultiplier;
+    public float _maxSpeed;
     private bool _acelX = false;
     private bool _decelX = false;
     private bool _acelY = false;
@@ -48,7 +49,7 @@ public class DropMover : Node
         _deceleration = new Vector2(0, 0);
         _accelerationTransform = new Vector2(0, 0);
         _windMultiplier = RegularWindMultiplier;
-
+        _maxSpeed = MaxSpeed;
         _drop.Connect("DropTypeChanged", this, nameof(OnDropTypeChanged));
     }
 
@@ -56,13 +57,13 @@ public class DropMover : Node
     public override void _Process(float delta)
     {
         GetInput();
-        if(Math.Abs(_velocity.x) > MaxSpeed && _acelX)
+        if(Math.Abs(_velocity.x) > _maxSpeed && _acelX)
         {
             _acceleration.x = _acceleration.x * -0.5f;
             _acelX = false;
             _decelX = true;           
         }
-        if(Math.Abs(_velocity.y) > MaxSpeed && _acelY)
+        if(Math.Abs(_velocity.y) > _maxSpeed && _acelY)
         {
             _acceleration.y = _acceleration.y *= -0.5f;
             _acelY = false;
@@ -78,7 +79,8 @@ public class DropMover : Node
             ResetY();
             _decelY = false;
         }
-        _velocity += _acceleration * _windMultiplier;
+
+        _velocity += _acceleration;
 
         if (_velocity.Length() != 0)
         {
@@ -180,6 +182,8 @@ public class DropMover : Node
                 default:
                     throw new Exception("Wind type");
             }
+
+            Util.HUD.Debug = _currentWindType.ToString();
         }
     }
 
@@ -225,6 +229,7 @@ public class DropMover : Node
                 _velocity *= Speed * HailSpeedMultiplier;
                 break;
         }
+        _maxSpeed = MaxSpeed * _windMultiplier;
     }
     
     private void ConsoleInputEntered(ConsoleCommand c)
@@ -234,7 +239,18 @@ public class DropMover : Node
     
     private void HandlePower()
     {
-        Util.HUD.Power -= PowerCost * _windMultiplier;
+        switch (_currentWindType)
+        {
+            case WindType.Regular:
+                Util.HUD.Power -= PowerCost;
+                break;
+            case WindType.Power:
+                Util.HUD.Power -= PowerCost * 2;
+                break;
+            case WindType.Small:
+                Util.HUD.Power -= PowerCost * 0.5f;
+                break;
+        }
     }
 }
 

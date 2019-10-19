@@ -35,10 +35,10 @@ text = "100
 
 [node name="DebugText" type="Label" parent="."]
 modulate = Color( 1, 0.937255, 0, 1 )
-margin_left = 8.16446
-margin_top = 13.9962
-margin_right = 58.1645
-margin_bottom = 27.9962
+margin_left = 277.591
+margin_top = 578.51
+margin_right = 327.591
+margin_bottom = 592.51
 text = "DEBUG:"
 
 [node name="FpsText" type="Label" parent="."]

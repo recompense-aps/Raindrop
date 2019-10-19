@@ -110,10 +110,10 @@ public class HUD : CanvasLayer
 
         CheckConsole();
 
-        if(_powerStopWatch.Elapsed.Seconds >= 2)
+        if(_powerStopWatch.Elapsed.Seconds >= 1)
         {
             _powerStopWatch.Reset();
-            Power += 1;
+            Power += 2;
         }
     }
 
