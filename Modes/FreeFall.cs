@@ -31,13 +31,13 @@ public class FreeFall : Node2D
 
     //Obstacles
     [Export]
-    public float CrawlSpeed = 100;
+    public float CrawlSpeed = RainDrop.Settings.GetFloat("FreeFall.CrawlSpeed", 150);
     [Export]
-    public float ObstacleStartY = 0;
+    public float ObstacleStartY = RainDrop.Settings.GetFloat("FreeFall.ObstacleStartY", 0);
     [Export]
-    public float VerticalObstacleSpace = 100;
+    public float VerticalObstacleSpace = RainDrop.Settings.GetFloat("FreeFall.VerticalObstacleSpace", 100);
     [Export]
-    public int ObstaclesPerLayer = 10;
+    public int ObstaclesPerLayer = RainDrop.Settings.GetInt("FreeFall.ObstaclesPerLayer", 10);
 
     #endregion
 
