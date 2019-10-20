@@ -21,13 +21,13 @@ public class FreeFall : Node2D
     #region Exports
     //Drop
     [Export]
-    public float DropStartY = 150;
+    public float DropStartY = RainDrop.Settings.GetFloat("FreeFall.DropStartY", 150);
     [Export]
-    private float DropVolumeIncrease = 1.05f;
+    public float DropVolumeIncrease = RainDrop.Settings.GetFloat("FreeFall.DropVolumeIncrease", 1.05f);
 
     //Storm cloud
     [Export]
-    public float StormCloudStartY = 0;
+    public float StormCloudStartY = RainDrop.Settings.GetFloat("FreeFall.StormCloudStartY", 0);
 
     //Obstacles
     [Export]
@@ -40,8 +40,6 @@ public class FreeFall : Node2D
     public int ObstaclesPerLayer = RainDrop.Settings.GetInt("FreeFall.ObstaclesPerLayer", 10);
 
     #endregion
-
-    public int TestInt = 0;
 
     public override void _Ready()
     {
@@ -143,7 +141,7 @@ public class FreeFall : Node2D
         }
         else if (collision.Collider is RainDropPickUp)
         {
-            //_pod.Grow(DropVolumeIncrease);
+            _pod.Grow(DropVolumeIncrease);
             Node2D pu = collision.Collider as Node2D;
             RemoveChild(pu);
         }

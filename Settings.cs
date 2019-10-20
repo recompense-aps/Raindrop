@@ -51,7 +51,7 @@ namespace RainDrop
 
     public class RainDropSettings
     {
-        private string _settingsFilePath = "C:/dev/raindrop.settings";
+        private string _settingsFilePath = "raindrop.settings";
         private Dictionary<string, string> _settings = new Dictionary<string, string>();
 
         public RainDropSettings()

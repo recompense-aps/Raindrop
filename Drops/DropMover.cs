@@ -7,27 +7,27 @@ public class DropMover : Node
 {
     private RainPod _drop;
     [Export]
-    public float Speed = 100;
+    public float Speed = RainDrop.Settings.GetFloat("DropMover.Speed", 100);
     [Export]
-    public float MaxSpeed = 200;
+    public float MaxSpeed = RainDrop.Settings.GetFloat("DropMover.MaxSpeed", 200);
     [Export]
-    public float RainSpeedMultiplier = 1.0f;
+    public float RainSpeedMultiplier = RainDrop.Settings.GetFloat("DropMover.RainSpeedMultiplier", 1.0f);
     [Export]
-    public float HailSpeedMultiplier = 4f;
+    public float HailSpeedMultiplier = RainDrop.Settings.GetFloat("DropMover.HailSpeedMultiplier", 4f);
     [Export]
-    public float SnowSpeedMultiplier = 0.5f;
+    public float SnowSpeedMultiplier = RainDrop.Settings.GetFloat("DropMover.SnowSpeedMultiplier", 0.5f);
     [Export]
-    public float AccelerationBase = 40;
+    public float AccelerationBase = RainDrop.Settings.GetFloat("DropMover.AccelerationBase", 40);
     [Export]
-    public float AccelerationMagnitude = 40;
+    public float AccelerationMagnitude = RainDrop.Settings.GetFloat("DropMover.AccelerationMagnitude", 40);
     [Export]
-    public float SmallWindMultiplier = 0.5f;
+    public float SmallWindMultiplier = RainDrop.Settings.GetFloat("DropMover.SmallWindMultiplier", 0.5f);
     [Export]
-    public float RegularWindMultiplier = 1f;
+    public float RegularWindMultiplier = RainDrop.Settings.GetFloat("DropMover.RegularWindMultiplier", 1f);
     [Export]
-    public float PowerWindMultiplier = 3f;
+    public float PowerWindMultiplier = RainDrop.Settings.GetFloat("DropMover.PowerWindMultiplier", 3f);
     [Export]
-    public float PowerCost = 10;
+    public float PowerCost = RainDrop.Settings.GetFloat("DropMover.PowerCost", 10);
 
     private Vector2 _velocity;
     private Vector2 _acceleration;
@@ -36,7 +36,7 @@ public class DropMover : Node
     private Vector2 _usualDirectionNormal = new Vector2(0, 1);
     private WindType _currentWindType = WindType.Regular;
     private float _windMultiplier;
-    public float _maxSpeed;
+    private float _maxSpeed;
     private bool _acelX = false;
     private bool _decelX = false;
     private bool _acelY = false;
