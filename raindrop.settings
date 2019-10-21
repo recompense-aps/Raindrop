@@ -4,7 +4,7 @@
 FreeFall.DropStartY = 150
 FreeFall.DropVolumeIncrease = 1.05
 FreeFall.StormCloudStartY = 0
-FreeFall.CrawlSpeed = 1500
+FreeFall.CrawlSpeed = 150
 FreeFall.ObstacleStartY = 0
 FreeFall.VerticalObstacleSpace = 100
 FreeFall.ObstaclesPerLayer = 10
@@ -14,9 +14,9 @@ FreeFall.ObstaclesPerLayer = 10
 #[DropMover]
 DropMover.Speed = 100
 DropMover.MaxSpeed = 200
-DropMover.RainSpeedMultiplier = 1.0
+DropMover.RainSpeedMultiplier = 2.0
 DropMover.HailSpeedMultiplier = 4.0
-DropMover.SnowSpeedMultiplier = 0.5
+DropMover.SnowSpeedMultiplier = 1
 DropMover.AccelerationBase = 40
 DropMover.AccelerationMagnitude = 40
 DropMover.SmallWindMultiplier = 0.5

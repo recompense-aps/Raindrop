@@ -229,7 +229,7 @@ public class DropMover : Node
                 break;
         }
         Util.HUD.Debug = dropType.ToString();
-        Util.Log(AccelerationMagnitude);
+        Util.Log(dropType + "," + AccelerationMagnitude / AccelerationBase);
     }
     
     private void ConsoleInputEntered(ConsoleCommand c)

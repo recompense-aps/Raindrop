@@ -13,7 +13,7 @@ public class RainPod : KinematicBody2D
     private Sprite _rainSprite;
     private Sprite _hailSprite;
     private Sprite _snowSprite;
-    private DropType _currentDropType = DropType.Rain;
+    private DropType _currentDropType;
     private Node2D _collisionShape;
 
     // Called when the node enters the scene tree for the first time.
@@ -26,6 +26,7 @@ public class RainPod : KinematicBody2D
         _collisionShape = Util.FindNode(this, "CollisionShape2D") as Node2D;
         _hailSprite.Visible = false;
         _snowSprite.Visible = false;
+        TransformDrop(DropType.Rain);
     }
     public override void _Process(float delta)
     {
