@@ -1,8 +1,9 @@
 # lines that start with '#' are ignored
 # if you want to use the default value for a key, assign it to [value] or get rid of the line
+# if you can think of something you want to control here, let me know
 #[FreeFall]
 FreeFall.DropStartY = 150
-FreeFall.DropVolumeIncrease = 1.05
+FreeFall.DropVolumeIncrease = 0.10
 FreeFall.StormCloudStartY = 0
 FreeFall.CrawlSpeed = 150
 FreeFall.ObstacleStartY = 0

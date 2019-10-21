@@ -23,7 +23,7 @@ public class FreeFall : Node2D
     [Export]
     public float DropStartY = RainDrop.Settings.GetFloat("FreeFall.DropStartY", 150);
     [Export]
-    public float DropVolumeIncrease = RainDrop.Settings.GetFloat("FreeFall.DropVolumeIncrease", 1.05f);
+    public float DropVolumeIncrease = RainDrop.Settings.GetFloat("FreeFall.DropVolumeIncrease", 0.10f);
 
     //Storm cloud
     [Export]
@@ -150,11 +150,16 @@ public class FreeFall : Node2D
             //technically a loss, so restart the scene
             Util.ChangeScene(this, "Modes/FreeFall");
         }
-        else
+        else //obstacle
         {
             Node obj = collision.Collider as Node;
             Node obp = obj.GetParent().GetParent();
-            obp.RemoveChild(obj.GetParent()); 
+            obp.RemoveChild(obj.GetParent());
+
+            _pod.Grow(-0.1f);
+            Particles2D p  = Util.LoadNode("Particles/DropBurst") as Particles2D;
+            p.OneShot = true;
+            _pod.AddChild(p);
         }
 
     }

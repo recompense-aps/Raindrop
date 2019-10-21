@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Graphics/raindrop 2.png" type="Texture" id=1]
+
+[sub_resource type="ParticlesMaterial" id=1]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 114.94
+angular_velocity = 380.69
+angular_velocity_random = 0.34
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.1
+
+[node name="Particles2D" type="Particles2D"]
+amount = 16
+explosiveness = 1.0
+randomness = 0.4
+local_coords = false
+process_material = SubResource( 1 )
+texture = ExtResource( 1 )
