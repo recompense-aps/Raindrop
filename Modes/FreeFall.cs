@@ -14,7 +14,7 @@ public class FreeFall : Node2D
     private StormCloud _stormCloud;
     private HUD _hud;
     private ScoreKeeper _scoreKeeper = new ScoreKeeper();
-    private List<Node2D> _spawnedObstacles = new List<Node2D>();
+    private List<Obstacle> _spawnedObstacles = new List<Obstacle>();
     private PickBag<LevelSpawnType> _waveBag = new PickBag<LevelSpawnType>();
     private string _spawnType = "all";
 
@@ -32,6 +32,12 @@ public class FreeFall : Node2D
     //Obstacles
     [Export]
     public float CrawlSpeed = RainDrop.Settings.GetFloat("FreeFall.CrawlSpeed", 150);
+    [Export]
+    public float RainCrawlMultiplier = RainDrop.Settings.GetFloat("DropMover.RainCrawlMultiplier", 1.5f);
+    [Export]
+    public float HailCrawlMultiplier = RainDrop.Settings.GetFloat("DropMover.RainCrawlMultiplier", 2.0f);
+    [Export]
+    public float SnowCrawlMultiplier = RainDrop.Settings.GetFloat("DropMover.RainCrawlMultiplier", 1.0f);
     [Export]
     public float ObstacleStartY = RainDrop.Settings.GetFloat("FreeFall.ObstacleStartY", 0);
     [Export]
@@ -128,6 +134,11 @@ public class FreeFall : Node2D
         {
             RemoveChild(ob);
         }
+    }
+
+    private void ChangeObstacleSpeed(Vector2 velocity)
+    {
+        _spawnedObstacles.ForEach(ob => ob.Velocity.Set(velocity));
     }
 
     private void OnDropHitSomething(KinematicCollision2D collision)
