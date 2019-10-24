@@ -19,6 +19,10 @@ config/name="RainDrop"
 run/main_scene="res://Modes/StartMenu.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/resizable=false
+
 [input]
 
 right={

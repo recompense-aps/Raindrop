@@ -5,59 +5,53 @@
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 1 )
 
-[node name="ScoreText" type="Label" parent="."]
+[node name="Top" type="HBoxContainer" parent="."]
+margin_right = 1023.0
+margin_bottom = 40.0
+
+[node name="Bottom" type="HBoxContainer" parent="."]
+margin_left = 3.0
+margin_top = 572.0
+margin_right = 1002.0
+margin_bottom = 597.0
+size_flags_stretch_ratio = 0.0
+custom_constants/separation = 150
+alignment = 1
+
+[node name="Powerbar" type="ColorRect" parent="Bottom"]
+margin_right = 242.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+color = Color( 1, 0, 0, 1 )
+
+[node name="ScoreText" type="Label" parent="Bottom"]
 modulate = Color( 0.0313726, 1, 0, 1 )
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_left = -1.16638
-margin_top = -600.0
-margin_right = 1022.83
-margin_bottom = -2.0
+margin_left = 392.0
+margin_top = 5.0
+margin_right = 443.0
+margin_bottom = 19.0
 text = "Score: 0"
 align = 2
 valign = 2
 
-[node name="TimeText" type="Label" parent="."]
-margin_left = 487.535
-margin_top = 577.344
-margin_right = 527.535
-margin_bottom = 591.344
+[node name="TimeText" type="Label" parent="Bottom"]
+margin_left = 593.0
+margin_top = 5.0
+margin_right = 641.0
+margin_bottom = 19.0
 text = "Time: 0"
 
-[node name="PowerText" type="Label" parent="."]
-modulate = Color( 1, 0, 0, 1 )
-margin_left = 12.8298
-margin_top = 579.676
-margin_right = 52.8298
-margin_bottom = 610.676
-text = "100
-"
-
-[node name="DebugText" type="Label" parent="."]
+[node name="DebugText" type="Label" parent="Bottom"]
 modulate = Color( 1, 0.937255, 0, 1 )
-margin_left = 277.591
-margin_top = 578.51
-margin_right = 327.591
-margin_bottom = 592.51
+margin_left = 791.0
+margin_top = 5.0
+margin_right = 841.0
+margin_bottom = 19.0
 text = "DEBUG:"
 
-[node name="FpsText" type="Label" parent="."]
-margin_left = 586.798
-margin_top = 575.846
-margin_right = 626.798
-margin_bottom = 589.846
-text = "0"
-
-[node name="TextEdit" type="TextEdit" parent="."]
-visible = false
-margin_left = 718.0
+[node name="FpsText" type="Label" parent="Bottom"]
+margin_left = 991.0
 margin_top = 5.0
-margin_right = 1015.0
-margin_bottom = 36.0
-
-[node name="Powerbar" type="ColorRect" parent="."]
-margin_left = 44.5124
-margin_top = 572.667
-margin_right = 215.512
-margin_bottom = 596.667
-color = Color( 1, 0, 0, 1 )
+margin_right = 999.0
+margin_bottom = 19.0
+text = "0"

@@ -13,10 +13,8 @@ public class HUD : CanvasLayer
     private Stopwatch _powerStopWatch = new Stopwatch();
     private Label _scoreText;
     private Label _timeText;
-    private Label _powerText;
     private Label _debugText;
     private Label _fpsLabel;
-    private TextEdit _textEdit;
     private ColorRect _powerBar;
 
     private int _score = 0;
@@ -58,7 +56,6 @@ public class HUD : CanvasLayer
             {
                 _power = 100;
             }
-            _powerText.Text = _power.ToString();
             _powerBar.SetScale(new Vector2(_power / 100, 1));
         }
     }
@@ -76,29 +73,15 @@ public class HUD : CanvasLayer
         }
     }
 
-    public string ConsoleInput
-    {
-        get
-        {
-            return _textEdit.Text;
-        }
-        set
-        {
-            _textEdit.Text = value;
-        }
-    }
-
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         _stopWatch.Start();
-        _scoreText = GetNode(new NodePath("ScoreText")) as Label;
-        _timeText = GetNode(new NodePath("TimeText")) as Label;
-        _powerText = GetNode(new NodePath("PowerText")) as Label;
-        _debugText = GetNode(new NodePath("DebugText")) as Label;
-        _fpsLabel = Util.FindNode(this, "FpsText") as Label;
-        _textEdit = Util.FindNode(this, "TextEdit") as TextEdit;
-        _powerBar = Util.FindNode(this, "Powerbar") as ColorRect;
+        _scoreText = GetNode(new NodePath("Bottom/ScoreText")) as Label;
+        _timeText = GetNode(new NodePath("Bottom/TimeText")) as Label;
+        _debugText = GetNode(new NodePath("Bottom/DebugText")) as Label;
+        _fpsLabel = Util.FindNode(this, "Bottom/FpsText") as Label;
+        _powerBar = Util.FindNode(this, "Bottom/Powerbar") as ColorRect;
 
     }
 
@@ -107,8 +90,6 @@ public class HUD : CanvasLayer
     {
         _timeText.Text = _powerStopWatch.Elapsed.Seconds.ToString();
         _fpsLabel.Text = Engine.GetFramesPerSecond().ToString() + "/" + Engine.TargetFps.ToString();
-
-        CheckConsole();
 
         if(_powerStopWatch.Elapsed.Seconds >= 1)
         {
@@ -119,22 +100,7 @@ public class HUD : CanvasLayer
 
     public void ToggleConsole(bool tog = true)
     {
-        _textEdit.Visible = tog;
         _consoleOn = tog;
-    }
-
-    private void CheckConsole()
-    {
-        if (!_consoleOn) return;
-        if (Input.IsActionJustPressed("ui_focus_next"))
-        {
-            string command = ConsoleInput;
-            ConsoleInput = "";
-
-            string[] commandSplit = command.Split(' ');
-
-            EmitSignal(nameof(ConsoleInputEntered), new ConsoleCommand(commandSplit[1], commandSplit[2], commandSplit[3]));
-        }
     }
 }
 

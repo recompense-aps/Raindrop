@@ -3,6 +3,7 @@ using RainDrop;
 using RainDrop.Enums;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Reflection;
 
 public class FreeFall : Node2D
@@ -17,6 +18,7 @@ public class FreeFall : Node2D
     private List<Obstacle> _spawnedObstacles = new List<Obstacle>();
     private PickBag<LevelSpawnType> _waveBag = new PickBag<LevelSpawnType>();
     private string _spawnType = "all";
+    private float _spawnElapsed = 0;
 
     #region Exports
     //Drop
@@ -39,11 +41,13 @@ public class FreeFall : Node2D
     [Export]
     public float SnowCrawlMultiplier = RainDrop.Settings.GetFloat("DropMover.RainCrawlMultiplier", 1.0f);
     [Export]
-    public float ObstacleStartY = RainDrop.Settings.GetFloat("FreeFall.ObstacleStartY", 0);
+    public float ObstacleStartY = RainDrop.Settings.GetFloat("FreeFall.ObstacleStartY", OS.GetRealWindowSize().y);
+    [Export]
+    public float SpawnInterval = RainDrop.Settings.GetFloat("FreeFall.SpawnInterval", 1);
     [Export]
     public float VerticalObstacleSpace = RainDrop.Settings.GetFloat("FreeFall.VerticalObstacleSpace", 100);
     [Export]
-    public int ObstaclesPerLayer = RainDrop.Settings.GetInt("FreeFall.ObstaclesPerLayer", 10);
+    public int ObstaclesPerLayer = RainDrop.Settings.GetInt("FreeFall.ObstaclesPerLayer", 2);
 
     #endregion
 
@@ -76,13 +80,12 @@ public class FreeFall : Node2D
 
     public override void _Process(float delta)
     {
-        if (_spawnedObstacles.Count > 0)
+        _spawnElapsed += delta;
+        _hud.Debug = ((int)_spawnElapsed).ToString();
+        if (_spawnElapsed >= SpawnInterval)
         {
-            Node2D lastOb = _spawnedObstacles[_spawnedObstacles.Count - 1];
-            if (_pod.Position.y > lastOb.Position.y)
-            {
-                GenerateNextWave(lastOb.Position.y);
-            }
+            _spawnElapsed = 0;
+            GenerateNextWave(ObstacleStartY);
         }
         if (Input.IsActionJustPressed("ui_cancel"))
         {
