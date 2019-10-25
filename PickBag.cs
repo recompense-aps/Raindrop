@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Godot;
 
 namespace RainDrop
@@ -22,6 +19,20 @@ namespace RainDrop
 
             _bag.Add(new int[] { _index, _index + chance }, choice);
             _index += chance;
+        }
+
+        public void Add(Dictionary<T,int> choices)
+        {
+            int bag = 0;
+            foreach(T key in choices.Keys)
+            {
+                Add(choices[key], key);
+                bag += choices[key];
+            }
+            if (bag < 100)
+            {
+                throw new Exception("Bag is not full! (" + bag.ToString() + ")");
+            }
         }
 
         public T Pick()

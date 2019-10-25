@@ -17,7 +17,7 @@ public class FreeFall : Node2D
     private ScoreKeeper _scoreKeeper = new ScoreKeeper();
     private List<Obstacle> _spawnedObstacles = new List<Obstacle>();
     private PickBag<LevelSpawnType> _waveBag = new PickBag<LevelSpawnType>();
-    private string _spawnType = "all";
+    private string _spawnType = "city";
     private float _spawnElapsed = 0;
 
     #region Exports
@@ -26,6 +26,8 @@ public class FreeFall : Node2D
     public float DropStartY = RainDrop.Settings.GetFloat("FreeFall.DropStartY", 150);
     [Export]
     public float DropVolumeIncrease = RainDrop.Settings.GetFloat("FreeFall.DropVolumeIncrease", 0.10f);
+    [Export]
+    public float DropScale = RainDrop.Settings.GetFloat("FreeFall.DropScale", 2);
 
     //Storm cloud
     [Export]
@@ -61,6 +63,7 @@ public class FreeFall : Node2D
         _pod = Util.LoadNode("Drops/RainPod") as RainPod;
         _pod.Position = new Vector2(_window.x / 2, DropStartY);
         _pod.Connect("HitSomething", this, nameof(OnDropHitSomething));
+        _pod.Scale.Set(new Vector2(DropScale, DropScale));
         AddChild(_pod);
 
         _stormCloud = Util.LoadNode("StormCloud") as StormCloud;
@@ -69,7 +72,7 @@ public class FreeFall : Node2D
 
         _scoreKeeper.Connect("ScoreChanged", this, nameof(OnScoreChanged));
 
-        _spawnType = Util.Globals.ContainsKey("SpawnType") ? Util.Globals["SpawnType"] as string : "all";
+        _spawnType = Util.Globals.ContainsKey("SpawnType") ? Util.Globals["SpawnType"] as string : "city";
 
         _waveBag.Add(50, LevelSpawnType.Obstacle);
         _waveBag.Add(25, LevelSpawnType.PowerUp);

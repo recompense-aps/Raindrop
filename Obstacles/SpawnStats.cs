@@ -6,57 +6,52 @@ using System.Collections.Generic;
 public class ObstacleSpawner
 {
     private RandomNumberGenerator _random = new RandomNumberGenerator();
+    private PickBag<string> _cityPickBag = new PickBag<string>();
+    private PickBag<string> _junglePickBag = new PickBag<string>();
+    private PickBag<string> _oceanPickBag = new PickBag<string>();
+
     private static Dictionary<string, int> _cityStats = new Dictionary<string, int>()
     {
-        {"Pigeon", 1 },
-        {"BrickPlatform", 1 },
-        {"SuperHero", 1 },
-        {"Airplane", 1 },
-        {"PlayGroundSlide",1 },
-        {"Javelin", 1 },
-        {"Football", 1 },
-        {"Ufo", 1 },
-        {"Car", 1 }
+        {"Pigeon", 11 },
+        {"BrickPlatform", 11 },
+        {"SuperHero", 11 },
+        {"Airplane", 11 },
+        {"PlayGroundSlide",11 },
+        {"Javelin", 11 },
+        {"Football", 11 },
+        {"Ufo", 11 },
+        {"Car", 12 }
     };
 
     private Dictionary<string, int> _jungleStats = new Dictionary<string, int>()
     {
-        {"LogPlatform", 1 },
-        {"Snake", 1 },
-        {"Toucan", 1 },
-        {"Arrow", 1 },
-        {"DinoBird", 1 },
-        {"JunglePlane", 1 },
-        {"Rainbow", 1 },
-        {"MonkeyHead", 1 }
+        {"LogPlatform", 12 },
+        {"Snake", 12 },
+        {"Toucan", 12 },
+        {"Arrow", 12 },
+        {"DinoBird", 12 },
+        {"JunglePlane", 12 },
+        {"Rainbow", 12 },
+        {"MonkeyHead", 16 }
     };
 
     private Dictionary<string, int> _oceanStats = new Dictionary<string, int>()
     {
-        {"Seagull", 1 },
-        {"IcePlatform", 1 },
-        {"SeaPlane", 1 },
-        {"Shark", 1 },
-        {"Surfboard", 1 },
-        {"Submarine", 1 },
-        {"Fish", 1 },
-        {"Parachute", 1 }
+        {"Seagull", 12 },
+        {"IcePlatform", 12 },
+        {"SeaPlane", 12 },
+        {"Shark", 12 },
+        {"Surfboard", 12 },
+        {"Submarine", 12 },
+        {"Fish", 12 },
+        {"Parachute", 16 }
     };
-
-    List<string> _cityPool;
-    List<string> _junglePool;
-    List<string> _oceanPool;
-    List<string> _allPool = new List<string>();
 
     public ObstacleSpawner()
     {
-        _cityPool = CreatePool(_cityStats);
-        _junglePool = CreatePool(_jungleStats);
-        _oceanPool = CreatePool(_oceanStats);
-
-        _allPool.AddRange(_cityPool);
-        _allPool.AddRange(_junglePool);
-        _allPool.AddRange(_oceanPool);
+        _cityPickBag.Add(_cityStats);
+        _junglePickBag.Add(_jungleStats);
+        _oceanPickBag.Add(_oceanStats);
     }
 
     //TODO: This should be a struct
@@ -64,39 +59,21 @@ public class ObstacleSpawner
     {
         switch (levelType)
         {
-            case "all":
-                return SpawnRandomObstacle(_allPool);
             case "city":
-                return SpawnRandomObstacle(_cityPool);
+                return SpawnRandomObstacle(_cityPickBag.Pick());
             case "jungle":
-                return SpawnRandomObstacle(_junglePool);
+                return SpawnRandomObstacle(_junglePickBag.Pick());
             case "ocean":
-                return SpawnRandomObstacle(_oceanPool);
+                return SpawnRandomObstacle(_oceanPickBag.Pick());
             default:
                 throw new Exception("Invalid Spawn! '" + levelType + "' is not a valid level type!");
         }
     }
 
-    private Obstacle SpawnRandomObstacle(List<string> pool)
+    private Obstacle SpawnRandomObstacle(string pick)
     {
-        _random.Randomize();
-        int index = _random.RandiRange(0, pool.Count - 1);
         Obstacle ob = Util.LoadNode("Obstacles/Obstacle") as Obstacle;
-        ob.SetObstacleType(pool[index]);
+        ob.SetObstacleType(pick);
         return ob;
-    }
-
-    private List<string> CreatePool(Dictionary<string, int> poolStats)
-    {
-        List<string> pool = new List<string>();
-
-        foreach(string key in poolStats.Keys)
-        {
-            for (int i = 0; i < poolStats[key]; i++)
-            {
-                pool.Add(key);
-            }
-        }
-        return pool;
     }
 }
