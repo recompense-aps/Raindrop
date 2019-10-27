@@ -3,3 +3,5 @@ C:\dev\RainDrop\Raindrop\.mono\temp\bin\Debug\RainDrop.pdb
 C:\dev\RainDrop\Raindrop\.mono\temp\obj\Debug\RainDrop.dll
 C:\dev\RainDrop\Raindrop\.mono\temp\obj\Debug\RainDrop.pdb
 C:\dev\RainDrop\Raindrop\.mono\temp\obj\Debug\RainDrop.csprojResolveAssemblyReference.cache
+C:\dev\RainDrop\Raindrop\.mono\temp\bin\Debug\Newtonsoft.Json.dll
+C:\dev\RainDrop\Raindrop\.mono\temp\bin\Debug\Newtonsoft.Json.xml

@@ -5,6 +5,8 @@ public class StartMenu : Node2D
 {
     public override void _Ready()
     {
+        RainDrop.SaveFile saveFile = new RainDrop.SaveFile();
+        saveFile.Save();
     }
 
     private void OnFreeFallButtonClick(Button button)
