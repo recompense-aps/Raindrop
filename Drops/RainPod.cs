@@ -16,6 +16,9 @@ public class RainPod : KinematicBody2D
     private DropType _currentDropType;
     private Node2D _collisionShape;
 
+    [Export]
+    public float MinDropScale = RainDrop.Settings.GetFloat("RainPod.MinDropScale", 0.5f);
+
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
@@ -54,6 +57,11 @@ public class RainPod : KinematicBody2D
 
         _sprite.SetScale(sScale);
         _collisionShape.SetScale(bScale);
+
+        if(sScale.x <= MinDropScale)
+        {
+            GetTree().ChangeScene("res://Modes/GameOver.tscn");
+        }
     }
     public void TransformDrop(DropType dropType)
     {

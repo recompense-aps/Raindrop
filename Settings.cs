@@ -159,5 +159,7 @@ namespace RainDrop
     {
         public DateTime LastEdit;
         public int Orbs;
+        public int TotalScore;
+        public string[] PurchasedUpgrades;
     }
 }

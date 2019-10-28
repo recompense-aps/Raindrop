@@ -17,9 +17,9 @@ public class DropMover : Node
     [Export]
     public float SnowSpeedMultiplier = RainDrop.Settings.GetFloat("DropMover.SnowSpeedMultiplier", 0.5f);
     [Export]
-    public float AccelerationBase = RainDrop.Settings.GetFloat("DropMover.AccelerationBase", 40);
+    public float AccelerationBase = RainDrop.Settings.GetFloat("DropMover.AccelerationBase", 60);
     [Export]
-    public float AccelerationMagnitude = RainDrop.Settings.GetFloat("DropMover.AccelerationMagnitude", 40);
+    public float AccelerationMagnitude = RainDrop.Settings.GetFloat("DropMover.AccelerationMagnitude", 60);
     [Export]
     public float SmallWindMultiplier = RainDrop.Settings.GetFloat("DropMover.SmallWindMultiplier", 0.5f);
     [Export]
@@ -61,13 +61,13 @@ public class DropMover : Node
         GetInput();
         if(Math.Abs(_velocity.x) > _maxSpeed && _acelX)
         {
-            _acceleration.x = _acceleration.x * -0.1f;
+            _acceleration.x = _acceleration.x * -0.2f;
             _acelX = false;
             _decelX = true;           
         }
         if(Math.Abs(_velocity.y) > _maxSpeed && _acelY)
         {
-            _acceleration.y = _acceleration.y * -0.5f;
+            _acceleration.y = _acceleration.y * -0.2f;
             _acelY = false;
             _decelY = true;
         }
