@@ -21,6 +21,8 @@ public class DropMover : Node
     [Export]
     public float AccelerationMagnitude = RainDrop.Settings.GetFloat("DropMover.AccelerationMagnitude", 60);
     [Export]
+    public float DecelBaseMultiplier = RainDrop.Settings.GetFloat("DropMover.DecelBaseMultiplier", 0.2f);
+    [Export]
     public float SmallWindMultiplier = RainDrop.Settings.GetFloat("DropMover.SmallWindMultiplier", 0.5f);
     [Export]
     public float RegularWindMultiplier = RainDrop.Settings.GetFloat("DropMover.RegularWindMultiplier", 1f);
@@ -61,13 +63,13 @@ public class DropMover : Node
         GetInput();
         if(Math.Abs(_velocity.x) > _maxSpeed && _acelX)
         {
-            _acceleration.x = _acceleration.x * -0.2f;
+            _acceleration.x = _acceleration.x * -1 * DecelBaseMultiplier;
             _acelX = false;
             _decelX = true;           
         }
         if(Math.Abs(_velocity.y) > _maxSpeed && _acelY)
         {
-            _acceleration.y = _acceleration.y * -0.2f;
+            _acceleration.y = _acceleration.y * -1 * DecelBaseMultiplier;
             _acelY = false;
             _decelY = true;
         }
@@ -219,17 +221,17 @@ public class DropMover : Node
        switch (dropType)
        {
             case DropType.Hail:
-                AccelerationMagnitude = AccelerationBase * HailSpeedMultiplier;
+                //AccelerationMagnitude = AccelerationBase * HailSpeedMultiplier;
                 break;
             case DropType.Rain:
-                AccelerationMagnitude = AccelerationBase * RainSpeedMultiplier;
+                //AccelerationMagnitude = AccelerationBase * RainSpeedMultiplier;
                 break;
             case DropType.Snow:
-                AccelerationMagnitude = AccelerationBase * SnowSpeedMultiplier;
+                //AccelerationMagnitude = AccelerationBase * SnowSpeedMultiplier;
                 break;
         }
         Util.HUD.Debug = dropType.ToString();
-        Util.Log(dropType + "," + AccelerationMagnitude / AccelerationBase);
+        //Util.Log(dropType + "," + AccelerationMagnitude / AccelerationBase);
     }
     
     private void ConsoleInputEntered(ConsoleCommand c)
