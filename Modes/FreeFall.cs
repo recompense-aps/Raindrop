@@ -62,7 +62,7 @@ public class FreeFall : Node2D
 
         _stormCloud = Util.LoadNode("StormCloud") as StormCloud;
         _stormCloud.Position = new Vector2(0, StormCloudStartY);
-        AddChild(_stormCloud);
+        //AddChild(_stormCloud);
 
         _scoreKeeper.Connect("ScoreChanged", this, nameof(OnScoreChanged));
 
@@ -86,6 +86,9 @@ public class FreeFall : Node2D
         }
         if (Input.IsActionJustPressed("ui_cancel"))
         {
+            Util.SaveFile.Contents.TotalScore += _scoreKeeper.Score;
+            Util.SaveFile.Contents.Orbs += _scoreKeeper.PowerUpsCollected;
+            Util.SaveFile.Save();
             GetTree().ChangeScene("res://Modes/StartMenu.tscn");
         }
     }

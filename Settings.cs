@@ -102,7 +102,7 @@ namespace RainDrop
         }
     }
 
-    class SaveFile
+    public class SaveFile
     {
         private string _fileName = "raindrop.save";
         private string _sharedSecret = "happygo  lucky bears with icecream sdfasdfasd 12343489 on the china";
@@ -149,17 +149,27 @@ namespace RainDrop
         public void Save()
         {
             _contents.LastEdit = DateTime.Now;
+            string contentsString = JsonConvert.SerializeObject(_contents);
             StreamWriter w = new StreamWriter(_fileName);
-            w.WriteLine(JsonConvert.SerializeObject(_contents));
+            
+            if(_encrypted)
+            {
+                w.WriteLine(Crypto.EncryptStringAES(contentsString, _sharedSecret));
+            }
+            else
+            {
+                w.WriteLine(contentsString);
+            }
+
             w.Close();
         }
     }
 
-    class SaveFileStructure
+    public class SaveFileStructure
     {
         public DateTime LastEdit;
-        public int Orbs;
-        public int TotalScore;
+        public int Orbs = 0;
+        public int TotalScore = 0;
         public string[] PurchasedUpgrades;
     }
 }

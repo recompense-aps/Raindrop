@@ -19,6 +19,14 @@ namespace RainDrop
             }
         }
 
+        public int PowerUpsCollected
+        {
+            get
+            {
+                return _powerUpsCollected;
+            }
+        }
+
         public void ScoreObstacle(Obstacle ob)
         {
             ob.Connect("PassedPlayer", this, nameof(OnObstaclePassedPlayer), null, (int)ConnectFlags.Oneshot);

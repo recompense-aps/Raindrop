@@ -20,6 +20,20 @@ namespace RainDrop
 
         public static HUD HUD;
 
+        private static SaveFile _saveFile;
+
+        public static SaveFile SaveFile
+        {
+            get
+            {
+                if (_saveFile == null)
+                {
+                    _saveFile = new SaveFile(true);
+                }
+                return _saveFile;
+            }
+        }
+
         public static Node2D LoadNode(string path)
         {
             PackedScene o = GD.Load<PackedScene>("res://" + path + ".tscn");
