@@ -12,8 +12,7 @@ public class DevConsole : Node2D
         _types = new Type[]
         {
             typeof(FreeFall),
-            typeof(RainPod),
-            typeof(DropMover)
+            typeof(RainPod)
         };
 
         CreateDirectionsDoc();

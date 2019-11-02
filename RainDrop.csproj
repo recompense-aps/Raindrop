@@ -55,8 +55,6 @@
   <ItemGroup>
     <Compile Include="Crypto.cs" />
     <Compile Include="DevConsole.cs" />
-    <Compile Include="Drops\CollisionShape2D.cs" />
-    <Compile Include="Drops\DropMover.cs" />
     <Compile Include="Drops\RainDropPickUp.cs" />
     <Compile Include="Drops\RainPod.cs" />
     <Compile Include="Enums\Enums.cs" />
