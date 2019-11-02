@@ -9,6 +9,7 @@ public class RainPod : KinematicBody2D
     [Signal]
     public delegate void DropTypeChanged();
 
+    private int _health;
     private Sprite _sprite;
     private Sprite _rainSprite;
     private Sprite _hailSprite;
@@ -21,6 +22,8 @@ public class RainPod : KinematicBody2D
 
     [Export]
     public float MinDropScale = RainDrop.Settings.GetFloat("RainPod.MinDropScale", 0.5f);
+    public int MaxHealth = RainDrop.Settings.GetInt("RainPod.MaxHealth", 10);
+    public int StartHealth = RainDrop.Settings.GetInt("RainPod.StartHealth", 5);
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -35,6 +38,7 @@ public class RainPod : KinematicBody2D
         _collisionShape = Util.FindNode(this, "CollisionShape2D") as Node2D;
         _hailSprite.Visible = false;
         _snowSprite.Visible = false;
+        _health = StartHealth;
         TransformDrop(DropType.Rain, false);
     }
     public override void _Process(float delta)
@@ -49,24 +53,19 @@ public class RainPod : KinematicBody2D
             TransformDrop(_currentDropType);
         }
     }
-    public override void _PhysicsProcess(float delta)
-    {
-    }
 
     public void Grow(float amount)
     {
-        Vector2 sScale = _sprite.Transform.Scale;
-        Vector2 bScale = _collisionShape.Transform.Scale;
-
-        sScale.Set(sScale.x + amount, bScale.y + amount);
-        bScale.Set(bScale.x + amount, bScale.y + amount);
-
-        _sprite.SetScale(sScale);
-        _collisionShape.SetScale(bScale);
-
-        if(sScale.x <= MinDropScale)
+        if (CheckHealth(amount))
         {
-            GetTree().ChangeScene("res://Modes/GameOver.tscn");
+            Vector2 sScale = _sprite.Transform.Scale;
+            Vector2 bScale = _collisionShape.Transform.Scale;
+
+            sScale.Set(sScale.x + amount, bScale.y + amount);
+            bScale.Set(bScale.x + amount, bScale.y + amount);
+
+            _sprite.SetScale(sScale);
+            _collisionShape.SetScale(bScale);
         }
     }
     public void TransformDrop(DropType dropType, bool playSound = true)
@@ -115,4 +114,29 @@ public class RainPod : KinematicBody2D
         newSprite.Visible = true;    
     }
 
+    private bool CheckHealth(float amount)
+    {
+        if(amount < 0)
+        {
+            _health--;
+        }
+        else
+        {
+            _health++;
+        }
+
+        if(_health <= 0)
+        {
+            GetTree().ChangeScene("res://Modes/GameOver.tscn");
+            return false;
+        }
+
+        if (_health > MaxHealth)
+        {
+            _health = MaxHealth;
+            return false;
+        }
+
+        return true;
+    }
 }

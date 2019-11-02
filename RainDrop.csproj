@@ -72,10 +72,12 @@
     <Compile Include="ScoreKeeper.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Snowflake.cs" />
+    <Compile Include="Spawner.cs" />
     <Compile Include="StormCloud.cs" />
     <Compile Include="UI\Button.cs" />
     <Compile Include="UI\HUD.cs" />
     <Compile Include="Util.cs" />
+    <Compile Include="Window.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
