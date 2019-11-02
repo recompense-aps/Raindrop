@@ -37,6 +37,10 @@ public class FreeFall : Node2D
     [Export]
     public float CrawlSpeed = RainDrop.Settings.GetFloat("FreeFall.CrawlSpeed", 150);
     [Export]
+    public float PowerUpCrawlSpeed = RainDrop.Settings.GetFloat("FreeFall.PowerUpCrawlSpeed", 0.9f);
+    [Export]
+    public float DropCrawlSpeed = RainDrop.Settings.GetFloat("FreeFall.DropCrawlSpeed", 0.8f);
+    [Export]
     public float ObstacleStartY = RainDrop.Settings.GetFloat("FreeFall.ObstacleStartY", OS.GetRealWindowSize().y);
     [Export]
     public float SpawnInterval = RainDrop.Settings.GetFloat("FreeFall.SpawnInterval", 1);
@@ -89,7 +93,7 @@ public class FreeFall : Node2D
             switch(_waveBag.Pick())
             {
                 case LevelSpawnType.PowerUp:
-                    PowerUp p = _spawner.SpawnPowerUp(position, crawlVector);
+                    PowerUp p = _spawner.SpawnPowerUp(position, crawlVector * PowerUpCrawlSpeed);
                     _scoreKeeper.ScorePowerUp(p);
                     break;
                 case LevelSpawnType.Obstacle:
@@ -98,7 +102,7 @@ public class FreeFall : Node2D
                     _scoreKeeper.ScoreObstacle(ob);
                     break;
                 case LevelSpawnType.Drop:
-                    RainDropPickUp rainDrop = _spawner.SpawnRainDropPickUp(position, crawlVector);
+                    RainDropPickUp rainDrop = _spawner.SpawnRainDropPickUp(position, crawlVector * DropCrawlSpeed);
                     break;
             }
         }
@@ -177,7 +181,6 @@ public class FreeFall : Node2D
         }
 
     }
-    
     private void OnScoreChanged()
     {
         _hud.Score = _scoreKeeper.Score;
