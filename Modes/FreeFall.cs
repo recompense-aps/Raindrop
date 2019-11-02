@@ -28,6 +28,8 @@ public class FreeFall : Node2D
     public float DropVolumeIncrease = RainDrop.Settings.GetFloat("FreeFall.DropVolumeIncrease", 0.10f);
     [Export]
     public float DropScale = RainDrop.Settings.GetFloat("FreeFall.DropScale", 2);
+    [Export]
+    public int HailStoneUpgradeCost = RainDrop.Settings.GetInt("HailStoneUpgradeCost", 0);
 
     //Storm cloud
     [Export]
@@ -133,6 +135,7 @@ public class FreeFall : Node2D
     private void OnDropHitSomething(KinematicCollision2D collision)
     {
         // TODO: Refactor pod-specific stuff into the pod
+        //       Honestly, refector this whole method
 
         if (collision.Collider is PowerUp)
         {
@@ -144,8 +147,9 @@ public class FreeFall : Node2D
         else if (collision.Collider is RainDropPickUp)
         {
             _pod.Grow(DropVolumeIncrease);
-            Node2D pu = collision.Collider as Node2D;
+            RainDropPickUp pu = collision.Collider as RainDropPickUp;
             RemoveChild(pu);
+            _pod.HitRainDropPickUp(pu);
         }
         else if (collision.Collider is StormCloud)
         {

@@ -100,6 +100,12 @@ public class RainPod : KinematicBody2D
         _obstacleSound.Play();
     }
 
+    public void HitRainDropPickUp(RainDropPickUp pickUp)
+    {
+        _powerUpSound.Play();
+        TransformDrop(pickUp.DropType);
+    }
+
     private void SwitchSprite(Sprite newSprite)
     {
         _rainSprite.Visible =
