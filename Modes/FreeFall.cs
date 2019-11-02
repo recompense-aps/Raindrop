@@ -58,7 +58,6 @@ public class FreeFall : Node2D
         ConnectSignals();
         GenerateNextWave(ObstacleStartY);
     }
-
     public override void _Process(float delta)
     {
         _spawnElapsed += delta;
@@ -76,7 +75,6 @@ public class FreeFall : Node2D
             GetTree().ChangeScene("res://Modes/StartMenu.tscn");
         }
     }
-
     private void GenerateNextWave(float startY)
     {
         startY += Window.Height / 2;
@@ -150,6 +148,7 @@ public class FreeFall : Node2D
             PowerUp p = collision.Collider as PowerUp;
             p.EmitSignal("Collected");
             RemoveChild(p);
+            _hud.Power += _pod.PowerCost;
             _pod.HitPowerUp();
         }
         else if (collision.Collider is RainDropPickUp)
