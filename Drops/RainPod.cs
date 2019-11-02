@@ -15,6 +15,9 @@ public class RainPod : KinematicBody2D
     private Sprite _snowSprite;
     private DropType _currentDropType;
     private Node2D _collisionShape;
+    private AudioStreamPlayer _convertSound;
+    private AudioStreamPlayer _powerUpSound;
+    private AudioStreamPlayer _obstacleSound;
 
     [Export]
     public float MinDropScale = RainDrop.Settings.GetFloat("RainPod.MinDropScale", 0.5f);
@@ -25,11 +28,14 @@ public class RainPod : KinematicBody2D
         _rainSprite = Util.FindNode(this, "Sprite") as Sprite;
         _snowSprite = Util.FindNode(this, "SnowflakeSprite") as Sprite;
         _hailSprite = Util.FindNode(this, "HailstoneSprite") as Sprite;
+        _convertSound = Util.FindNode(this, "ConvertSound") as AudioStreamPlayer;
+        _powerUpSound = Util.FindNode(this, "PowerUpSound") as AudioStreamPlayer;
+        _obstacleSound = Util.FindNode(this, "ObstacleSound") as AudioStreamPlayer;
         _sprite = _rainSprite;
         _collisionShape = Util.FindNode(this, "CollisionShape2D") as Node2D;
         _hailSprite.Visible = false;
         _snowSprite.Visible = false;
-        TransformDrop(DropType.Rain);
+        TransformDrop(DropType.Rain, false);
     }
     public override void _Process(float delta)
     {
@@ -63,7 +69,7 @@ public class RainPod : KinematicBody2D
             GetTree().ChangeScene("res://Modes/GameOver.tscn");
         }
     }
-    public void TransformDrop(DropType dropType)
+    public void TransformDrop(DropType dropType, bool playSound = true)
     {
         switch(dropType)
         {
@@ -77,7 +83,21 @@ public class RainPod : KinematicBody2D
                 SwitchSprite(_hailSprite);
                 break;
         }
+        if(playSound)
+        {
+            _convertSound.Play();
+        }
         EmitSignal(nameof(DropTypeChanged), dropType);
+    }
+
+    public void HitPowerUp()
+    {
+        _powerUpSound.Play();
+    }
+
+    public void HitObstacle()
+    {
+        _obstacleSound.Play();
     }
 
     private void SwitchSprite(Sprite newSprite)
@@ -88,4 +108,5 @@ public class RainPod : KinematicBody2D
 
         newSprite.Visible = true;    
     }
+
 }

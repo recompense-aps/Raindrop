@@ -70,7 +70,7 @@ public class FreeFall : Node2D
 
         _waveBag.Add(50, LevelSpawnType.Obstacle);
         _waveBag.Add(25, LevelSpawnType.PowerUp);
-        _waveBag.Add(25, LevelSpawnType.Drop);
+        _waveBag.Add(25, LevelSpawnType.Drop);       
 
         GenerateNextWave(ObstacleStartY);
     }
@@ -132,12 +132,14 @@ public class FreeFall : Node2D
 
     private void OnDropHitSomething(KinematicCollision2D collision)
     {
+        // TODO: Refactor pod-specific stuff into the pod
 
         if (collision.Collider is PowerUp)
         {
             PowerUp p = collision.Collider as PowerUp;
             p.EmitSignal("Collected");
             RemoveChild(p);
+            _pod.HitPowerUp();
         }
         else if (collision.Collider is RainDropPickUp)
         {
@@ -160,6 +162,7 @@ public class FreeFall : Node2D
             Particles2D p  = Util.LoadNode("Particles/DropBurst") as Particles2D;
             p.OneShot = true;
             _pod.AddChild(p);
+            _pod.HitObstacle();
         }
 
     }

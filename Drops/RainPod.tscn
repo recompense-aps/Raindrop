@@ -1,10 +1,13 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Drops/RainPod.cs" type="Script" id=1]
 [ext_resource path="res://Drops/DropMover.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Graphics/raindrop 2.png" type="Texture" id=3]
 [ext_resource path="res://Graphics/snowflake.png" type="Texture" id=4]
 [ext_resource path="res://Graphics/hailstone.png" type="Texture" id=5]
+[ext_resource path="res://Audio/convert-drop.wav" type="AudioStream" id=6]
+[ext_resource path="res://Audio/get-orb.wav" type="AudioStream" id=7]
+[ext_resource path="res://Audio/hit-obstacle.wav" type="AudioStream" id=8]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 6.09061
@@ -35,3 +38,15 @@ texture = ExtResource( 5 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 modulate = Color( 0.317647, 0.807843, 0.443137, 1 )
 shape = SubResource( 1 )
+
+[node name="ConvertSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -30.291
+
+[node name="PowerUpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+volume_db = -20.0
+
+[node name="ObstacleSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -20.0
