@@ -15,14 +15,14 @@ margin_top = 572.0
 margin_right = 1002.0
 margin_bottom = 597.0
 size_flags_stretch_ratio = 0.0
-custom_constants/separation = 150
+custom_constants/separation = 100
 alignment = 1
 
 [node name="ScoreText" type="Label" parent="Bottom"]
 modulate = Color( 0.0313726, 1, 0, 1 )
-margin_left = 295.0
+margin_left = 345.0
 margin_top = 5.0
-margin_right = 346.0
+margin_right = 396.0
 margin_bottom = 19.0
 text = "Score: 0"
 align = 2
@@ -45,8 +45,8 @@ margin_bottom = 19.0
 text = "DEBUG:"
 
 [node name="FpsText" type="Label" parent="Bottom"]
-margin_left = 696.0
+margin_left = 646.0
 margin_top = 5.0
-margin_right = 704.0
+margin_right = 654.0
 margin_bottom = 19.0
 text = "0"

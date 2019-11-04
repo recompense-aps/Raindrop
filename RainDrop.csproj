@@ -53,8 +53,8 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Crypto.cs" />
-    <Compile Include="DevConsole.cs" />
+    <Compile Include="GlobalControls.cs" />
+    <Compile Include="Util\Crypto.cs" />
     <Compile Include="Drops\RainDropPickUp.cs" />
     <Compile Include="Drops\RainPod.cs" />
     <Compile Include="Enums\Enums.cs" />
@@ -64,17 +64,16 @@
     <Compile Include="Modes\StartMenu.cs" />
     <Compile Include="Obstacles\Obstacle.cs" />
     <Compile Include="Obstacles\SpawnStats.cs" />
-    <Compile Include="PickBag.cs" />
+    <Compile Include="Util\PickBag.cs" />
     <Compile Include="PowerUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScoreKeeper.cs" />
-    <Compile Include="Settings.cs" />
-    <Compile Include="Snowflake.cs" />
-    <Compile Include="Spawner.cs" />
+    <Compile Include="Util\ScoreKeeper.cs" />
+    <Compile Include="Util\Settings.cs" />
+    <Compile Include="Util\Spawner.cs" />
     <Compile Include="StormCloud.cs" />
     <Compile Include="UI\HUD.cs" />
-    <Compile Include="Util.cs" />
-    <Compile Include="Window.cs" />
+    <Compile Include="Util\Util.cs" />
+    <Compile Include="Util\Window.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
