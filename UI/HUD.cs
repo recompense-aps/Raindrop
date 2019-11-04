@@ -15,10 +15,8 @@ public class HUD : CanvasLayer
     private Label _timeText;
     private Label _debugText;
     private Label _fpsLabel;
-    private ColorRect _powerBar;
 
     private int _score = 0;
-    private float _power = 100;
     private string _debug = "";
     private bool _consoleOn = false;
 
@@ -32,31 +30,6 @@ public class HUD : CanvasLayer
         {
             _score = value;
             _scoreText.Text = "Score: " + _score.ToString();
-        }
-    }
-
-    public float Power
-    {
-        get
-        {
-            return _power;
-        }
-        set
-        {
-            _power = value;
-            if (_power <= 0)
-            {
-                _power = 0;
-            }
-            else if (_power < 100)
-            {
-                _powerStopWatch.Start();
-            }
-            if(_power > 100)
-            {
-                _power = 100;
-            }
-            _powerBar.SetScale(new Vector2(_power / 100, 1));
         }
     }
 
@@ -81,8 +54,6 @@ public class HUD : CanvasLayer
         _timeText = GetNode(new NodePath("Bottom/TimeText")) as Label;
         _debugText = GetNode(new NodePath("Bottom/DebugText")) as Label;
         _fpsLabel = Util.FindNode(this, "Bottom/FpsText") as Label;
-        _powerBar = Util.FindNode(this, "Bottom/Powerbar") as ColorRect;
-
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -90,43 +61,10 @@ public class HUD : CanvasLayer
     {
         _timeText.Text = _powerStopWatch.Elapsed.Seconds.ToString();
         _fpsLabel.Text = Engine.GetFramesPerSecond().ToString() + "/" + Engine.TargetFps.ToString();
-
-        if(_powerStopWatch.Elapsed.Seconds >= 1)
-        {
-            _powerStopWatch.Reset();
-            Power += 2;
-        }
     }
 
     public void ToggleConsole(bool tog = true)
     {
         _consoleOn = tog;
-    }
-}
-
-class ConsoleCommand
-{
-    string _key;
-    string _value;
-    string _category;
-
-    public string Category
-    {
-        get
-        {
-            return _category;
-        }
-    }
-
-    public ConsoleCommand(string category, string key, string value)
-    {
-        _key = key;
-        _value = value;
-        _category = category;
-    }
-
-    public void Execute(object instance)
-    {
-
     }
 }

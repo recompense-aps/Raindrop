@@ -152,7 +152,6 @@ public class FreeFall : Node2D
             PowerUp p = collision.Collider as PowerUp;
             p.EmitSignal("Collected");
             RemoveChild(p);
-            _hud.Power += _pod.PowerCost;
             _pod.HitPowerUp();
         }
         else if (collision.Collider is RainDropPickUp)

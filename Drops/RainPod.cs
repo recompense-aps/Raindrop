@@ -227,7 +227,7 @@ public class RainPod : KinematicBody2D
     }
     private void GetInput()
     {
-        if (_acceleration.Length() != 0 || Util.HUD.Power < 1)
+        if (_acceleration.Length() != 0)
         {
            return;
         }
@@ -235,25 +235,21 @@ public class RainPod : KinematicBody2D
         {
             _acceleration.Set(AccelerationMagnitude, 0);
             _acelX = true;
-            HandlePower();
         }
         if (Input.IsActionJustPressed("move_left"))
         {
             _acceleration.Set(-1 * AccelerationMagnitude, 0);
             _acelX = true;
-            HandlePower();
         }
         if (Input.IsActionJustPressed("move_up"))
         {
             _acceleration.y = -1 * AccelerationMagnitude;
             _acelY = true;
-            HandlePower();
         }
         if (Input.IsActionJustPressed("move_down"))
         {
             _acceleration.y = AccelerationMagnitude;
             _acelY = true;
-            HandlePower();
         }
 
         if (Input.IsActionJustPressed("move_right_up"))
@@ -261,28 +257,24 @@ public class RainPod : KinematicBody2D
             _acceleration.Set(AccelerationMagnitude, -AccelerationMagnitude);
             _acelX = true;
             _acelY = true;
-            HandlePower();
         }
         if (Input.IsActionJustPressed("move_right_down"))
         {
             _acceleration.Set(AccelerationMagnitude, AccelerationMagnitude);
             _acelX = true;
             _acelY = true;
-            HandlePower();
         }
         if (Input.IsActionJustPressed("move_left_down"))
         {
             _acceleration.Set(-AccelerationMagnitude, AccelerationMagnitude);
             _acelX = true;
             _acelY = true;
-            HandlePower();
         }
         if (Input.IsActionJustPressed("move_left_up"))
         {
             _acceleration.Set(-AccelerationMagnitude, -AccelerationMagnitude);
             _acelX = true;
             _acelY = true;
-            HandlePower();
         }
     }
     private void HandleWind()
@@ -335,20 +327,5 @@ public class RainPod : KinematicBody2D
         }
         Position = new Vector2(Mathf.Clamp(Position.x, 0, OS.GetRealWindowSize().x - 32), 
             Mathf.Clamp(Position.y, 0, Window.Height - 64));
-    }
-    private void HandlePower()
-    {
-        switch (_currentWindType)
-        {
-            case WindType.Regular:
-                Util.HUD.Power -= PowerCost;
-                break;
-            case WindType.Power:
-                Util.HUD.Power -= PowerCost * 2;
-                break;
-            case WindType.Small:
-                Util.HUD.Power -= PowerCost * 0.5f;
-                break;
-        }
     }
 }
