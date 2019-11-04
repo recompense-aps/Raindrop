@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://UI/Button.cs" type="Script" id=1]
-
-[node name="Button" type="ColorRect"]
-margin_right = 182.0
-margin_bottom = 85.0
-script = ExtResource( 1 )
-[connection signal="gui_input" from="." to="." method="OnGuiInput"]

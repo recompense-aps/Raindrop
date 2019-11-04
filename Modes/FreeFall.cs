@@ -9,15 +9,13 @@ using System.Reflection;
 public class FreeFall : Node2D
 {
     private RandomNumberGenerator _rand = new RandomNumberGenerator();
-    private ObstacleSpawner _obstacleSpawner = new ObstacleSpawner();
     private Vector2 _window;
     private RainPod _pod;
     private StormCloud _stormCloud;
     private HUD _hud;
     private ScoreKeeper _scoreKeeper = new ScoreKeeper();
-
+    private Spawner _spawner;
     private PickBag<LevelSpawnType> _waveBag = new PickBag<LevelSpawnType>();
-    private string _spawnType = "city";
     private float _spawnElapsed = 0;
 
     #region Exports
@@ -39,6 +37,10 @@ public class FreeFall : Node2D
     [Export]
     public float CrawlSpeed = RainDrop.Settings.GetFloat("FreeFall.CrawlSpeed", 150);
     [Export]
+    public float PowerUpCrawlSpeed = RainDrop.Settings.GetFloat("FreeFall.PowerUpCrawlSpeed", 0.9f);
+    [Export]
+    public float DropCrawlSpeed = RainDrop.Settings.GetFloat("FreeFall.DropCrawlSpeed", 0.8f);
+    [Export]
     public float ObstacleStartY = RainDrop.Settings.GetFloat("FreeFall.ObstacleStartY", OS.GetRealWindowSize().y);
     [Export]
     public float SpawnInterval = RainDrop.Settings.GetFloat("FreeFall.SpawnInterval", 1);
@@ -52,31 +54,14 @@ public class FreeFall : Node2D
     public override void _Ready()
     {
         Util.FlushLog();
-        _window = OS.GetRealWindowSize();
         _hud = (Util.FindNode(this, "HUD") as HUD);
         Util.HUD = _hud;
 
-        _pod = Util.LoadNode("Drops/RainPod") as RainPod;
-        _pod.Position = new Vector2(_window.x / 2, DropStartY);
-        _pod.Connect("HitSomething", this, nameof(OnDropHitSomething));
-        _pod.Scale.Set(new Vector2(DropScale, DropScale));
-        AddChild(_pod);
-
-        _stormCloud = Util.LoadNode("StormCloud") as StormCloud;
-        _stormCloud.Position = new Vector2(0, StormCloudStartY);
-        //AddChild(_stormCloud);
-
-        _scoreKeeper.Connect("ScoreChanged", this, nameof(OnScoreChanged));
-
-        _spawnType = Util.Globals.ContainsKey("SpawnType") ? Util.Globals["SpawnType"] as string : "city";
-
-        _waveBag.Add(50, LevelSpawnType.Obstacle);
-        _waveBag.Add(25, LevelSpawnType.PowerUp);
-        _waveBag.Add(25, LevelSpawnType.Drop);       
-
+        SetUpDrop();
+        SetUpSpawning();
+        ConnectSignals();
         GenerateNextWave(ObstacleStartY);
     }
-
     public override void _Process(float delta)
     {
         _spawnElapsed += delta;
@@ -94,44 +79,69 @@ public class FreeFall : Node2D
             GetTree().ChangeScene("res://Modes/StartMenu.tscn");
         }
     }
-
     private void GenerateNextWave(float startY)
     {
-        startY += _window.y / 2;
+        startY += Window.Height / 2;
 
         for (int i = 0; i < ObstaclesPerLayer; i++)
         {
             float posX = _rand.RandiRange(-100, (int)OS.GetRealWindowSize().x);
             float posY = startY + VerticalObstacleSpace * i;
+            Vector2 position = new Vector2(posX, posY);
+            Vector2 crawlVector = new Vector2(0, -CrawlSpeed);
 
             switch(_waveBag.Pick())
             {
                 case LevelSpawnType.PowerUp:
-                    PowerUp p = Util.LoadNode("PowerUp") as PowerUp;
-                    p.Position = new Vector2(posX, posY);
-                    p.Velocity = new Vector2(0, -CrawlSpeed);
-                    AddChild(p);
+                    PowerUp p = _spawner.SpawnPowerUp(position, crawlVector * PowerUpCrawlSpeed);
                     _scoreKeeper.ScorePowerUp(p);
                     break;
                 case LevelSpawnType.Obstacle:
-                    Obstacle ob = _obstacleSpawner.Spawn(_spawnType);
-                    AddChild(ob);
+                    Obstacle ob = _spawner.SpawnObstacle(position, crawlVector);
                     ob.TrackPlayer(_pod);
-                    ob.Position = new Vector2(posX, posY);
-                    ob.Velocity = new Vector2(0, -CrawlSpeed);
                     _scoreKeeper.ScoreObstacle(ob);
                     break;
                 case LevelSpawnType.Drop:
-                    RainDropPickUp rainDrop = Util.LoadNode("Drops/RainDropPickUp") as RainDropPickUp;
-                    rainDrop.Position = new Vector2(posX, posY);
-                    rainDrop.Velocity = new Vector2(0, -CrawlSpeed);
-                    AddChild(rainDrop);
+                    RainDropPickUp rainDrop = _spawner.SpawnRainDropPickUp(position, crawlVector * DropCrawlSpeed);
                     break;
             }
         }
 
     }
 
+    #region Initialization
+    private void ConnectSignals()
+    {
+        _pod.Connect("HitSomething", this, nameof(OnDropHitSomething));
+        _scoreKeeper.Connect("ScoreChanged", this, nameof(OnScoreChanged));
+    }
+
+    private void SetUpSpawning()
+    {
+        _spawner = new Spawner(this);       
+
+        _waveBag.Add(50, LevelSpawnType.Obstacle);
+        _waveBag.Add(25, LevelSpawnType.PowerUp);
+        _waveBag.Add(25, LevelSpawnType.Drop);      
+    }
+
+    private void SetUpDrop()
+    {
+        _pod = Util.LoadNode("Drops/RainPod") as RainPod;
+        _pod.Position = new Vector2(Window.Width / 2, DropStartY);
+        _pod.Scale.Set(new Vector2(DropScale, DropScale));
+        AddChild(_pod);
+    }
+
+    private void SetUpStormCloud()
+    {
+        _stormCloud = Util.LoadNode("StormCloud") as StormCloud;
+        _stormCloud.Position = new Vector2(0, StormCloudStartY);
+        //AddChild(_stormCloud);
+    }
+    #endregion
+
+    #region Signal Handles
     private void OnDropHitSomething(KinematicCollision2D collision)
     {
         // TODO: Refactor pod-specific stuff into the pod
@@ -170,9 +180,10 @@ public class FreeFall : Node2D
         }
 
     }
-    
     private void OnScoreChanged()
     {
         _hud.Score = _scoreKeeper.Score;
     }
+
+    #endregion
 }

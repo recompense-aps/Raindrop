@@ -15,20 +15,14 @@ margin_top = 572.0
 margin_right = 1002.0
 margin_bottom = 597.0
 size_flags_stretch_ratio = 0.0
-custom_constants/separation = 150
+custom_constants/separation = 100
 alignment = 1
-
-[node name="Powerbar" type="ColorRect" parent="Bottom"]
-margin_right = 440.0
-margin_bottom = 25.0
-size_flags_horizontal = 3
-color = Color( 1, 0, 0, 1 )
 
 [node name="ScoreText" type="Label" parent="Bottom"]
 modulate = Color( 0.0313726, 1, 0, 1 )
-margin_left = 590.0
+margin_left = 345.0
 margin_top = 5.0
-margin_right = 641.0
+margin_right = 396.0
 margin_bottom = 19.0
 text = "Score: 0"
 align = 2
@@ -44,15 +38,15 @@ text = "Time: 0"
 
 [node name="DebugText" type="Label" parent="Bottom"]
 modulate = Color( 1, 0.937255, 0, 1 )
-margin_left = 791.0
+margin_left = 496.0
 margin_top = 5.0
-margin_right = 841.0
+margin_right = 546.0
 margin_bottom = 19.0
 text = "DEBUG:"
 
 [node name="FpsText" type="Label" parent="Bottom"]
-margin_left = 991.0
+margin_left = 646.0
 margin_top = 5.0
-margin_right = 999.0
+margin_right = 654.0
 margin_bottom = 19.0
 text = "0"
