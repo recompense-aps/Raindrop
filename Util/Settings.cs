@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace RainDrop
 {
-    public static class Settings
+    public static class GameSettings
     {
         private static RainDropSettings _rainDropSettings;
 
@@ -171,5 +171,7 @@ namespace RainDrop
         public int Orbs = 0;
         public int TotalScore = 0;
         public string[] PurchasedUpgrades;
+        public bool MusicVolumeOn = false;
+        public bool SoundEffectsVolumeOn = false;
     }
 }

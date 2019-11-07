@@ -1,20 +1,38 @@
 using Godot;
-using System;
+using RainDrop;
 
 public class Settings : Node2D
 {
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
-
-    // Called when the node enters the scene tree for the first time.
+    private CheckButton _musicVolumeOn;
+    private CheckButton _soundEffectsVolumeOn;
     public override void _Ready()
     {
-        
-    }
+        Ready_FindNodes();
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
+        _musicVolumeOn.Pressed = Util.SaveFile.Contents.MusicVolumeOn;
+        _soundEffectsVolumeOn.Pressed = Util.SaveFile.Contents.SoundEffectsVolumeOn;
+        _musicVolumeOn.Connect("toggled", this, nameof(OnMusicVolumeOnToggled));
+        _soundEffectsVolumeOn.Connect("toggled", this, nameof(OnSoundEffectsVolumeOnToggled));
+    }
     public override void _Process(float delta)
     {
     }
+    private void Ready_FindNodes()
+    {
+        _musicVolumeOn = FindNode("MusicCheckButton") as CheckButton;
+        _soundEffectsVolumeOn = FindNode("SoundEffectsCheckButton") as CheckButton;
+    }
+
+    #region Signal Connections
+    private void OnMusicVolumeOnToggled(bool buttonPressed)
+    {
+        Util.SaveFile.Contents.MusicVolumeOn = buttonPressed;
+        Util.SaveFile.Save();
+    }
+    private void OnSoundEffectsVolumeOnToggled(bool buttonPressed)
+    {
+        Util.SaveFile.Contents.SoundEffectsVolumeOn = buttonPressed;
+        Util.SaveFile.Save();
+    }
+    #endregion
 }

@@ -21,33 +21,33 @@ public class FreeFall : Node2D
     #region Exports
     //Drop
     [Export]
-    public float DropStartY = RainDrop.Settings.GetFloat("FreeFall.DropStartY", 150);
+    public float DropStartY = RainDrop.GameSettings.GetFloat("FreeFall.DropStartY", 150);
     [Export]
-    public float DropVolumeIncrease = RainDrop.Settings.GetFloat("FreeFall.DropVolumeIncrease", 0.10f);
+    public float DropVolumeIncrease = RainDrop.GameSettings.GetFloat("FreeFall.DropVolumeIncrease", 0.10f);
     [Export]
-    public float DropScale = RainDrop.Settings.GetFloat("FreeFall.DropScale", 2);
+    public float DropScale = RainDrop.GameSettings.GetFloat("FreeFall.DropScale", 2);
     [Export]
-    public int HailStoneUpgradeCost = RainDrop.Settings.GetInt("HailStoneUpgradeCost", 0);
+    public int HailStoneUpgradeCost = RainDrop.GameSettings.GetInt("HailStoneUpgradeCost", 0);
 
     //Storm cloud
     [Export]
-    public float StormCloudStartY = RainDrop.Settings.GetFloat("FreeFall.StormCloudStartY", 0);
+    public float StormCloudStartY = RainDrop.GameSettings.GetFloat("FreeFall.StormCloudStartY", 0);
 
     //Obstacles
     [Export]
-    public float CrawlSpeed = RainDrop.Settings.GetFloat("FreeFall.CrawlSpeed", 150);
+    public float CrawlSpeed = RainDrop.GameSettings.GetFloat("FreeFall.CrawlSpeed", 150);
     [Export]
-    public float PowerUpCrawlSpeed = RainDrop.Settings.GetFloat("FreeFall.PowerUpCrawlSpeed", 0.9f);
+    public float PowerUpCrawlSpeed = RainDrop.GameSettings.GetFloat("FreeFall.PowerUpCrawlSpeed", 0.9f);
     [Export]
-    public float DropCrawlSpeed = RainDrop.Settings.GetFloat("FreeFall.DropCrawlSpeed", 0.8f);
+    public float DropCrawlSpeed = RainDrop.GameSettings.GetFloat("FreeFall.DropCrawlSpeed", 0.8f);
     [Export]
-    public float ObstacleStartY = RainDrop.Settings.GetFloat("FreeFall.ObstacleStartY", OS.GetRealWindowSize().y);
+    public float ObstacleStartY = RainDrop.GameSettings.GetFloat("FreeFall.ObstacleStartY", OS.GetRealWindowSize().y);
     [Export]
-    public float SpawnInterval = RainDrop.Settings.GetFloat("FreeFall.SpawnInterval", 1);
+    public float SpawnInterval = RainDrop.GameSettings.GetFloat("FreeFall.SpawnInterval", 1);
     [Export]
-    public float VerticalObstacleSpace = RainDrop.Settings.GetFloat("FreeFall.VerticalObstacleSpace", 100);
+    public float VerticalObstacleSpace = RainDrop.GameSettings.GetFloat("FreeFall.VerticalObstacleSpace", 100);
     [Export]
-    public int ObstaclesPerLayer = RainDrop.Settings.GetInt("FreeFall.ObstaclesPerLayer", 2);
+    public int ObstaclesPerLayer = RainDrop.GameSettings.GetInt("FreeFall.ObstaclesPerLayer", 2);
 
     #endregion
 

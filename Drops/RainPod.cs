@@ -41,35 +41,35 @@ public class RainPod : KinematicBody2D
 
     #region Exports
     [Export]
-    public float MinDropScale = RainDrop.Settings.GetFloat("RainPod.MinDropScale", 0.5f);
+    public float MinDropScale = RainDrop.GameSettings.GetFloat("RainPod.MinDropScale", 0.5f);
     [Export]
-    public int MaxHealth = RainDrop.Settings.GetInt("RainPod.MaxHealth", 10);
+    public int MaxHealth = RainDrop.GameSettings.GetInt("RainPod.MaxHealth", 10);
     [Export]
-    public int StartHealth = RainDrop.Settings.GetInt("RainPod.StartHealth", 5);
+    public int StartHealth = RainDrop.GameSettings.GetInt("RainPod.StartHealth", 5);
     [Export]
-    public float Speed = RainDrop.Settings.GetFloat("DropMover.Speed", 100);
+    public float Speed = RainDrop.GameSettings.GetFloat("DropMover.Speed", 100);
     [Export]
-    public float MaxSpeed = RainDrop.Settings.GetFloat("DropMover.MaxSpeed", 200);
+    public float MaxSpeed = RainDrop.GameSettings.GetFloat("DropMover.MaxSpeed", 200);
     [Export]
-    public float RainSpeedMultiplier = RainDrop.Settings.GetFloat("DropMover.RainSpeedMultiplier", 1.0f);
+    public float RainSpeedMultiplier = RainDrop.GameSettings.GetFloat("DropMover.RainSpeedMultiplier", 1.0f);
     [Export]
-    public float HailSpeedMultiplier = RainDrop.Settings.GetFloat("DropMover.HailSpeedMultiplier", 4f);
+    public float HailSpeedMultiplier = RainDrop.GameSettings.GetFloat("DropMover.HailSpeedMultiplier", 4f);
     [Export]
-    public float SnowSpeedMultiplier = RainDrop.Settings.GetFloat("DropMover.SnowSpeedMultiplier", 0.5f);
+    public float SnowSpeedMultiplier = RainDrop.GameSettings.GetFloat("DropMover.SnowSpeedMultiplier", 0.5f);
     [Export]
-    public float AccelerationBase = RainDrop.Settings.GetFloat("DropMover.AccelerationBase", 60);
+    public float AccelerationBase = RainDrop.GameSettings.GetFloat("DropMover.AccelerationBase", 60);
     [Export]
-    public float AccelerationMagnitude = RainDrop.Settings.GetFloat("DropMover.AccelerationMagnitude", 60);
+    public float AccelerationMagnitude = RainDrop.GameSettings.GetFloat("DropMover.AccelerationMagnitude", 60);
     [Export]
-    public float DecelBaseMultiplier = RainDrop.Settings.GetFloat("DropMover.DecelBaseMultiplier", 0.2f);
+    public float DecelBaseMultiplier = RainDrop.GameSettings.GetFloat("DropMover.DecelBaseMultiplier", 0.2f);
     [Export]
-    public float SmallWindMultiplier = RainDrop.Settings.GetFloat("DropMover.SmallWindMultiplier", 0.5f);
+    public float SmallWindMultiplier = RainDrop.GameSettings.GetFloat("DropMover.SmallWindMultiplier", 0.5f);
     [Export]
-    public float RegularWindMultiplier = RainDrop.Settings.GetFloat("DropMover.RegularWindMultiplier", 1f);
+    public float RegularWindMultiplier = RainDrop.GameSettings.GetFloat("DropMover.RegularWindMultiplier", 1f);
     [Export]
-    public float PowerWindMultiplier = RainDrop.Settings.GetFloat("DropMover.PowerWindMultiplier", 3f);
+    public float PowerWindMultiplier = RainDrop.GameSettings.GetFloat("DropMover.PowerWindMultiplier", 3f);
     [Export]
-    public float PowerCost = RainDrop.Settings.GetFloat("DropMover.PowerCost", 10);
+    public float PowerCost = RainDrop.GameSettings.GetFloat("DropMover.PowerCost", 10);
 
     #endregion
     
