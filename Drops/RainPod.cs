@@ -156,7 +156,10 @@ public class RainPod : KinematicBody2D
     public void HitRainDropPickUp(RainDropPickUp pickUp)
     {
         _powerUpSound.Play();
-        TransformDrop(pickUp.DropType);
+        if(pickUp.MutateDrop)
+        {
+            TransformDrop(pickUp.DropType);
+        }       
     }
     private void SwitchSprite(Sprite newSprite)
     {
@@ -177,7 +180,7 @@ public class RainPod : KinematicBody2D
             _health++;
         }
 
-        if(_health >= 0)
+        if(_health <= 0)
         {
             EmitSignal(nameof(DropDied));
             return false;

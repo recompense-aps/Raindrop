@@ -6,16 +6,25 @@ using System;
 public class RainDropPickUp : KinematicBody2D
 {
     public Vector2 Velocity;
+    private RandomNumberGenerator _random = new RandomNumberGenerator();
     private Sprite _rainSprite;
     private Sprite _hailSprite;
     private Sprite _snowSprite;
     private DropType _dropType;
+    private bool _mutateDrop = false;
 
     public DropType DropType
     {
         get
         {
             return _dropType;
+        }
+    }
+    public bool MutateDrop
+    {
+        get
+        {
+            return _mutateDrop;
         }
     }
 
@@ -33,6 +42,15 @@ public class RainDropPickUp : KinematicBody2D
         possibleDrops.Add(33, DropType.Hail);
         dropToBe = possibleDrops.Pick();
         TransformDrop(dropToBe);
+
+        _random.Randomize();
+        if(_random.RandiRange(1,10) < 4)
+        {
+            _mutateDrop = true;
+            Label l = new Label();
+            l.Text = "MUTATE";
+            AddChild(l);
+        }
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
