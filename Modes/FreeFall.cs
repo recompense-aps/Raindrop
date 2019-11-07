@@ -61,6 +61,8 @@ public class FreeFall : Node2D
         SetUpSpawning();
         ConnectSignals();
         GenerateNextWave(ObstacleStartY);
+
+        (FindNode("BackgroundMusic") as AudioStreamPlayer).Playing = Util.SaveFile.Contents.MusicVolumeOn;
     }
     public override void _Process(float delta)
     {

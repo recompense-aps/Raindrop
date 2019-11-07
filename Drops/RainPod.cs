@@ -146,7 +146,7 @@ public class RainPod : KinematicBody2D
                 SwitchSprite(_hailSprite);
                 break;
         }
-        if(playSound)
+        if(playSound && Util.SaveFile.Contents.SoundEffectsVolumeOn)
         {
             _convertSound.Play();
         }
@@ -154,15 +154,24 @@ public class RainPod : KinematicBody2D
     }
     public void HitPowerUp()
     {
-        _powerUpSound.Play();
+        if(Util.SaveFile.Contents.SoundEffectsVolumeOn)
+        {
+            _powerUpSound.Play();
+        }
     }
     public void HitObstacle()
     {
-        _obstacleSound.Play();
+        if(Util.SaveFile.Contents.SoundEffectsVolumeOn)
+        {
+            _obstacleSound.Play();
+        }
     }
     public void HitRainDropPickUp(RainDropPickUp pickUp)
     {
-        _powerUpSound.Play();
+        if(Util.SaveFile.Contents.SoundEffectsVolumeOn)
+        {
+            _powerUpSound.Play();
+        }
         if(pickUp.MutateDrop)
         {
             TransformDrop(pickUp.DropType);
