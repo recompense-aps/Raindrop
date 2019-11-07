@@ -13,5 +13,9 @@ public class GlobalControls : Node
         {
             GetTree().ChangeScene("res://Modes/StartMenu.tscn");
         }
+        if(Input.IsActionJustPressed("launch_upgrade_menu"))
+        {
+            GetTree().ChangeScene("res://UI/UpgradeMenu/UpgradeMenu.tscn");
+        }
     }
 }

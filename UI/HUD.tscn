@@ -20,9 +20,9 @@ alignment = 1
 
 [node name="ScoreText" type="Label" parent="Bottom"]
 modulate = Color( 0.0313726, 1, 0, 1 )
-margin_left = 345.0
+margin_left = 227.0
 margin_top = 5.0
-margin_right = 396.0
+margin_right = 278.0
 margin_bottom = 19.0
 text = "Score: 0"
 align = 2
@@ -30,23 +30,30 @@ valign = 2
 
 [node name="TimeText" type="Label" parent="Bottom"]
 visible = false
-margin_left = 593.0
+margin_left = 422.0
 margin_top = 5.0
-margin_right = 641.0
+margin_right = 470.0
 margin_bottom = 19.0
 text = "Time: 0"
 
 [node name="DebugText" type="Label" parent="Bottom"]
 modulate = Color( 1, 0.937255, 0, 1 )
-margin_left = 496.0
+margin_left = 378.0
 margin_top = 5.0
-margin_right = 546.0
+margin_right = 428.0
 margin_bottom = 19.0
 text = "DEBUG:"
 
 [node name="FpsText" type="Label" parent="Bottom"]
-margin_left = 646.0
+margin_left = 528.0
 margin_top = 5.0
-margin_right = 654.0
+margin_right = 536.0
 margin_bottom = 19.0
 text = "0"
+
+[node name="Label" type="Label" parent="Bottom"]
+margin_left = 636.0
+margin_top = 5.0
+margin_right = 772.0
+margin_bottom = 19.0
+text = "Press 'u' for upgrades"

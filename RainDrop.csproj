@@ -55,6 +55,8 @@
   <ItemGroup>
     <Compile Include="GlobalControls.cs" />
     <Compile Include="Modes\GameOver.cs" />
+    <Compile Include="UI\UpgradeMenu\MenuItem.cs" />
+    <Compile Include="UI\UpgradeMenu\UpgradeMenu.cs" />
     <Compile Include="Util\Crypto.cs" />
     <Compile Include="Drops\RainDropPickUp.cs" />
     <Compile Include="Drops\RainPod.cs" />
