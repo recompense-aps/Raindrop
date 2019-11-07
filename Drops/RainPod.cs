@@ -177,7 +177,7 @@ public class RainPod : KinematicBody2D
             _health++;
         }
 
-        if(_health <= 0)
+        if(_health >= 0)
         {
             EmitSignal(nameof(DropDied));
             return false;

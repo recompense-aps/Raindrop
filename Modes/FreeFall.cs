@@ -116,6 +116,7 @@ public class FreeFall : Node2D
     private void ConnectSignals()
     {
         _pod.Connect("HitSomething", this, nameof(OnDropHitSomething));
+        _pod.Connect("DropDied", this, nameof(OnDropDied));
         _scoreKeeper.Connect("ScoreChanged", this, nameof(OnScoreChanged));
     }
 

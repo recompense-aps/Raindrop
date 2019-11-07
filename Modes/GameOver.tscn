@@ -13,25 +13,47 @@ texture = ExtResource( 2 )
 
 [node name="GlobalControls" parent="." instance=ExtResource( 3 )]
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-margin_left = 416.0
-margin_top = 381.0
-margin_right = 616.0
-margin_bottom = 421.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 414.263
+margin_top = 383.211
+margin_right = 627.263
+margin_bottom = 520.211
 
-[node name="RestartButton" type="Button" parent="HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+editor/display_folded = true
+margin_right = 213.0
+margin_bottom = 20.0
+
+[node name="RestartButton" type="Button" parent="VBoxContainer/HBoxContainer"]
 margin_right = 57.0
-margin_bottom = 40.0
+margin_bottom = 20.0
 text = "Restart"
 
-[node name="LevelSelectButton" type="Button" parent="HBoxContainer"]
+[node name="LevelSelectButton" type="Button" parent="VBoxContainer/HBoxContainer"]
 margin_left = 61.0
 margin_right = 150.0
-margin_bottom = 40.0
+margin_bottom = 20.0
 text = "Level Select"
 
-[node name="QuitButton" type="Button" parent="HBoxContainer"]
+[node name="QuitButton" type="Button" parent="VBoxContainer/HBoxContainer"]
 margin_left = 154.0
 margin_right = 194.0
-margin_bottom = 40.0
+margin_bottom = 20.0
 text = "Quit"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 24.0
+margin_right = 213.0
+margin_bottom = 38.0
+
+[node name="ScoreText" type="Label" parent="VBoxContainer/HBoxContainer2"]
+margin_right = 71.0
+margin_bottom = 14.0
+custom_colors/font_color = Color( 0.0784314, 1, 0, 1 )
+text = "Score: 0 (0)"
+
+[node name="PowerUpText" type="Label" parent="VBoxContainer/HBoxContainer2"]
+margin_left = 75.0
+margin_right = 171.0
+margin_bottom = 14.0
+text = "PowerUps: 0(0)"
