@@ -160,10 +160,13 @@ public class FreeFall : Node2D
         }
         else if (collision.Collider is RainDropPickUp)
         {
-            _pod.Grow(DropVolumeIncrease);
             RainDropPickUp pu = collision.Collider as RainDropPickUp;
             RemoveChild(pu);
             _pod.HitRainDropPickUp(pu);
+            if(pu.DropType == _pod.DropType)
+            {
+                _pod.Grow(DropVolumeIncrease);
+            }
         }
         else if (collision.Collider is StormCloud)
         {

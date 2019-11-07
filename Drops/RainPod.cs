@@ -73,6 +73,13 @@ public class RainPod : KinematicBody2D
 
     #endregion
     
+    public DropType DropType
+    {
+        get
+        {
+            return _currentDropType;
+        }
+    }
     public override void _Ready()
     {
         _rainSprite = Util.FindNode(this, "Sprite") as Sprite;
