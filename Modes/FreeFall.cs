@@ -73,9 +73,7 @@ public class FreeFall : Node2D
         }
         if (Input.IsActionJustPressed("ui_cancel"))
         {
-            Util.SaveFile.Contents.TotalScore += _scoreKeeper.Score;
-            Util.SaveFile.Contents.Orbs += _scoreKeeper.PowerUpsCollected;
-            Util.SaveFile.Save();
+            SaveInfo();
             GetTree().ChangeScene("res://Modes/StartMenu.tscn");
         }
     }
@@ -108,7 +106,12 @@ public class FreeFall : Node2D
         }
 
     }
-
+    private void SaveInfo()
+    {
+        Util.SaveFile.Contents.TotalScore += _scoreKeeper.Score;
+        Util.SaveFile.Contents.Orbs += _scoreKeeper.PowerUpsCollected;
+        Util.SaveFile.Save();
+    }
     #region Initialization
     private void ConnectSignals()
     {
@@ -184,6 +187,10 @@ public class FreeFall : Node2D
     {
         _hud.Score = _scoreKeeper.Score;
     }
-
+    private void OnDropDied()
+    {
+        SaveInfo();
+        GetTree().ChangeScene("res://Modes/GameOver.tscn");
+    }
     #endregion
 }

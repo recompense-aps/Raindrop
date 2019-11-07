@@ -10,6 +10,8 @@ public class RainPod : KinematicBody2D
     public delegate void HitSomething();
     [Signal]
     public delegate void DropTypeChanged();
+    [Signal]
+    public delegate void DropDied();
     #endregion
 
     #region Members
@@ -177,7 +179,7 @@ public class RainPod : KinematicBody2D
 
         if(_health <= 0)
         {
-            GetTree().ChangeScene("res://Modes/GameOver.tscn");
+            EmitSignal(nameof(DropDied));
             return false;
         }
 
