@@ -4,3 +4,6 @@ C:\dev\RainDrop\Raindrop\.mono\temp\obj\Release\RainDrop.csprojAssemblyReference
 C:\dev\RainDrop\Raindrop\.mono\temp\obj\Release\RainDrop.csproj.CoreCompileInputs.cache
 C:\dev\RainDrop\Raindrop\.mono\temp\obj\Release\RainDrop.dll
 C:\dev\RainDrop\Raindrop\.mono\temp\obj\Release\RainDrop.pdb
+C:\dev\RainDrop\Raindrop\.mono\temp\bin\Release\Newtonsoft.Json.dll
+C:\dev\RainDrop\Raindrop\.mono\temp\bin\Release\Newtonsoft.Json.xml
+C:\dev\RainDrop\Raindrop\.mono\temp\obj\Release\RainDrop.csproj.CopyComplete

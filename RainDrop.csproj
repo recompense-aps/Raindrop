@@ -55,6 +55,8 @@
   <ItemGroup>
     <Compile Include="GlobalControls.cs" />
     <Compile Include="Modes\GameOver.cs" />
+    <Compile Include="PowerUps\DoubleSpeedEffect.cs" />
+    <Compile Include="PowerUps\PowerUpEffect.cs" />
     <Compile Include="UI\UpgradeMenu\MenuItem.cs" />
     <Compile Include="UI\UpgradeMenu\UpgradeMenu.cs" />
     <Compile Include="Util\Crypto.cs" />
