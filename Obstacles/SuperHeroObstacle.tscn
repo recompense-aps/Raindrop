@@ -1,13 +1,14 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Graphics/obstacle-superhero.png" type="Texture" id=1]
+[ext_resource path="res://Graphics/Sprites/City Sprites/RealSuperHero.png" type="Texture" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 66.5821, 17.713 )
+extents = Vector2( 29.9792, 17.713 )
 
 [node name="SuperHeroObstacle" type="KinematicBody2D"]
 
 [node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
