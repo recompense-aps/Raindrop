@@ -3,9 +3,12 @@ using System;
 
 public class GlobalControls : Node
 {
+    [Signal]
+    public delegate void UpgradeMenuLaunched();
+    PackedScene _upgradeMenu;
     public override void _Ready()
     {
-        
+        PauseMode = PauseModeEnum.Process;
     }
     public override void _Process(float delta)
     {
@@ -15,7 +18,11 @@ public class GlobalControls : Node
         }
         if(Input.IsActionJustPressed("launch_upgrade_menu"))
         {
-            GetTree().ChangeScene("res://UI/UpgradeMenu/UpgradeMenu.tscn");
+
         }
+    }
+    public static GlobalControls Get(Node context)
+    {
+        return context.FindNode("GlobalControls") as GlobalControls;
     }
 }

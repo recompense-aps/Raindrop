@@ -1,8 +1,9 @@
 using Godot;
 using System;
-
+using System.Collections.Generic;
 public class UpgradeMenu : Node2D
 {
+    public delegate void UpgradePurchased(Dictionary<string,object> upgradeData);
     private VBoxContainer _menuItemContainer;
     public override void _Ready()
     {

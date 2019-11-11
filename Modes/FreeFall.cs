@@ -13,6 +13,8 @@ public class FreeFall : Node2D
     private RainPod _pod;
     private StormCloud _stormCloud;
     private HUD _hud;
+    private GlobalControls _globalControls;
+    private UpgradeMenu _upgradeMenu;
     private ScoreKeeper _scoreKeeper = new ScoreKeeper();
     private Spawner _spawner;
     private PickBag<LevelSpawnType> _waveBag = new PickBag<LevelSpawnType>();
@@ -56,6 +58,8 @@ public class FreeFall : Node2D
         Util.FlushLog();
         _hud = (Util.FindNode(this, "HUD") as HUD);
         Util.HUD = _hud;
+        _globalControls = GlobalControls.Get(this);
+        _upgradeMenu = _globalControls.FindNode("UpgradeMenu") as UpgradeMenu;
 
         SetUpDrop();
         SetUpSpawning();
@@ -120,6 +124,7 @@ public class FreeFall : Node2D
         _pod.Connect("HitSomething", this, nameof(OnDropHitSomething));
         _pod.Connect("DropDied", this, nameof(OnDropDied));
         _scoreKeeper.Connect("ScoreChanged", this, nameof(OnScoreChanged));
+        _upgradeMenu.Connect("")
     }
 
     private void SetUpSpawning()
@@ -197,6 +202,15 @@ public class FreeFall : Node2D
     {
         SaveInfo();
         GetTree().ChangeScene("res://Modes/GameOver.tscn");
+    }
+    private void OnUpgradePurchased(Dictionary<string,object> upgradeData)
+    {
+        switch(upgradeData["name"] as string)
+        {
+            case "invincibility":
+                break;
+            
+        }
     }
     #endregion
 }
