@@ -25,6 +25,7 @@ public class RainPod : KinematicBody2D
     private AudioStreamPlayer _convertSound;
     private AudioStreamPlayer _powerUpSound;
     private AudioStreamPlayer _obstacleSound;
+    private InvincibleEffect _invincibleEffect;
     private Vector2 _velocity;
     private Vector2 _acceleration;
     private Vector2 _deceleration;
@@ -37,6 +38,7 @@ public class RainPod : KinematicBody2D
     private bool _decelX = false;
     private bool _acelY = false;
     private bool _decelY = false;
+    private bool _invincible = false;
     #endregion
 
     #region Exports
@@ -90,6 +92,7 @@ public class RainPod : KinematicBody2D
         _obstacleSound = Util.FindNode(this, "ObstacleSound") as AudioStreamPlayer;
         _sprite = _rainSprite;
         _collisionShape = Util.FindNode(this, "CollisionShape2D") as Node2D;
+        _invincibleEffect = InvincibleEffect.Get(this);
         _hailSprite.Visible = false;
         _snowSprite.Visible = false;
         _health = StartHealth;
@@ -107,6 +110,7 @@ public class RainPod : KinematicBody2D
         HandleCollision(delta);
         HandleWind();
         GetInput();
+        Process_TestEffects();
 
         if(Input.IsActionJustPressed("ui_select"))
         {
@@ -120,6 +124,7 @@ public class RainPod : KinematicBody2D
     }
     public void Grow(float amount)
     {
+        if(amount < 0 && _invincibleEffect.Enabled) return;
         if (CheckHealth(amount))
         {
             Vector2 sScale = _sprite.Transform.Scale;
@@ -189,7 +194,7 @@ public class RainPod : KinematicBody2D
     {
         if(amount < 0)
         {
-            _health--;
+             _health--;
         }
         else
         {
@@ -323,6 +328,13 @@ public class RainPod : KinematicBody2D
                 default:
                     throw new Exception("Wind type");
             }
+        }
+    }
+    private void Process_TestEffects()
+    {
+        if(Input.IsKeyPressed((int)KeyList.I))
+        {
+            _invincibleEffect.Enable();
         }
     }
     private void ResetX()

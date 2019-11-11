@@ -3,16 +3,15 @@ using System;
 
 public class PowerUpEffect : Node
 {
-    protected FreeFall _freeFall;
-    protected RainPod _player;
+    private FreeFall _freeFall;
+    private RainPod _player;
+    private Timer _timer;
     public override void _Ready()
     {
-        
+        _timer = FindNode("Timer") as Timer;
     }
     public override void _Process(float delta)
     {
-        AffectGame();
-        AffectPlayer();
     }
 
     public void Spawn(FreeFall freeFall, RainPod player)
@@ -20,15 +19,6 @@ public class PowerUpEffect : Node
         freeFall.AddChild(this);
         AddToGroup("power-up-effects");
         _player = player;
-    }
-
-    protected virtual void AffectGame()
-    {
-
-    }
-
-    protected virtual void AffectPlayer()
-    {
-
+        _timer.Start();
     }
 }

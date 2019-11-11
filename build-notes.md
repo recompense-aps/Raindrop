@@ -1,6 +1,5 @@
-# BUILD NOTES - 0.0.9
-- [X]   Settings menu
-- [X]   Custom Fonts
-- [X]   Score screen after you die
-- [X]   Upgrade store
-- [X]   Transform drops vs Pick up drops
+# BUILD NOTES - 0.0.10
+
+## Power Ups
+-   Press '[I]' to enable `Invincibility` effect. Lasts for
+    10 seconds
