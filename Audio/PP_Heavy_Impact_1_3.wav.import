@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/PP_Heavy_Impact_1_3.wav-3755e796a27c90910ab0d925f153fde7.sample"
+
+[deps]
+
+source_file="res://Audio/PP_Heavy_Impact_1_3.wav"
+dest_files=[ "res://.import/PP_Heavy_Impact_1_3.wav-3755e796a27c90910ab0d925f153fde7.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/PP_Skill_Unlock.wav-7f6645a8ec8dae1f29c0d5268c9532cb.sample"
+
+[deps]
+
+source_file="res://Audio/PP_Skill_Unlock.wav"
+dest_files=[ "res://.import/PP_Skill_Unlock.wav-7f6645a8ec8dae1f29c0d5268c9532cb.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

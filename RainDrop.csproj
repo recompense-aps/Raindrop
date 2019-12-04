@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1F0F332D-D2D9-43CA-AA76-0CF60CC71F09}</ProjectGuid>
+    <ProjectGuid>{E8893873-B76F-4F59-844D-455A9F070DFE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <OutputPath>.mono\temp\bin\$(Configuration)</OutputPath>
     <RootNamespace>RainDrop</RootNamespace>
@@ -46,39 +46,38 @@
       <HintPath>$(ProjectDir)\.mono\assemblies\GodotSharpEditor.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Guero">
+      <HintPath>..\prototypes\lib\Guero\Guero\bin\Debug\Guero.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GlobalControls.cs" />
-    <Compile Include="Modes\GameOver.cs" />
-    <Compile Include="PowerUps\InvincibleEffect.cs" />
-    <Compile Include="PowerUps\PowerUpEffect.cs" />
-    <Compile Include="UI\UpgradeMenu\MenuItem.cs" />
-    <Compile Include="UI\UpgradeMenu\UpgradeMenu.cs" />
-    <Compile Include="Util\Crypto.cs" />
-    <Compile Include="Drops\RainDropPickUp.cs" />
-    <Compile Include="Drops\RainPod.cs" />
-    <Compile Include="Enums\Enums.cs" />
-    <Compile Include="Modes\FreeFall.cs" />
-    <Compile Include="Modes\LevelSelect.cs" />
-    <Compile Include="Modes\Settings.cs" />
-    <Compile Include="Modes\StartMenu.cs" />
-    <Compile Include="Obstacles\Obstacle.cs" />
-    <Compile Include="Obstacles\SpawnStats.cs" />
-    <Compile Include="Util\PickBag.cs" />
-    <Compile Include="PowerUp.cs" />
+    <Compile Include="Cloud.cs" />
+    <Compile Include="Clouds.cs" />
+    <Compile Include="Controllers\ArcController.cs" />
+    <Compile Include="Controllers\BackAndForthController.cs" />
+    <Compile Include="Controllers\BasicController.cs" />
+    <Compile Include="Controllers\ManualController.cs" />
+    <Compile Include="Controllers\StreakController.cs" />
+    <Compile Include="Data\ObstacleData.cs" />
+    <Compile Include="Drop.cs" />
+    <Compile Include="Global.cs" />
+    <Compile Include="HUD.cs" />
+    <Compile Include="Locations\Environment\OceanWave.cs" />
+    <Compile Include="Locations\Ocean.cs" />
+    <Compile Include="MainScene.cs" />
+    <Compile Include="Obstacle.cs" />
+    <Compile Include="Playlist.cs" />
+    <Compile Include="Portal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Util\ScoreKeeper.cs" />
-    <Compile Include="Util\Settings.cs" />
-    <Compile Include="Util\Spawner.cs" />
-    <Compile Include="StormCloud.cs" />
-    <Compile Include="UI\HUD.cs" />
-    <Compile Include="Util\Util.cs" />
-    <Compile Include="Util\Window.cs" />
+    <Compile Include="SoundEffects.cs" />
+    <Compile Include="Spawner.cs" />
+    <Compile Include="SpriteTrail.cs" />
+    <Compile Include="TeleportCover.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

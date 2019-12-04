@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/PP_Special_Item.wav-66eb04994e7f1fcf98123e81853a972f.sample"
+
+[deps]
+
+source_file="res://Audio/PP_Special_Item.wav"
+dest_files=[ "res://.import/PP_Special_Item.wav-66eb04994e7f1fcf98123e81853a972f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

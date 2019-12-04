@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/PP_Player_Dies_1_1.wav-b9628d4f678353d36e75e22b702f5d0b.sample"
+
+[deps]
+
+source_file="res://Audio/Effects/PP_Player_Dies_1_1.wav"
+dest_files=[ "res://.import/PP_Player_Dies_1_1.wav-b9628d4f678353d36e75e22b702f5d0b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
