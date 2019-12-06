@@ -15,6 +15,7 @@ public class ManualController : Node
     public override void _Ready()
     {
         _slave = GetParent() as Area2D;
+        _slave.Connect("HitObstacle", this, nameof(OnHitObstacle));
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -93,5 +94,10 @@ public class ManualController : Node
         {
             _slave.Position = new Vector2(0, _slave.Position.y);
         }
+    }
+
+    private void OnHitObstacle()
+    {
+        _velocity *= -1;
     }
 }

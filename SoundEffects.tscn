@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://SoundEffects.cs" type="Script" id=1]
 [ext_resource path="res://Audio/PP_Heavy_Impact_1_3.wav" type="AudioStream" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Audio/Effects/PP_Player_Dies_1_1.wav" type="AudioStream" id=4]
 [ext_resource path="res://Audio/Effects/PP_Skill_Unlock.wav" type="AudioStream" id=5]
 [ext_resource path="res://Audio/PP_UI_Swap.wav" type="AudioStream" id=6]
+[ext_resource path="res://Audio/8 bit Shiny Swell 01_3.wav" type="AudioStream" id=7]
 
 [node name="SoundEffects" type="Node"]
 script = ExtResource( 1 )
@@ -24,3 +25,6 @@ stream = ExtResource( 5 )
 
 [node name="MouseHover" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+
+[node name="PortalSpawn" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )

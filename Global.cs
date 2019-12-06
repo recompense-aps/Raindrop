@@ -35,7 +35,11 @@ namespace RainDrop
             Node anchor = context.FindNode("LocationAnchor");
             if(anchor == null)
             {
-                throw new System.Exception("Unable to find anchor!");
+                anchor = context.GetTree().Root.FindNode("LocationAnchor");
+                if(anchor == null)
+                {
+                    throw new System.Exception("Unable to find anchor!");
+                }               
             }
             anchor.RemoveChild(anchor.GetChild(0));
             anchor.AddChild(scene.Instance());

@@ -8,11 +8,13 @@ public class Obstacle : Area2D
     private static Dictionary<string, Texture> _textures = new Dictionary<string, Texture>();
     private static Dictionary<string, PackedScene> _controllers = new Dictionary<string, PackedScene>();
     private Sprite _sprite;
+    private Tween _tween;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         _sprite = FindNode("Sprite") as Sprite;
+        _tween = FindNode("Tween") as Tween;
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -63,6 +65,18 @@ public class Obstacle : Area2D
 
         Scale = new Vector2(2, 2);
         AddToGroup("obstacles");
+    }
+
+    public void Fall()
+    {
+        foreach(Node n in GetChildren())
+        {
+            if (n is Sprite || n is Tween) continue;
+            RemoveChild(n);
+        }
+        _tween.InterpolateProperty(this, "position", new Vector2(Position), 
+            new Vector2(Position.x, 1600), 2, Tween.TransitionType.Linear, Tween.EaseType.In);
+        _tween.Start();
     }
 
     private Texture LoadTexture(string id)

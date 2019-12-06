@@ -25,7 +25,16 @@ namespace RainDrop.Data
             {"pterydactal", new ObstacleContainer("Streak") },
             {"rainbow", new ObstacleContainer("BackAndForth") },
             {"toucan", new ObstacleContainer("Streak") },
-            {"arrow", new ObstacleContainer("Arc") }
+            {"arrow", new ObstacleContainer("Arc") },
+
+            {"fish", new ObstacleContainer("Basic") },
+            {"surfer", new ObstacleContainer("BackAndForth") },
+            {"iceplatform", new ObstacleContainer("Streak") },
+            {"seagull", new ObstacleContainer("Streak") },
+            {"shark", new ObstacleContainer("Streak") },
+            {"speedboat", new ObstacleContainer("BackAndForth") },
+            {"submarine", new ObstacleContainer("Streak") },
+            {"parachute", new ObstacleContainer("Arc") }
         };
     }
 

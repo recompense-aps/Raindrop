@@ -45,20 +45,16 @@ public class HUD : CanvasLayer
 
     public void Reset()
     {
-        _startButton.Visible = true;
-        _gameTitle.Visible = true;
+        Show();
         Score = 0;
         _scoring = false;
-        _scoreText.Visible = false;
     }
 
     private void _on_StartButton_pressed()
     {
         EmitSignal(nameof(StartButtonPressed));
-        _startButton.Visible = false;
-        _gameTitle.Visible = false;
         _scoring = true;
-        _scoreText.Visible = true;
+        Hide();
         GetTree().CallGroup("obstacles", "queue_free");
         Global.SoundEffects.Play("Ready");
     }
@@ -66,6 +62,28 @@ public class HUD : CanvasLayer
     private void _on_StartButton_mouse_entered()
     {
         Global.SoundEffects.Play("MouseHover");
+    }
+
+    private void Hide()
+    {
+        foreach (Node n in GetChildren())
+        {
+            if(n is Control)
+            {
+                (n as Control).Visible = false;
+            }
+        }
+    }
+
+    private void Show()
+    {
+        foreach (Node n in GetChildren())
+        {
+            if (n is Control)
+            {
+                (n as Control).Visible = true;
+            }
+        }
     }
 
 }

@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://HUD.cs" type="Script" id=1]
 [ext_resource path="res://Fonts/pixel_block.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Graphics/Obstacles/play.png" type="Texture" id=3]
 [ext_resource path="res://Graphics/Obstacles/play-hover.png" type="Texture" id=4]
-[ext_resource path="res://Graphics/title.png" type="Texture" id=5]
+[ext_resource path="res://Graphics/settings.png" type="Texture" id=5]
+[ext_resource path="res://Graphics/settings-hover.png" type="Texture" id=6]
+[ext_resource path="res://Graphics/title-2.png" type="Texture" id=7]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -37,28 +39,39 @@ text = "High Score: 0"
 [node name="HBoxContainer2" type="HBoxContainer" parent="."]
 margin_left = 2.0
 margin_top = 187.0
-margin_right = 600.0
-margin_bottom = 227.0
+margin_right = 630.0
+margin_bottom = 387.0
 alignment = 1
 
-[node name="StartButton" type="TextureButton" parent="HBoxContainer2"]
-margin_left = 229.0
-margin_right = 368.0
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer2"]
+margin_left = 209.0
+margin_right = 418.0
+margin_bottom = 200.0
+
+[node name="StartButton" type="TextureButton" parent="HBoxContainer2/VBoxContainer"]
+margin_right = 209.0
 margin_bottom = 64.0
 texture_normal = ExtResource( 3 )
 texture_hover = ExtResource( 4 )
 
+[node name="TextureButton" type="TextureButton" parent="HBoxContainer2/VBoxContainer"]
+margin_top = 68.0
+margin_right = 209.0
+margin_bottom = 132.0
+texture_normal = ExtResource( 5 )
+texture_hover = ExtResource( 6 )
+
 [node name="HBoxContainer3" type="HBoxContainer" parent="."]
 margin_left = 3.0
 margin_top = 106.0
-margin_right = 601.0
-margin_bottom = 146.0
+margin_right = 602.0
+margin_bottom = 170.0
 alignment = 1
 
 [node name="GameTitle" type="TextureRect" parent="HBoxContainer3"]
-margin_left = 189.0
-margin_right = 408.0
-margin_bottom = 53.0
-texture = ExtResource( 5 )
-[connection signal="mouse_entered" from="HBoxContainer2/StartButton" to="." method="_on_StartButton_mouse_entered"]
-[connection signal="pressed" from="HBoxContainer2/StartButton" to="." method="_on_StartButton_pressed"]
+margin_left = 137.0
+margin_right = 462.0
+margin_bottom = 64.0
+texture = ExtResource( 7 )
+[connection signal="mouse_entered" from="HBoxContainer2/VBoxContainer/StartButton" to="." method="_on_StartButton_mouse_entered"]
+[connection signal="pressed" from="HBoxContainer2/VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]

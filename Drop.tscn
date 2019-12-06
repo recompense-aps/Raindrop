@@ -1,22 +1,22 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Drop.cs" type="Script" id=1]
-[ext_resource path="res://Graphics/raindrop.png" type="Texture" id=2]
+[ext_resource path="res://Graphics/RealRaindrop.png" type="Texture" id=2]
 [ext_resource path="res://Controllers/ManualController.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 6.3177
-height = 8.42411
+radius = 17.8353
+height = 2.13163
 
 [node name="Drop" type="Area2D"]
-scale = Vector2( 2, 2 )
+z_index = 100
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -0.291992, -2.04393 )
+position = Vector2( 0.11583, 2.03421 )
 shape = SubResource( 1 )
 
 [node name="ManualController" parent="." instance=ExtResource( 3 )]

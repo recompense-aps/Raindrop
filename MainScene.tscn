@@ -37,6 +37,7 @@ visible = false
 modulate = Color( 0.501961, 0, 1, 1 )
 
 [node name="DeathArea" type="Area2D" parent="."]
+editor/display_folded = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathArea"]
 position = Vector2( 306.183, 707.238 )

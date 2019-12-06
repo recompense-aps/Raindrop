@@ -13,7 +13,6 @@ public class Spawner : Node2D
     [Export]
     public bool On = true;
 
-    public static bool SpawnedPortal = false;
     private static int _scoreToSpawnPortal = 10;
     private static int _scoreToSpawnPortalIncrement = 10;
 
@@ -21,6 +20,7 @@ public class Spawner : Node2D
     private PackedScene _obstacleScene;
     private PackedScene _portalScene;
     private PickBag<string> _obstaclePickBag;
+    private PickBag<float> _obstacleSizes;
     private RandomNumberGenerator _random = new RandomNumberGenerator();
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -29,6 +29,10 @@ public class Spawner : Node2D
         _portalScene = GD.Load<PackedScene>("res://Portal.tscn");
         //FillBagTest();
         FillBagNormal(Global.CurrentLocation);
+        _obstacleSizes = new PickBag<float>();
+        _obstacleSizes.Add(50, 1);
+        _obstacleSizes.Add(25, 1.5f);
+        _obstacleSizes.Add(25, 0.5f);
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -66,23 +70,21 @@ public class Spawner : Node2D
     private void SpawnObstacle()
     {
         if (On == false) return;
+        float pickedScale = _obstacleSizes.Pick();
         Obstacle o = _obstacleScene.Instance() as Obstacle;
         o.Position = new Vector2(Position);
         GetParent().AddChild(o);
-        o.Spawn(_obstaclePickBag.Pick());      
+        o.Spawn(_obstaclePickBag.Pick());
+        o.Scale *= new Vector2(pickedScale, pickedScale);      
     }
 
     private void SpawnPortal()
     {
-        if (On == false) return;
-
-        System.Diagnostics.Debug.WriteLine($"{Global.CurrentLocation},{Global.NextLocation}");
-
+        if (On == false || Portal.PortalIsCurrentlySpawned) return;
         Portal p = _portalScene.Instance() as Portal;
-        p.Position = new Vector2(400, 300);
+        p.Position = new Vector2(300, 600);
         GetParent().AddChild(p);
         p.Spawn(Global.NextLocation);
-        SpawnedPortal = true;
     }
 
     private void FillBagNormal(string location)

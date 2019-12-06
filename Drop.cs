@@ -3,6 +3,9 @@ using RainDrop;
 
 public class Drop : Area2D
 {
+    [Signal]
+    public delegate void HitObstacle();
+
     public float Speed = 1;
     private float _health = 1;
     private Vector2 _pausePosition = new Vector2();
@@ -29,6 +32,8 @@ public class Drop : Area2D
         QueueFree();
         Global.HUD.Reset();
         Global.SoundEffects.Play("Lose");
+        Global.ChangeLocation("City", GetParent());
+        //(GetParent().FindNode("GameOverCover") as TeleportCover).Activate();
     }
 
     private void _on_Drop_area_entered(Area2D area)
@@ -39,7 +44,6 @@ public class Drop : Area2D
         }
         if(area is Obstacle)
         {
-            (area as Obstacle).QueueFree();
             Global.HUD.Score -= 1;
             _health -= 0.25f;
             Scale = new Vector2(Scale.x - 0.25f, Scale.x - 0.25f);
@@ -48,6 +52,8 @@ public class Drop : Area2D
             {
                 Lose();
             }
+            EmitSignal(nameof(HitObstacle));
+            (area as Obstacle).Fall();
         }
         if(area is Portal)
         {
@@ -57,6 +63,7 @@ public class Drop : Area2D
 
     private void OnTeleportStarted()
     {
+        Position = new Vector2(Position.x, 50);
         _pausePosition = new Vector2(Position);
         paused = true;
         Visible = false;
