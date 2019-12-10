@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://MainScene.cs" type="Script" id=1]
 [ext_resource path="res://Locations/City.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Spawner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=5]
 [ext_resource path="res://TeleportCover.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Graphics/frame.png" type="Texture" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 381.807, 25.1293 )
@@ -42,3 +43,9 @@ editor/display_folded = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathArea"]
 position = Vector2( 306.183, 707.238 )
 shape = SubResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 600.0
+margin_bottom = 800.0
+texture = ExtResource( 7 )
+expand = true

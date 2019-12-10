@@ -27,6 +27,9 @@ public class StreakController : Node
             _accel = new Vector2(_accel.x, _accel.y * -1);
             _veloctiy = new Vector2(_veloctiy.x, _veloctiy.y * -1);
         }
+
+        SpriteTrail st = new SpriteTrail();
+        _obstacle.AddChild(st);
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.

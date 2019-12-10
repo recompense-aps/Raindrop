@@ -20,7 +20,7 @@ public class SoundEffects : Node
 
     public void Play(string soundId)
     {
-        if (Mute || Global.PlaySound == false) return;
+        if (Mute || Global.Settings.PlaySounds == false) return;
         (FindNode(soundId) as AudioStreamPlayer).Play();
     }
 }

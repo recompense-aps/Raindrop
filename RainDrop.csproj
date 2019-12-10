@@ -62,9 +62,11 @@
     <Compile Include="Controllers\BackAndForthController.cs" />
     <Compile Include="Controllers\BasicController.cs" />
     <Compile Include="Controllers\ManualController.cs" />
+    <Compile Include="Controllers\SideInController.cs" />
     <Compile Include="Controllers\StreakController.cs" />
     <Compile Include="Data\ObstacleData.cs" />
     <Compile Include="Drop.cs" />
+    <Compile Include="GameOver.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="HUD.cs" />
     <Compile Include="Locations\Environment\OceanWave.cs" />
@@ -78,6 +80,7 @@
     <Compile Include="Spawner.cs" />
     <Compile Include="SpriteTrail.cs" />
     <Compile Include="TeleportCover.cs" />
+    <Compile Include="UI\LabelButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -16,12 +16,13 @@ public class SpriteTrail : Node
     public override void _Process(float delta)
     {
         _spawnTimer += delta;
-        if(_spawnTimer >= 0.1)
+        if(_spawnTimer >= 0)
         {
-            TrailSprite s = new TrailSprite(5);
+            TrailSprite s = new TrailSprite(3);
             s.Texture = _texture;
             s.Position = new Vector2(_parent.Position);
             s.Scale = new Vector2(_parent.Scale);
+            s.Rotation = _parent.Rotation;
             GetTree().Root.AddChild(s);
             _spawnTimer = 0;
         }

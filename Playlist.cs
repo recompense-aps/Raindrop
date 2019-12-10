@@ -33,7 +33,7 @@ public class Playlist : Node
 
     public void Start()
     {
-        if (Global.PlaySound == false) return;
+        if (Global.Settings.PlaySounds == false) return;
         _current = _songs[0];
         _current.Play();
         _current.Connect("finished", this, nameof(OnFinished));

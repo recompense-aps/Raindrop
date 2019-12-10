@@ -65,7 +65,6 @@ public class ManualController : Node
 
     private void OutOfSideBounds()
     {
-        //ReverseX();
         FlowThroughSide();
     }
 
@@ -96,8 +95,8 @@ public class ManualController : Node
         }
     }
 
-    private void OnHitObstacle()
+    private void OnHitObstacle(Obstacle o)
     {
-        _velocity *= -1;
+        _velocity = new Vector2(_velocity.x, -3);
     }
 }

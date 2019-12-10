@@ -5,8 +5,8 @@ public class ArcController : Node
 {
     private Obstacle _obstacle;
     private float Speed { get; set; }
-    private Vector2 _accel = new Vector2(0, 0.1f);
-    private Vector2 _velocity = new Vector2(1, -10);
+    private Vector2 _accel = new Vector2(0, 0.3f);
+    private Vector2 _velocity = new Vector2(1, -15);
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {

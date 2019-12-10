@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Drop.cs" type="Script" id=1]
 [ext_resource path="res://Graphics/RealRaindrop.png" type="Texture" id=2]
 [ext_resource path="res://Controllers/ManualController.tscn" type="PackedScene" id=3]
+[ext_resource path="res://SpriteTrail.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 17.8353
@@ -20,4 +21,6 @@ position = Vector2( 0.11583, 2.03421 )
 shape = SubResource( 1 )
 
 [node name="ManualController" parent="." instance=ExtResource( 3 )]
+
+[node name="SpriteTrail" parent="." instance=ExtResource( 4 )]
 [connection signal="area_entered" from="." to="." method="_on_Drop_area_entered"]

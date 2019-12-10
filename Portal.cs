@@ -53,6 +53,7 @@ public class Portal : Area2D
     private void ChangeLocation()
     {
         GetParent().EmitSignal("TeleportFinished");
+        GetTree().CallGroup("obstacles", "queue_free");
         Global.ChangeLocation(_destination, GetParent());
         QueueFree();
         PortalIsCurrentlySpawned = false;

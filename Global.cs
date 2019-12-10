@@ -6,7 +6,6 @@ namespace RainDrop
 {
     static class Global
     {
-        public static bool PlaySound = true;
         public static HUD HUD { get; set; }
         public static SoundEffects SoundEffects {get; set;}
         public static string CurrentLocation { get; set; }
@@ -26,8 +25,15 @@ namespace RainDrop
                 return _locations[index+1];
             }
         }
+        public static int FinalScore = 0;
+        public static GlobalSettings Settings = new GlobalSettings();
 
-        private static List<string> _locations = new List<string>() { "City", "Jungle", "Ocean" };
+        private static List<string> _locations = new List<string>() { "City", "Desert", "Ocean" };
+
+        public static void Log(object message)
+        {
+            System.Diagnostics.Debug.WriteLine(message);
+        }
 
         public static void ChangeLocation(string location, Node context)
         {
@@ -67,6 +73,12 @@ namespace RainDrop
                 list[n] = value;
             }
         }
+    }
+
+    class GlobalSettings
+    {
+        public bool PlaySounds = false;
+        public bool DevLogActive = true;
     }
 
 

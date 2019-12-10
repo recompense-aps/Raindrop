@@ -27,12 +27,11 @@ public class Spawner : Node2D
     {
         _obstacleScene = GD.Load<PackedScene>("res://Obstacle.tscn");
         _portalScene = GD.Load<PackedScene>("res://Portal.tscn");
-        //FillBagTest();
-        FillBagNormal(Global.CurrentLocation);
+        FillObstaclePickBag(Global.CurrentLocation);
         _obstacleSizes = new PickBag<float>();
         _obstacleSizes.Add(50, 1);
-        _obstacleSizes.Add(25, 1.5f);
-        _obstacleSizes.Add(25, 0.5f);
+        _obstacleSizes.Add(25, 1.2f);
+        _obstacleSizes.Add(25, 0.8f);
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -64,7 +63,7 @@ public class Spawner : Node2D
 
     public void ChangeSpawnLocation(string location)
     {
-        FillBagNormal(location);
+        FillObstaclePickBag(location);
     }
     
     private void SpawnObstacle()
@@ -87,9 +86,10 @@ public class Spawner : Node2D
         p.Spawn(Global.NextLocation);
     }
 
-    private void FillBagNormal(string location)
+    private void FillObstaclePickBag(string location)
     {
         _obstaclePickBag = new PickBag<string>();
+        //FillBagTest();return;
         switch(location)
         {
             case "Jungle":
@@ -126,6 +126,6 @@ public class Spawner : Node2D
 
     private void FillBagTest()
     {
-        _obstaclePickBag.Add(100, "superhero");
+        _obstaclePickBag.Add(100, "slide");
     }
 }

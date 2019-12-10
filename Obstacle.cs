@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class Obstacle : Area2D
 {
     private static Dictionary<string, Texture> _textures = new Dictionary<string, Texture>();
-    private static Dictionary<string, PackedScene> _controllers = new Dictionary<string, PackedScene>();
+    private static Dictionary<string, PackedScene> _sceneCache = new Dictionary<string, PackedScene>();
     private Sprite _sprite;
     private Tween _tween;
 
@@ -25,10 +25,6 @@ public class Obstacle : Area2D
             QueueFree();
             Global.HUD.Score += 1;
         }
-        if (_sprite.Texture == null)
-        {
-            QueueFree(); //TODO: Fix this
-        }
     }
 
     public void Spawn(string id)
@@ -42,28 +38,28 @@ public class Obstacle : Area2D
         {
             c = new ObstacleContainer("Basic");
         }
-        
-        if(_textures.ContainsKey(id))
+
+        if(c.IsAnimated)
         {
-            _sprite.Texture = _textures[id];
+            SetAnimatedSprite(id);
         }
         else
         {
-            Texture t = LoadTexture(id);
-            _textures.Add(id, t);
+            SetBasicTexture(id);
         }
-        if(_controllers.ContainsKey(c.Controller))
+        
+        if(_sceneCache.ContainsKey(c.Controller))
         {
-            AddChild(_controllers[c.Controller].Instance());
+            AddChild(_sceneCache[c.Controller].Instance());
         }
         else
         {
             PackedScene ps = LoadController(c.Controller);
-            _controllers.Add(c.Controller, ps);
+            _sceneCache.Add(c.Controller, ps);
             AddChild(ps.Instance());
         }
 
-        Scale = new Vector2(2, 2);
+        Scale = new Vector2(2, 2) * c.Scale;
         AddToGroup("obstacles");
     }
 
@@ -71,7 +67,7 @@ public class Obstacle : Area2D
     {
         foreach(Node n in GetChildren())
         {
-            if (n is Sprite || n is Tween) continue;
+            if (n is Sprite || n is Tween || n is AnimatedSprite) continue;
             RemoveChild(n);
         }
         _tween.InterpolateProperty(this, "position", new Vector2(Position), 
@@ -91,5 +87,28 @@ public class Obstacle : Area2D
         string rootPath = "res://Controllers/";
         PackedScene ps = GD.Load<PackedScene>(rootPath + id + "Controller.tscn");
         return ps;
+    }
+
+    private void SetBasicTexture(string id)
+    {
+        if (_textures.ContainsKey(id))
+        {
+            _sprite.Texture = _textures[id];
+        }
+        else
+        {
+            Texture t = LoadTexture(id);
+            _textures.Add(id, t);
+            _sprite.Texture = t;
+        }
+    }
+
+    private void SetAnimatedSprite(string id)
+    {
+        string path = $"res://Sprites/{id}.tscn";
+        PackedScene s = GD.Load<PackedScene>(path);
+        Global.Log("Loading from path: " + path);
+        RemoveChild(_sprite);
+        AddChild(s.Instance());
     }
 }

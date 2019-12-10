@@ -4,7 +4,7 @@ using RainDrop;
 public class Drop : Area2D
 {
     [Signal]
-    public delegate void HitObstacle();
+    public delegate void HitObstacle(Obstacle o);
 
     public float Speed = 1;
     private float _health = 1;
@@ -30,10 +30,11 @@ public class Drop : Area2D
     private void Lose()
     {
         QueueFree();
+        Global.FinalScore = Global.HUD.Score;
         Global.HUD.Reset();
         Global.SoundEffects.Play("Lose");
         Global.ChangeLocation("City", GetParent());
-        //(GetParent().FindNode("GameOverCover") as TeleportCover).Activate();
+        GetTree().ChangeScene("res://GameOver.tscn");
     }
 
     private void _on_Drop_area_entered(Area2D area)
