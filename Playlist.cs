@@ -13,6 +13,20 @@ public class Playlist : Node
         
     }
 
+    // Called every frame. 'delta' is the elapsed time since the previous frame.
+    public override void _Process(float delta)
+    {
+        if(Global.Settings.PlaySounds == false && _current.Playing)
+        {
+            _current.Playing = false;
+        }
+        else if(Global.Settings.PlaySounds && _current.Playing == false)
+        {
+            _current.Playing = true;
+            OnFinished();
+        }
+    }
+
     public void Load(List<string> songs, string root)
     {
         foreach(string song in songs)
@@ -47,10 +61,4 @@ public class Playlist : Node
         _current.Play();
         System.Diagnostics.Debug.WriteLine("next song");
     }
-
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
 }

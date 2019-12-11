@@ -92,15 +92,8 @@ public class Spawner : Node2D
         //FillBagTest();return;
         switch(location)
         {
-            case "Jungle":
-                _obstaclePickBag.Add(12, "arrow");
-                _obstaclePickBag.Add(12, "log");
-                _obstaclePickBag.Add(12, "monkey");
-                _obstaclePickBag.Add(12, "pterydactal");
-                _obstaclePickBag.Add(12, "rainbow");
-                _obstaclePickBag.Add(12, "seaplane");
-                _obstaclePickBag.Add(14, "snake");
-                _obstaclePickBag.Add(14, "toucan");
+            case "Desert":
+                _obstaclePickBag.Add(100, "snake");
                 break;
             case "Ocean":
                 _obstaclePickBag.Add(12, "fish");

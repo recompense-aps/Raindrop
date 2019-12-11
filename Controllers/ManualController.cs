@@ -1,5 +1,5 @@
 using Godot;
-using System;
+using RainDrop;
 
 public class ManualController : Node
 {
@@ -16,6 +16,7 @@ public class ManualController : Node
     {
         _slave = GetParent() as Area2D;
         _slave.Connect("HitObstacle", this, nameof(OnHitObstacle));
+        _slave.Connect("HitPlatform", this, nameof(OnHitPlatform));
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -98,5 +99,15 @@ public class ManualController : Node
     private void OnHitObstacle(Obstacle o)
     {
         _velocity = new Vector2(_velocity.x, -3);
+    }
+
+    private void OnHitPlatform(Platform p)
+    {
+        float vY = 6;
+        if(_slave.Position.y <= p.Position.y)
+        {
+            vY = -6f;
+        }
+        _velocity = new Vector2(_velocity.x, vY);
     }
 }

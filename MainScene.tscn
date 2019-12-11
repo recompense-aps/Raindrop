@@ -21,14 +21,20 @@ editor/display_folded = true
 
 [node name="SoundEffects" parent="." instance=ExtResource( 3 )]
 
-[node name="Spawner" parent="." instance=ExtResource( 4 )]
+[node name="Spawner" parent="." groups=[
+"spawners",
+] instance=ExtResource( 4 )]
 position = Vector2( 31.9579, 821.032 )
 
-[node name="Spawner2" parent="." instance=ExtResource( 4 )]
+[node name="Spawner2" parent="." groups=[
+"spawners",
+] instance=ExtResource( 4 )]
 position = Vector2( 430.172, 821.25 )
 SpawnInterval = 2.0
 
-[node name="Spawner3" parent="." instance=ExtResource( 4 )]
+[node name="Spawner3" parent="." groups=[
+"spawners",
+] instance=ExtResource( 4 )]
 position = Vector2( 292.424, -30.1468 )
 
 [node name="HUD" parent="." instance=ExtResource( 5 )]

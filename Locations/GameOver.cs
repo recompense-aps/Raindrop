@@ -3,6 +3,8 @@ using RainDrop;
 
 public class GameOver : Node2D
 {
+    bool playedSound = false;
+    int count = 0;
     private string[] _facts = new string[]
     {
         "Rain falls from clouds in the sky in the form of water droplets, this is called precipitation.",
@@ -22,9 +24,9 @@ public class GameOver : Node2D
         (FindNode("FinalScoreText") as Label).Text = Global.FinalScore.ToString();
     }
 
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+    // Called every frame. 'delta' is the elapsed time since the previous frame.
+    public override void _Process(float delta)
+    {
+
+    }
 }

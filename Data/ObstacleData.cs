@@ -7,6 +7,7 @@ namespace RainDrop.Data
     {
         public static Dictionary<string, ObstacleContainer> Data = new Dictionary<string, ObstacleContainer>()
         {
+            // City
             {"superhero", new ObstacleContainer("Streak") },
             {"football", new ObstacleContainer("Arc") },
             {"slide", new ObstacleContainer("Arc", false, new Vector2(0.5f,0.5f) )},
@@ -15,15 +16,10 @@ namespace RainDrop.Data
             {"bird", new ObstacleContainer("SideIn", true) },
             {"airplane", new ObstacleContainer("Streak", false, new Vector2(2,2)) },
 
-            { "log", new ObstacleContainer("Basic") },
-            {"monkey", new ObstacleContainer("BackAndForth") },
-            {"snake", new ObstacleContainer("Streak") },
-            {"seaplane", new ObstacleContainer("Streak") },
-            {"pterydactal", new ObstacleContainer("Streak") },
-            {"rainbow", new ObstacleContainer("BackAndForth") },
-            {"toucan", new ObstacleContainer("Streak") },
-            {"arrow", new ObstacleContainer("Arc") },
+            // Desert
+            { "snake", new ObstacleContainer("SideIn", true) },
 
+            //Ocean
             {"fish", new ObstacleContainer("Basic") },
             {"surfer", new ObstacleContainer("BackAndForth") },
             {"iceplatform", new ObstacleContainer("Streak") },

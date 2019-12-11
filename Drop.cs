@@ -5,17 +5,21 @@ public class Drop : Area2D
 {
     [Signal]
     public delegate void HitObstacle(Obstacle o);
+    [Signal]
+    public delegate void HitPlatform(Platform p);
 
     public float Speed = 1;
     private float _health = 1;
     private Vector2 _pausePosition = new Vector2();
     private bool paused = false;
+    PackedScene _gameOverScene;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         GetParent().Connect("TeleportStarted", this, nameof(OnTeleportStarted));
         GetParent().Connect("TeleportFinished", this, nameof(OnTeleportFinished));
+        _gameOverScene = GD.Load<PackedScene>("res://Locations/GameOver.tscn");
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -30,11 +34,18 @@ public class Drop : Area2D
     private void Lose()
     {
         QueueFree();
+        var children =  GetParent().GetChildren();
+        foreach(Node n in children)
+        {
+            if(n is SoundEffects == false)
+            {
+                n.QueueFree();
+            }
+        }
+        Global.SoundEffects.Play("GameOver");
         Global.FinalScore = Global.HUD.Score;
-        Global.HUD.Reset();
-        Global.SoundEffects.Play("Lose");
-        Global.ChangeLocation("City", GetParent());
-        GetTree().ChangeScene("res://GameOver.tscn");
+        Portal.PortalIsCurrentlySpawned = false;
+        GetParent().AddChild(_gameOverScene.Instance());
     }
 
     private void _on_Drop_area_entered(Area2D area)
@@ -55,6 +66,10 @@ public class Drop : Area2D
             }
             EmitSignal(nameof(HitObstacle));
             (area as Obstacle).Fall();
+        }
+        if(area is Platform)
+        {
+            EmitSignal(nameof(HitPlatform), area as Platform);
         }
         if(area is Portal)
         {

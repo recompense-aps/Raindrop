@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Graphics/desert-tile-1.png" type="Texture" id=1]
+[ext_resource path="res://Locations/Environment/Sun.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Clouds.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Graphics/desert-tile-1.png" type="Texture" id=3]
+[ext_resource path="res://Platform.tscn" type="PackedScene" id=4]
 
 [node name="Desert" type="Node2D"]
 
@@ -9,12 +12,42 @@ margin_right = 600.0
 margin_bottom = 800.0
 color = Color( 0.854902, 0.72549, 0.611765, 1 )
 
+[node name="Sun" parent="." instance=ExtResource( 1 )]
+modulate = Color( 1, 0.0705882, 0.0705882, 1 )
+position = Vector2( 476.002, 617.216 )
+
+[node name="Clouds" parent="." instance=ExtResource( 2 )]
+modulate = Color( 0.941176, 0.85098, 0.658824, 1 )
+position = Vector2( 7.93347, 580.723 )
+
 [node name="TextureRect" type="TextureRect" parent="."]
 margin_left = 3.0
 margin_top = 677.0
 margin_right = 152.0
 margin_bottom = 708.0
 rect_scale = Vector2( 4, 4 )
-texture = ExtResource( 1 )
+texture = ExtResource( 3 )
 expand = true
 stretch_mode = 2
+
+[node name="PlatformAnchor" type="Node2D" parent="."]
+
+[node name="Platform" parent="PlatformAnchor" instance=ExtResource( 4 )]
+position = Vector2( 249.695, 375.324 )
+PlatformType = "Desert"
+
+[node name="Platform2" parent="PlatformAnchor" instance=ExtResource( 4 )]
+position = Vector2( 247.239, 478.817 )
+PlatformType = "Desert"
+
+[node name="Platform3" parent="PlatformAnchor" instance=ExtResource( 4 )]
+position = Vector2( 247.239, 255.368 )
+PlatformType = "Desert"
+
+[node name="Platform4" parent="PlatformAnchor" instance=ExtResource( 4 )]
+position = Vector2( 438.766, 373.231 )
+PlatformType = "Desert"
+
+[node name="Platform5" parent="PlatformAnchor" instance=ExtResource( 4 )]
+position = Vector2( 74.1282, 376.914 )
+PlatformType = "Desert"

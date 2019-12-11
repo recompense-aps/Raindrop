@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Platform.cs" type="Script" id=1]
+[ext_resource path="res://Graphics/palm-tree-1.png" type="Texture" id=2]
+[ext_resource path="res://Graphics/Obstacles/iceplatform.png" type="Texture" id=3]
+[ext_resource path="res://Graphics/brick-tile-1.png" type="Texture" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 65.9312, 17.5132 )
+
+[node name="Platform" type="Area2D"]
+script = ExtResource( 1 )
+
+[node name="Desert" type="TextureRect" parent="."]
+margin_left = 0.63028
+margin_top = -37.1848
+margin_right = 32.6303
+margin_bottom = -5.18479
+rect_scale = Vector2( 4, 5 )
+texture = ExtResource( 2 )
+
+[node name="Ocean" type="TextureRect" parent="."]
+margin_right = 134.0
+margin_bottom = 33.0
+texture = ExtResource( 3 )
+expand = true
+
+[node name="City" type="TextureRect" parent="."]
+margin_right = 128.0
+margin_bottom = 32.0
+texture = ExtResource( 4 )
+stretch_mode = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 63.6553, 15.126 )
+shape = SubResource( 1 )

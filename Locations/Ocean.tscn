@@ -1,11 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Locations/Ocean.cs" type="Script" id=1]
-[ext_resource path="res://Graphics/sun.png" type="Texture" id=2]
-[ext_resource path="res://Locations/Environment/OceanWave.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Graphics/ocean-tile-2.png" type="Texture" id=4]
-[ext_resource path="res://Graphics/ocean-tile-3.png" type="Texture" id=5]
-[ext_resource path="res://Graphics/ocean-tile-1.png" type="Texture" id=6]
+[ext_resource path="res://Graphics/ocean-sky-3.png" type="Texture" id=2]
+[ext_resource path="res://Locations/Environment/Sun.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Clouds.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Locations/Environment/OceanWave.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Graphics/ocean-tile-2.png" type="Texture" id=6]
+[ext_resource path="res://Graphics/ocean-tile-3.png" type="Texture" id=7]
+[ext_resource path="res://Graphics/ocean-tile-1.png" type="Texture" id=8]
+[ext_resource path="res://Platform.tscn" type="PackedScene" id=9]
 
 [node name="Ocean" type="Node2D"]
 script = ExtResource( 1 )
@@ -14,48 +17,52 @@ __meta__ = {
 "_edit_vertical_guides_": [ -450.947 ]
 }
 
-[node name="ColorRect" type="ColorRect" parent="."]
-margin_right = 600.0
-margin_bottom = 800.0
-
-[node name="TextureRect2" type="TextureRect" parent="."]
-margin_left = -21.1028
-margin_top = -10.5514
-margin_right = 113.897
-margin_bottom = 107.449
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = 2.0
+margin_top = 3.0
+margin_right = 602.0
+margin_bottom = 705.0
 texture = ExtResource( 2 )
 expand = true
+
+[node name="Sun" parent="." instance=ExtResource( 3 )]
+modulate = Color( 0.92549, 0.905882, 0.435294, 1 )
+position = Vector2( -18.372, -8.35094 )
+
+[node name="Clouds" parent="." instance=ExtResource( 4 )]
+position = Vector2( 6.80188, 604.007 )
 
 [node name="Waves" type="Node2D" parent="."]
 editor/display_folded = true
 visible = false
 position = Vector2( -21.1028, 720.509 )
 
-[node name="OceanWave" parent="Waves" instance=ExtResource( 3 )]
+[node name="OceanWave" parent="Waves" instance=ExtResource( 5 )]
 modulate = Color( 0.513726, 0.768627, 0.956863, 1 )
 position = Vector2( 0.753784, 4.52197 )
 TweenTo = -50.0
 DurationInSeconds = 2.0
 
-[node name="OceanWave2" parent="Waves" instance=ExtResource( 3 )]
+[node name="OceanWave2" parent="Waves" instance=ExtResource( 5 )]
 modulate = Color( 0.301961, 0.698039, 0.988235, 1 )
 position = Vector2( 97.2236, 13.566 )
 TweenTo = 0.0
 DurationInSeconds = 2.0
 
-[node name="OceanWave3" parent="Waves" instance=ExtResource( 3 )]
+[node name="OceanWave3" parent="Waves" instance=ExtResource( 5 )]
 modulate = Color( 0.152941, 0.635294, 0.992157, 1 )
 position = Vector2( 6.78308, 12.0587 )
 DurationInSeconds = 2.0
 
 [node name="Node2D" type="Node2D" parent="."]
+editor/display_folded = true
 position = Vector2( 0, 708.827 )
 
 [node name="TextureRect3" type="TextureRect" parent="Node2D"]
 margin_top = -21.0
 margin_right = 608.0
 margin_bottom = 40.0
-texture = ExtResource( 4 )
+texture = ExtResource( 6 )
 expand = true
 stretch_mode = 2
 
@@ -63,7 +70,7 @@ stretch_mode = 2
 margin_top = 23.2687
 margin_right = 601.0
 margin_bottom = 117.269
-texture = ExtResource( 5 )
+texture = ExtResource( 7 )
 expand = true
 stretch_mode = 2
 
@@ -71,6 +78,28 @@ stretch_mode = 2
 margin_right = 303.0
 margin_bottom = 31.0
 rect_scale = Vector2( 2, 2 )
-texture = ExtResource( 6 )
+texture = ExtResource( 8 )
 expand = true
 stretch_mode = 2
+
+[node name="PlatformAnchor" type="Node2D" parent="."]
+
+[node name="Platform" parent="PlatformAnchor" instance=ExtResource( 9 )]
+position = Vector2( 264.707, 353.509 )
+PlatformType = "Ocean"
+
+[node name="Platform2" parent="PlatformAnchor" instance=ExtResource( 9 )]
+position = Vector2( 262.418, 457.705 )
+PlatformType = "Ocean"
+
+[node name="Platform3" parent="PlatformAnchor" instance=ExtResource( 9 )]
+position = Vector2( 267.118, 544.648 )
+PlatformType = "Ocean"
+
+[node name="Platform4" parent="PlatformAnchor" instance=ExtResource( 9 )]
+position = Vector2( 433.191, 353.388 )
+PlatformType = "Ocean"
+
+[node name="Platform5" parent="PlatformAnchor" instance=ExtResource( 9 )]
+position = Vector2( 66.5233, 353.078 )
+PlatformType = "Ocean"

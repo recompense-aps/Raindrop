@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Godot;
 using System;
+using System.Diagnostics;
 
 namespace RainDrop
 {
@@ -32,7 +33,14 @@ namespace RainDrop
 
         public static void Log(object message)
         {
-            System.Diagnostics.Debug.WriteLine(message);
+            if(Settings.TraceLog)
+            {
+                StackTrace stackTrace = new StackTrace();
+                string className = stackTrace.GetFrame(1).GetMethod().Module.Name;
+                string method = stackTrace.GetFrame(1).GetMethod().Name;
+                message += "\t {Called from:" +  className + "." + method + "}";
+            }
+            Debug.WriteLine("[RainDropLog]\t" + message);
         }
 
         public static void ChangeLocation(string location, Node context)
@@ -79,6 +87,7 @@ namespace RainDrop
     {
         public bool PlaySounds = false;
         public bool DevLogActive = true;
+        public bool TraceLog = true;
     }
 
 

@@ -4,8 +4,7 @@ using RainDrop;
 public class HUD : CanvasLayer
 {
     Label _scoreText;
-    TextureButton _startButton;
-    TextureRect _gameTitle;
+    LabelButton _muteButton;
     private int _score = 0;
     private bool _scoring = false;
 
@@ -32,8 +31,7 @@ public class HUD : CanvasLayer
     {
         Global.HUD = this;
         _scoreText = FindNode("ScoreText") as Label;
-        _startButton = FindNode("StartButton") as TextureButton;
-        _gameTitle = FindNode("GameTitle") as TextureRect;
+        _muteButton = FindNode("MuteButton") as LabelButton;
         _scoreText.Visible = false;
     }
 
@@ -58,6 +56,20 @@ public class HUD : CanvasLayer
         GetTree().CallGroup("obstacles", "queue_free");
         Global.SoundEffects.Play("Ready");
         _scoreText.Visible = true;
+    }
+
+    private void _on_MuteButton_Pressed(object labelButton)
+    {
+        if(_muteButton.BaseText == "MUTE")
+        {
+            Global.Settings.PlaySounds = false;
+            _muteButton.Text = _muteButton.BaseText = "UNMUTE";
+        }
+        else
+        {
+            Global.Settings.PlaySounds = true;
+            _muteButton.Text = _muteButton.BaseText = "MUTE";
+        }
     }
 
     private void Hide()

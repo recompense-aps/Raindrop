@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://GameOver.cs" type="Script" id=1]
+[ext_resource path="res://Locations/GameOver.cs" type="Script" id=1]
 [ext_resource path="res://Fonts/fipps-28.tres" type="DynamicFont" id=2]
 [ext_resource path="res://UI/LabelButton.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Fonts/min-pixel-24.tres" type="DynamicFont" id=4]
@@ -16,6 +16,7 @@ margin_bottom = 800.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
+editor/display_folded = true
 margin_left = -1.36035
 margin_top = 97.9471
 margin_right = 597.64
@@ -58,6 +59,7 @@ SceneTarget = "EXIT"
 BaseText = "EXIT"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="."]
+editor/display_folded = true
 margin_top = 291.0
 margin_right = 600.0
 margin_bottom = 331.0

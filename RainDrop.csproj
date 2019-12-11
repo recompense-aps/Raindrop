@@ -66,13 +66,14 @@
     <Compile Include="Controllers\StreakController.cs" />
     <Compile Include="Data\ObstacleData.cs" />
     <Compile Include="Drop.cs" />
-    <Compile Include="GameOver.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="HUD.cs" />
     <Compile Include="Locations\Environment\OceanWave.cs" />
+    <Compile Include="Locations\GameOver.cs" />
     <Compile Include="Locations\Ocean.cs" />
     <Compile Include="MainScene.cs" />
     <Compile Include="Obstacle.cs" />
+    <Compile Include="Platform.cs" />
     <Compile Include="Playlist.cs" />
     <Compile Include="Portal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
