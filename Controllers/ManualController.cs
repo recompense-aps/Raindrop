@@ -22,20 +22,20 @@ public class ManualController : Node
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
-        if(Input.IsActionPressed("ui_left"))
+        if(Input.IsActionPressed("drop_control_left"))
         {
             _velocity.x = -_horizontalSpeed;
         }
-        else if(Input.IsActionPressed("ui_right"))
+        else if(Input.IsActionPressed("drop_control_right"))
         {
             _velocity.x = _horizontalSpeed;
         }
 
-        if(Input.IsActionPressed("ui_up"))
+        if(Input.IsActionPressed("drop_control_up"))
         {
             _velocity.y = -_horizontalSpeed;
         }
-        else if(Input.IsActionPressed("ui_down"))
+        else if(Input.IsActionPressed("drop_control_down"))
         {
             _velocity.y += _accel * 10;
         }

@@ -18,7 +18,7 @@ public class MainScene : Node2D
         FindNode("HUD").Connect("StartButtonPressed", this, nameof(OnStartButtonPressed));
         _dropScene = GD.Load<PackedScene>("res://Drop.tscn");
         Global.ChangeLocation("City", this);
-        Global.Settings.PlaySounds = false;
+        Global.Settings.PlaySounds = true;
 
         Playlist pl = new Playlist();
         AddChild(pl);
