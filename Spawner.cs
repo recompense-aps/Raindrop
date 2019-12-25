@@ -93,17 +93,21 @@ public class Spawner : Node2D
         switch(location)
         {
             case "Desert":
-                _obstaclePickBag.Add(100, "snake");
+                _obstaclePickBag.Add(19, "snake");
+                _obstaclePickBag.Add(16, "pyramid");
+                _obstaclePickBag.Add(16, "vulture");
+                _obstaclePickBag.Add(16, "skull");
+                _obstaclePickBag.Add(16, "cactus");
+                _obstaclePickBag.Add(16, "camel");
                 break;
             case "Ocean":
                 _obstaclePickBag.Add(12, "fish");
-                _obstaclePickBag.Add(12, "surfer");
-                _obstaclePickBag.Add(12, "iceplatform");
+                _obstaclePickBag.Add(16, "surfer");
                 _obstaclePickBag.Add(12, "seagull");
                 _obstaclePickBag.Add(12, "shark");
                 _obstaclePickBag.Add(12, "speedboat");
-                _obstaclePickBag.Add(14, "submarine");
-                _obstaclePickBag.Add(14, "parachute");
+                _obstaclePickBag.Add(18, "submarine");
+                _obstaclePickBag.Add(18, "parachute");
                 break;
             default:
                 _obstaclePickBag.Add(14, "superhero");
@@ -119,6 +123,6 @@ public class Spawner : Node2D
 
     private void FillBagTest()
     {
-        _obstaclePickBag.Add(100, "slide");
+        _obstaclePickBag.Add(100, "speedboat");
     }
 }

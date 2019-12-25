@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Godot;
+using Guero;
 using System;
 using System.Diagnostics;
 
@@ -8,6 +9,7 @@ namespace RainDrop
     static class Global
     {
         public static HUD HUD { get; set; }
+        public static Drop Drop { get; set; }
         public static SoundEffects SoundEffects {get; set;}
         public static string CurrentLocation { get; set; }
         public static string NextLocation
@@ -30,6 +32,19 @@ namespace RainDrop
         public static GlobalSettings Settings = new GlobalSettings();
 
         private static List<string> _locations = new List<string>() { "City", "Desert", "Ocean" };
+        private static string _saveFilePath = "save.raindrop";
+        private static SaveFile<SaveFileContents> _saveFile;
+        public static SaveFile<SaveFileContents> SaveFile
+        {
+            get
+            {
+                if(_saveFile == null)
+                {
+                    _saveFile = new SaveFile<SaveFileContents>(_saveFilePath);
+                }
+                return _saveFile;
+            }
+        }
 
         public static void Log(object message)
         {
@@ -88,6 +103,11 @@ namespace RainDrop
         public bool PlaySounds = false;
         public bool DevLogActive = true;
         public bool TraceLog = true;
+    }
+
+    class SaveFileContents
+    {
+        public int Score = 0;
     }
 
 

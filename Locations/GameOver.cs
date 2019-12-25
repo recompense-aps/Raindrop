@@ -22,6 +22,12 @@ public class GameOver : Node2D
         string fact = _facts[g.RandiRange(0, _facts.Length - 1)];
         (FindNode("FactText") as Label).Text = fact;
         (FindNode("FinalScoreText") as Label).Text = Global.FinalScore.ToString();
+        if(Global.FinalScore > Global.SaveFile.Contents.Score)
+        {
+            Global.SaveFile.Contents.Score = Global.FinalScore;
+            Global.SaveFile.Save();
+        }
+        (FindNode("HighScoreText") as Label).Text = Global.SaveFile.Contents.Score.ToString();
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.

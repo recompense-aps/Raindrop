@@ -8,7 +8,7 @@ public class StreakController : Node
     private float Speed { get; set; }
     private Vector2 _streakToPoint;
     private Vector2 _veloctiy;
-    private Vector2 _accel = new Vector2(0.1f, -0.1f);
+    private Vector2 _accel = new Vector2(0.05f, -0.05f);
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()

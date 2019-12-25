@@ -26,7 +26,7 @@ texture = ExtResource( 2 )
 expand = true
 
 [node name="Sun" parent="." instance=ExtResource( 3 )]
-modulate = Color( 0.92549, 0.905882, 0.435294, 1 )
+modulate = Color( 0.917647, 0.894118, 0.305882, 1 )
 position = Vector2( -18.372, -8.35094 )
 
 [node name="Clouds" parent="." instance=ExtResource( 4 )]
@@ -83,6 +83,7 @@ expand = true
 stretch_mode = 2
 
 [node name="PlatformAnchor" type="Node2D" parent="."]
+editor/display_folded = true
 
 [node name="Platform" parent="PlatformAnchor" instance=ExtResource( 9 )]
 position = Vector2( 264.707, 353.509 )

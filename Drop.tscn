@@ -10,6 +10,7 @@ radius = 17.8353
 height = 2.13163
 
 [node name="Drop" type="Area2D"]
+position = Vector2( 3, 0 )
 z_index = 100
 script = ExtResource( 1 )
 

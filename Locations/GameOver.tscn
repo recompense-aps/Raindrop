@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Locations/GameOver.cs" type="Script" id=1]
 [ext_resource path="res://Fonts/fipps-28.tres" type="DynamicFont" id=2]
 [ext_resource path="res://UI/LabelButton.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Fonts/min-pixel-24.tres" type="DynamicFont" id=4]
-[ext_resource path="res://Fonts/min-pixel-48.tres" type="DynamicFont" id=5]
-[ext_resource path="res://Fonts/pixel_block.tres" type="DynamicFont" id=6]
+[ext_resource path="res://Fonts/pixel_block.tres" type="DynamicFont" id=5]
 
 [node name="GameOver" type="Node2D"]
 script = ExtResource( 1 )
@@ -60,18 +59,54 @@ BaseText = "EXIT"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="."]
 editor/display_folded = true
-margin_top = 291.0
+margin_top = 247.0
 margin_right = 600.0
-margin_bottom = 331.0
+margin_bottom = 307.0
 alignment = 1
 
+[node name="Label2" type="Label" parent="HBoxContainer3"]
+margin_left = 220.0
+margin_top = 15.0
+margin_right = 301.0
+margin_bottom = 45.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "SCORE:"
+
 [node name="FinalScoreText" type="Label" parent="HBoxContainer3"]
-margin_left = 225.0
-margin_right = 375.0
-margin_bottom = 60.0
-custom_fonts/font = ExtResource( 5 )
+margin_left = 305.0
+margin_top = 15.0
+margin_right = 380.0
+margin_bottom = 45.0
+custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 0.12549, 1, 0, 1 )
 text = "score"
+align = 1
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="."]
+editor/display_folded = true
+margin_top = 303.0
+margin_right = 600.0
+margin_bottom = 363.0
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer4"]
+margin_left = 163.0
+margin_top = 15.0
+margin_right = 295.0
+margin_bottom = 45.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+text = "HIGHSCORE:"
+
+[node name="HighScoreText" type="Label" parent="HBoxContainer4"]
+margin_left = 299.0
+margin_top = 15.0
+margin_right = 437.0
+margin_bottom = 45.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "HIGH SCORE:"
 align = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="."]
@@ -91,7 +126,7 @@ rect_min_size = Vector2( 500, 0 )
 [node name="Label" type="Label" parent="HBoxContainer2/VBoxContainer"]
 margin_right = 500.0
 margin_bottom = 20.0
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 5 )
 custom_colors/font_color = Color( 0, 0.368627, 1, 1 )
 text = "DID YOU KNOW?"
 align = 1
@@ -100,7 +135,7 @@ align = 1
 margin_top = 24.0
 margin_right = 500.0
 margin_bottom = 136.0
-custom_fonts/font = ExtResource( 6 )
+custom_fonts/font = ExtResource( 5 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Rain occurs on other planets in our Solar System but it is different to the rain we experience here on Earth. For example, rain on Venus is made of sulfuric acid and due to the intense heat it evaporates before it even reaches the surface!"
 align = 1

@@ -4,6 +4,7 @@ using RainDrop;
 public class HUD : CanvasLayer
 {
     Label _scoreText;
+    Label _healthText;
     LabelButton _muteButton;
     private int _score = 0;
     private bool _scoring = false;
@@ -31,8 +32,10 @@ public class HUD : CanvasLayer
     {
         Global.HUD = this;
         _scoreText = FindNode("ScoreText") as Label;
+        _healthText = FindNode("HealthText") as Label;
         _muteButton = FindNode("MuteButton") as LabelButton;
         _scoreText.Visible = false;
+        _healthText.Visible = false;
     }
 
     //  // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -48,6 +51,11 @@ public class HUD : CanvasLayer
         _scoring = false;
     }
 
+    public void SetHealth(float health)
+    {
+        _healthText.Text = "Health:" + (health * 100);
+    }
+
     private void _on_StartButton_Pressed(object labelButton)
     {
         EmitSignal(nameof(StartButtonPressed));
@@ -56,6 +64,7 @@ public class HUD : CanvasLayer
         GetTree().CallGroup("obstacles", "queue_free");
         Global.SoundEffects.Play("Ready");
         _scoreText.Visible = true;
+        _healthText.Visible = true;
     }
 
     private void _on_MuteButton_Pressed(object labelButton)
@@ -79,9 +88,9 @@ public class HUD : CanvasLayer
             if(n is Control)
             {
                 Control c = n as Control;
-                if(c.Name != "ScoreContainer" && c.Name != "ScoreText")
+                if(c.Name != "ScoreContainer" && c.Name != "ScoreText" && c.Name != "HealthText")
                 {
-                    (n as Control).Visible = false;
+                    (n as CanvasItem).Visible = false;
                 }
             }
         }
@@ -93,7 +102,7 @@ public class HUD : CanvasLayer
         {
             if (n is Control)
             {
-                (n as Control).Visible = true;
+                (n as CanvasItem).Visible = true;
             }
         }
     }

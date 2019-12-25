@@ -10,16 +10,26 @@ public class Drop : Area2D
 
     public float Speed = 1;
     private float _health = 1;
+    private float _scaleDelta = 0.1f;
     private Vector2 _pausePosition = new Vector2();
+    private Vector2 _originalScale;
     private bool paused = false;
+    private bool _invincible = false;
     PackedScene _gameOverScene;
+    PackedScene _blinkerScene;
+    SpriteTrail _spriteTrail;
+    BlinkerEffect _lastBlinker;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        Global.Drop = this;
         GetParent().Connect("TeleportStarted", this, nameof(OnTeleportStarted));
         GetParent().Connect("TeleportFinished", this, nameof(OnTeleportFinished));
         _gameOverScene = GD.Load<PackedScene>("res://Locations/GameOver.tscn");
+        _blinkerScene = GD.Load<PackedScene>("res://Effects/BlinkerEffect.tscn");
+        _originalScale = new Vector2(Scale);
+        _spriteTrail = FindNode("SpriteTrail") as SpriteTrail;
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -48,31 +58,78 @@ public class Drop : Area2D
         GetParent().AddChild(_gameOverScene.Instance());
     }
 
+    private void Hurt()
+    {
+        _spriteTrail.On = false;
+        _invincible = true;
+        ApplyBlinkEffect();
+
+        Global.HUD.Score -= 1;
+        _health -= 0.25f;
+        Scale = new Vector2(Scale.x - _scaleDelta, Scale.x - _scaleDelta);
+        Global.SoundEffects.Play("HitObstacle");
+        if (_health <= 0)
+        {
+            Lose();
+        }
+        Global.HUD.SetHealth(_health);
+    }
+
+    private void ApplyBlinkEffect()
+    {
+        RemoveBlinkers();
+        BlinkerEffect blink = _blinkerScene.Instance() as BlinkerEffect;
+        blink.Period = 0.05f;
+        blink.Die = true;
+        blink.Simple = true;
+        blink.Connect("Died", this, nameof(OnBlinkerDied));
+        AddChild(blink);
+    }
+
+    private void RemoveBlinkers()
+    {
+        foreach(Node n in GetChildren())
+        {
+            if(n is BlinkerEffect)
+            {
+                n.QueueFree();
+            }
+        }
+        Modulate = new Color(1, 1, 1, 1);
+    }
+
     private void _on_Drop_area_entered(Area2D area)
     {
         if(area.Name == "DeathArea")
         {
-            Lose();
+            Position = new Vector2(300, 50);
+            if(!_invincible)
+            {
+                Hurt();
+            }
         }
         if(area is Obstacle)
         {
-            Global.HUD.Score -= 1;
-            _health -= 0.25f;
-            Scale = new Vector2(Scale.x - 0.25f, Scale.x - 0.25f);
-            Global.SoundEffects.Play("HitObstacle");
-            if(_health <= 0)
+            if(_invincible)
             {
-                Lose();
+
             }
-            EmitSignal(nameof(HitObstacle));
-            (area as Obstacle).Fall();
+            else
+            {
+                Hurt();
+                EmitSignal(nameof(HitObstacle));
+                (area as Obstacle).Fall();
+            }
         }
         if(area is Platform)
         {
+            Global.SoundEffects.Play("HitPlatform");
             EmitSignal(nameof(HitPlatform), area as Platform);
         }
         if(area is Portal)
         {
+            Scale = _originalScale;
+            _health = 1;
             (area as Portal).Teleport();
         }
     }
@@ -89,6 +146,14 @@ public class Drop : Area2D
     {
         paused = false;
         Visible = true;
+    }
+
+    private void OnBlinkerDied()
+    {
+        _invincible = false;
+        _spriteTrail.On = true;
+        _lastBlinker = null;
+        Modulate = new Color(1, 1, 1, 1);
     }
 }
 

@@ -1,0 +1,379 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Graphics/city-sky-4.PNG" type="Texture" id=1]
+[ext_resource path="res://Locations/Environment/Sun.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Graphics/city-tile-3.png" type="Texture" id=3]
+[ext_resource path="res://Graphics/key-background.png" type="Texture" id=4]
+[ext_resource path="res://Fonts/fipps-28.tres" type="DynamicFont" id=5]
+[ext_resource path="res://Graphics/blank-key.png" type="Texture" id=6]
+[ext_resource path="res://Fonts/min-pixel-24.tres" type="DynamicFont" id=7]
+[ext_resource path="res://Effects/BlinkerEffect.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Graphics/RealRaindrop.png" type="Texture" id=9]
+[ext_resource path="res://Graphics/Obstacles/slide.png" type="Texture" id=10]
+[ext_resource path="res://Graphics/Obstacles/airplane.png" type="Texture" id=11]
+[ext_resource path="res://Graphics/Obstacles/car.png" type="Texture" id=12]
+[ext_resource path="res://Graphics/portal/1.png" type="Texture" id=13]
+[ext_resource path="res://UI/LabelButton.tscn" type="PackedScene" id=14]
+
+[node name="Tutorial" type="Node2D"]
+position = Vector2( 2, -13 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 610.0
+margin_bottom = 798.0
+texture = ExtResource( 1 )
+expand = true
+
+[node name="Sun" parent="." instance=ExtResource( 2 )]
+position = Vector2( 248, 647 )
+
+[node name="Buildings" type="Node2D" parent="."]
+editor/display_folded = true
+scale = Vector2( 4, 4 )
+
+[node name="TextureRect" type="TextureRect" parent="Buildings"]
+margin_left = -6.0
+margin_top = 169.0
+margin_right = 160.0
+margin_bottom = 201.0
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 2
+
+[node name="Controls" type="Node2D" parent="."]
+editor/display_folded = true
+position = Vector2( -1, -161 )
+
+[node name="WASD" type="Node2D" parent="Controls"]
+editor/display_folded = true
+position = Vector2( 24, 324 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Controls/WASD"]
+editor/display_folded = true
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Controls/WASD/VBoxContainer"]
+margin_right = 200.0
+margin_bottom = 64.0
+alignment = 1
+
+[node name="TextureRect4" type="TextureRect" parent="Controls/WASD/VBoxContainer/HBoxContainer2"]
+margin_left = 68.0
+margin_right = 132.0
+margin_bottom = 64.0
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="Controls/WASD/VBoxContainer/HBoxContainer2/TextureRect4"]
+margin_right = 64.0
+margin_bottom = 70.0
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "W"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Controls/WASD/VBoxContainer"]
+margin_top = 68.0
+margin_right = 200.0
+margin_bottom = 132.0
+
+[node name="TextureRect" type="TextureRect" parent="Controls/WASD/VBoxContainer/HBoxContainer"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="Controls/WASD/VBoxContainer/HBoxContainer/TextureRect"]
+margin_right = 64.0
+margin_bottom = 70.0
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "A"
+align = 1
+
+[node name="TextureRect2" type="TextureRect" parent="Controls/WASD/VBoxContainer/HBoxContainer"]
+margin_left = 68.0
+margin_right = 132.0
+margin_bottom = 64.0
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="Controls/WASD/VBoxContainer/HBoxContainer/TextureRect2"]
+margin_right = 64.0
+margin_bottom = 14.0
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "S"
+align = 1
+
+[node name="TextureRect3" type="TextureRect" parent="Controls/WASD/VBoxContainer/HBoxContainer"]
+margin_left = 136.0
+margin_right = 200.0
+margin_bottom = 64.0
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="Controls/WASD/VBoxContainer/HBoxContainer/TextureRect3"]
+margin_right = 64.0
+margin_bottom = 14.0
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "D"
+align = 1
+
+[node name="ARROWS" type="Node2D" parent="Controls"]
+editor/display_folded = true
+position = Vector2( 381, 320 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Controls/ARROWS"]
+editor/display_folded = true
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Controls/ARROWS/VBoxContainer"]
+editor/display_folded = true
+margin_right = 200.0
+margin_bottom = 64.0
+alignment = 1
+
+[node name="TextureRect4" type="TextureRect" parent="Controls/ARROWS/VBoxContainer/HBoxContainer2"]
+margin_left = 68.0
+margin_right = 132.0
+margin_bottom = 64.0
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="Controls/ARROWS/VBoxContainer/HBoxContainer2/TextureRect4"]
+margin_top = 64.0
+margin_right = 64.0
+margin_bottom = 134.0
+rect_rotation = -90.0
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = ">"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Controls/ARROWS/VBoxContainer"]
+margin_top = 68.0
+margin_right = 200.0
+margin_bottom = 132.0
+
+[node name="TextureRect" type="TextureRect" parent="Controls/ARROWS/VBoxContainer/HBoxContainer"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="Controls/ARROWS/VBoxContainer/HBoxContainer/TextureRect"]
+margin_right = 64.0
+margin_bottom = 70.0
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "<"
+align = 1
+
+[node name="TextureRect2" type="TextureRect" parent="Controls/ARROWS/VBoxContainer/HBoxContainer"]
+margin_left = 68.0
+margin_right = 132.0
+margin_bottom = 64.0
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="Controls/ARROWS/VBoxContainer/HBoxContainer/TextureRect2"]
+margin_left = 64.0
+margin_right = 128.0
+margin_bottom = 70.0
+rect_rotation = 90.0
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = ">"
+align = 1
+
+[node name="TextureRect3" type="TextureRect" parent="Controls/ARROWS/VBoxContainer/HBoxContainer"]
+margin_left = 136.0
+margin_right = 200.0
+margin_bottom = 64.0
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="Controls/ARROWS/VBoxContainer/HBoxContainer/TextureRect3"]
+margin_right = 64.0
+margin_bottom = 70.0
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = ">"
+align = 1
+
+[node name="NUMPAD" type="Node2D" parent="Controls"]
+editor/display_folded = true
+position = Vector2( 195, 182 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Controls/NUMPAD"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Controls/NUMPAD/VBoxContainer"]
+margin_right = 200.0
+margin_bottom = 64.0
+alignment = 1
+
+[node name="TextureRect4" type="TextureRect" parent="Controls/NUMPAD/VBoxContainer/HBoxContainer2"]
+margin_left = 68.0
+margin_right = 132.0
+margin_bottom = 64.0
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="Controls/NUMPAD/VBoxContainer/HBoxContainer2/TextureRect4"]
+margin_right = 64.0
+margin_bottom = 70.0
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "8"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Controls/NUMPAD/VBoxContainer"]
+margin_top = 68.0
+margin_right = 200.0
+margin_bottom = 132.0
+
+[node name="TextureRect" type="TextureRect" parent="Controls/NUMPAD/VBoxContainer/HBoxContainer"]
+margin_right = 64.0
+margin_bottom = 64.0
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="Controls/NUMPAD/VBoxContainer/HBoxContainer/TextureRect"]
+margin_right = 64.0
+margin_bottom = 70.0
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "4"
+align = 1
+
+[node name="TextureRect2" type="TextureRect" parent="Controls/NUMPAD/VBoxContainer/HBoxContainer"]
+margin_left = 68.0
+margin_right = 132.0
+margin_bottom = 64.0
+texture = ExtResource( 6 )
+
+[node name="TextureRect3" type="TextureRect" parent="Controls/NUMPAD/VBoxContainer/HBoxContainer"]
+margin_left = 136.0
+margin_right = 200.0
+margin_bottom = 64.0
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="Controls/NUMPAD/VBoxContainer/HBoxContainer/TextureRect3"]
+margin_right = 64.0
+margin_bottom = 14.0
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "6"
+align = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Controls/NUMPAD/VBoxContainer"]
+margin_top = 136.0
+margin_right = 200.0
+margin_bottom = 200.0
+alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="Controls/NUMPAD/VBoxContainer/HBoxContainer3"]
+margin_left = 68.0
+margin_right = 132.0
+margin_bottom = 64.0
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="Controls/NUMPAD/VBoxContainer/HBoxContainer3/TextureRect2"]
+margin_right = 64.0
+margin_bottom = 14.0
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "2"
+align = 1
+
+[node name="GroundWarning" type="Label" parent="."]
+editor/display_folded = true
+margin_left = 69.3524
+margin_top = 693.175
+margin_right = 360.352
+margin_bottom = 723.175
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 1, 0.0156863, 0.0156863, 1 )
+text = "STAY ABOVE THE GROUND!"
+
+[node name="BlinkerEffect" parent="GroundWarning" instance=ExtResource( 8 )]
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+margin_left = 284.888
+margin_top = 260.77
+margin_right = 324.888
+margin_bottom = 305.77
+texture = ExtResource( 9 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = -75.3671
+margin_top = 316.542
+margin_right = 716.633
+margin_bottom = 379.542
+custom_fonts/font = ExtResource( 7 )
+text = "Move left, right, up, or down 
+with any of the three control sets"
+align = 1
+
+[node name="Obstacles" type="Node2D" parent="."]
+editor/display_folded = true
+position = Vector2( 244.189, 438.636 )
+
+[node name="TextureRect" type="TextureRect" parent="Obstacles"]
+margin_left = 36.1762
+margin_top = -18.0881
+margin_right = 164.176
+margin_bottom = 68.9119
+rect_rotation = 43.64
+texture = ExtResource( 10 )
+
+[node name="TextureRect2" type="TextureRect" parent="Obstacles"]
+margin_left = 184.968
+margin_top = 40.3524
+margin_right = 203.968
+margin_bottom = 64.3524
+rect_rotation = 300.0
+rect_scale = Vector2( 5, 5 )
+texture = ExtResource( 11 )
+
+[node name="TextureRect3" type="TextureRect" parent="Obstacles"]
+margin_left = -188.029
+margin_top = 29.6689
+margin_right = -164.029
+margin_bottom = 61.6689
+rect_rotation = -90.0
+rect_scale = Vector2( 3, 3 )
+texture = ExtResource( 12 )
+
+[node name="Label" type="Label" parent="Obstacles"]
+margin_left = -244.189
+margin_top = 72.3524
+margin_right = 61.8107
+margin_bottom = 135.352
+custom_fonts/font = ExtResource( 7 )
+text = "Avoid all the objects
+ for as long as possible!"
+align = 1
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+margin_left = 379.85
+margin_top = 569.775
+margin_right = 419.85
+margin_bottom = 609.775
+rect_scale = Vector2( 4, 4 )
+texture = ExtResource( 13 )
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 340.659
+margin_top = 572.79
+margin_right = 577.659
+margin_bottom = 635.79
+custom_fonts/font = ExtResource( 7 )
+text = "Use the portals
+ to go to new areas"
+
+[node name="LabelButton" parent="." instance=ExtResource( 14 )]
+margin_left = 15.0734
+margin_top = 25.6248
+margin_right = 75.0734
+margin_bottom = 55.6248
+custom_fonts/font = ExtResource( 7 )
+text = "BACK"
+SceneTarget = "res://MainScene.tscn"
+BaseText = "BACK"

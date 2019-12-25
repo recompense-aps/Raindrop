@@ -17,17 +17,21 @@ namespace RainDrop.Data
             {"airplane", new ObstacleContainer("Streak", false, new Vector2(2,2)) },
 
             // Desert
-            { "snake", new ObstacleContainer("SideIn", true) },
+            { "snake", new ObstacleContainer("Streak", true) },
+            { "pyramid", new ObstacleContainer("Arc") },
+            { "vulture", new ObstacleContainer("SideIn", true) },
+            { "cactus", new ObstacleContainer("Arc") },
+            { "skull", new ObstacleContainer("Arc") },
+            { "camel", new ObstacleContainer("Streak") },
 
             //Ocean
-            {"fish", new ObstacleContainer("Basic") },
+            {"fish", new ObstacleContainer("Streak") },
             {"surfer", new ObstacleContainer("BackAndForth") },
-            {"iceplatform", new ObstacleContainer("Streak") },
-            {"seagull", new ObstacleContainer("Streak") },
+            {"seagull", new ObstacleContainer("SideIn", true) },
             {"shark", new ObstacleContainer("Streak") },
             {"speedboat", new ObstacleContainer("BackAndForth") },
             {"submarine", new ObstacleContainer("Streak") },
-            {"parachute", new ObstacleContainer("Arc") }
+            {"parachute", new ObstacleContainer("BackAndForth") }
         };
     }
 

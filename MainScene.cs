@@ -8,6 +8,8 @@ public class MainScene : Node2D
     public delegate void TeleportStarted();
     [Signal]
     public delegate void TeleportFinished();
+    [Signal]
+    public delegate void Message(string message);
     PackedScene _dropScene;
 
     // Called when the node enters the scene tree for the first time.
@@ -15,8 +17,8 @@ public class MainScene : Node2D
     {
         FindNode("HUD").Connect("StartButtonPressed", this, nameof(OnStartButtonPressed));
         _dropScene = GD.Load<PackedScene>("res://Drop.tscn");
-        Global.ChangeLocation("Desert", this);
-        Global.Settings.PlaySounds = true;
+        Global.ChangeLocation("City", this);
+        Global.Settings.PlaySounds = false;
 
         Playlist pl = new Playlist();
         AddChild(pl);

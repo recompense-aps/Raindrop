@@ -56,7 +56,15 @@ public class Obstacle : Area2D
         {
             PackedScene ps = LoadController(c.Controller);
             _sceneCache.Add(c.Controller, ps);
-            AddChild(ps.Instance());
+            Node n = ps.Instance();
+            if(n != null && ps != null)
+            {
+                AddChild(n);
+            }
+            else
+            {
+                Global.Log("Could not find controller: " + c.Controller);
+            }
         }
 
         Scale = new Vector2(2, 2) * c.Scale;

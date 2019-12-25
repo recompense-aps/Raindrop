@@ -26,11 +26,14 @@ texture = ExtResource( 3 )
 expand = true
 
 [node name="City" type="TextureRect" parent="."]
-margin_right = 128.0
-margin_bottom = 32.0
+margin_right = 64.0
+margin_bottom = 16.0
+rect_scale = Vector2( 2, 2 )
 texture = ExtResource( 4 )
+expand = true
 stretch_mode = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 63.6553, 15.126 )
 shape = SubResource( 1 )
