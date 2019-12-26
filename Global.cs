@@ -34,6 +34,8 @@ namespace RainDrop
         private static List<string> _locations = new List<string>() { "City", "Desert", "Ocean" };
         private static string _saveFilePath = "save.raindrop";
         private static SaveFile<SaveFileContents> _saveFile;
+        private static Dictionary<string, PackedScene> _sceneCache;
+
         public static SaveFile<SaveFileContents> SaveFile
         {
             get
@@ -43,6 +45,14 @@ namespace RainDrop
                     _saveFile = new SaveFile<SaveFileContents>(_saveFilePath);
                 }
                 return _saveFile;
+            }
+        }
+
+        public static Dictionary<string, PackedScene> SceneCache
+        {
+            get
+            {
+                return _sceneCache;
             }
         }
 
@@ -56,6 +66,27 @@ namespace RainDrop
                 message += "\t {Called from:" +  className + "." + method + "}";
             }
             Debug.WriteLine("[RainDropLog]\t" + message);
+        }
+
+        public static void LoadSceneCache(List<string> scenes)
+        {
+            _sceneCache = new Dictionary<string, PackedScene>();
+            foreach(string scene in scenes)
+            {
+                string path = "res://" + scene + ".tscn";
+                PackedScene ps = GD.Load<PackedScene>(path);
+                _sceneCache.Add(scene, ps);
+
+                if(ps == null)
+                {
+                    Global.Log("Unable to load: " + path);
+                }
+            }
+        }
+
+        public static Node Instance(string scene)
+        {
+            return _sceneCache[scene].Instance();
         }
 
         public static void ChangeLocation(string location, Node context)
@@ -96,6 +127,8 @@ namespace RainDrop
                 list[n] = value;
             }
         }
+
+
     }
 
     class GlobalSettings
@@ -109,6 +142,4 @@ namespace RainDrop
     {
         public int Score = 0;
     }
-
-
 }

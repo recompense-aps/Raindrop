@@ -17,16 +17,12 @@ public class Spawner : Node2D
     private static int _scoreToSpawnPortalIncrement = 10;
 
     private float _elapsed;
-    private PackedScene _obstacleScene;
-    private PackedScene _portalScene;
     private PickBag<string> _obstaclePickBag;
     private PickBag<float> _obstacleSizes;
     private RandomNumberGenerator _random = new RandomNumberGenerator();
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        _obstacleScene = GD.Load<PackedScene>("res://Obstacle.tscn");
-        _portalScene = GD.Load<PackedScene>("res://Portal.tscn");
         FillObstaclePickBag(Global.CurrentLocation);
         _obstacleSizes = new PickBag<float>();
         _obstacleSizes.Add(50, 1);
@@ -70,7 +66,7 @@ public class Spawner : Node2D
     {
         if (On == false) return;
         float pickedScale = _obstacleSizes.Pick();
-        Obstacle o = _obstacleScene.Instance() as Obstacle;
+        Obstacle o = Global.Instance("Obstacle") as Obstacle;
         o.Position = new Vector2(Position);
         GetParent().AddChild(o);
         o.Spawn(_obstaclePickBag.Pick());
@@ -80,7 +76,7 @@ public class Spawner : Node2D
     private void SpawnPortal()
     {
         if (On == false || Portal.PortalIsCurrentlySpawned) return;
-        Portal p = _portalScene.Instance() as Portal;
+        Portal p = Global.Instance("Portal") as Portal;
         p.Position = new Vector2(300, 600);
         GetParent().AddChild(p);
         p.Spawn(Global.NextLocation);

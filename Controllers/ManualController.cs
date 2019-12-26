@@ -15,7 +15,6 @@ public class ManualController : Node
     public override void _Ready()
     {
         _slave = GetParent() as Area2D;
-        _slave.Connect("HitObstacle", this, nameof(OnHitObstacle));
         _slave.Connect("HitPlatform", this, nameof(OnHitPlatform));
     }
 
@@ -94,11 +93,6 @@ public class ManualController : Node
         {
             _slave.Position = new Vector2(0, _slave.Position.y);
         }
-    }
-
-    private void OnHitObstacle(Obstacle o)
-    {
-        _velocity = new Vector2(_velocity.x, -3);
     }
 
     private void OnHitPlatform(Platform p)

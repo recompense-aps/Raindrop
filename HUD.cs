@@ -31,6 +31,7 @@ public class HUD : CanvasLayer
     public override void _Ready()
     {
         Global.HUD = this;
+        PauseMode = PauseModeEnum.Process;
         _scoreText = FindNode("ScoreText") as Label;
         _healthText = FindNode("HealthText") as Label;
         _muteButton = FindNode("MuteButton") as LabelButton;

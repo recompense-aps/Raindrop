@@ -18,6 +18,7 @@ public class GameOver : Node2D
     public override void _Ready()
     {
         RandomNumberGenerator g = new RandomNumberGenerator();
+        PauseMode = PauseModeEnum.Process;
         g.Randomize();
         string fact = _facts[g.RandiRange(0, _facts.Length - 1)];
         (FindNode("FactText") as Label).Text = fact;

@@ -19,7 +19,7 @@ config/name="RainDrop"
 run/main_scene="res://MainScene.tscn"
 boot_splash/image="res://Graphics/RMV STUDIOS Logo.png"
 boot_splash/bg_color=Color( 1, 1, 1, 1 )
-config/icon="res://Graphics/RMV STUDIOS Logo.png"
+config/icon="res://remv_croppped_icon_png.png"
 
 [debug]
 

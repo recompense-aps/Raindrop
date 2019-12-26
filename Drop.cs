@@ -4,21 +4,19 @@ using RainDrop;
 public class Drop : Area2D
 {
     [Signal]
-    public delegate void HitObstacle(Obstacle o);
-    [Signal]
     public delegate void HitPlatform(Platform p);
 
     public float Speed = 1;
     private float _health = 1;
     private float _scaleDelta = 0.1f;
+    private float _obstacleDamage = 0.25f;
     private Vector2 _pausePosition = new Vector2();
     private Vector2 _originalScale;
     private bool paused = false;
     private bool _invincible = false;
-    PackedScene _gameOverScene;
-    PackedScene _blinkerScene;
-    SpriteTrail _spriteTrail;
-    BlinkerEffect _lastBlinker;
+    private bool _ghost = false;
+    private SpriteTrail _spriteTrail;
+    private BlinkerEffect _lastBlinker;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -26,13 +24,10 @@ public class Drop : Area2D
         Global.Drop = this;
         GetParent().Connect("TeleportStarted", this, nameof(OnTeleportStarted));
         GetParent().Connect("TeleportFinished", this, nameof(OnTeleportFinished));
-        _gameOverScene = GD.Load<PackedScene>("res://Locations/GameOver.tscn");
-        _blinkerScene = GD.Load<PackedScene>("res://Effects/BlinkerEffect.tscn");
         _originalScale = new Vector2(Scale);
         _spriteTrail = FindNode("SpriteTrail") as SpriteTrail;
     }
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
         if(paused)
@@ -41,21 +36,18 @@ public class Drop : Area2D
         }
     }
 
+    public void ToggleDevMode()
+    {
+        _invincible = !_invincible;
+        _ghost = !_ghost;
+    }
+
     private void Lose()
     {
-        QueueFree();
-        var children =  GetParent().GetChildren();
-        foreach(Node n in children)
-        {
-            if(n is SoundEffects == false)
-            {
-                n.QueueFree();
-            }
-        }
-        Global.SoundEffects.Play("GameOver");
+        Global.SoundEffects.Play("GameOver").Connect("finished", this, nameof(OnGameOverSoundFinished));
         Global.FinalScore = Global.HUD.Score;
         Portal.PortalIsCurrentlySpawned = false;
-        GetParent().AddChild(_gameOverScene.Instance());
+        GetTree().Paused = true;
     }
 
     private void Hurt()
@@ -65,7 +57,7 @@ public class Drop : Area2D
         ApplyBlinkEffect();
 
         Global.HUD.Score -= 1;
-        _health -= 0.25f;
+        _health -= _obstacleDamage;
         Scale = new Vector2(Scale.x - _scaleDelta, Scale.x - _scaleDelta);
         Global.SoundEffects.Play("HitObstacle");
         if (_health <= 0)
@@ -78,7 +70,7 @@ public class Drop : Area2D
     private void ApplyBlinkEffect()
     {
         RemoveBlinkers();
-        BlinkerEffect blink = _blinkerScene.Instance() as BlinkerEffect;
+        BlinkerEffect blink = Global.Instance("Effects/BlinkerEffect") as BlinkerEffect;
         blink.Period = 0.05f;
         blink.Die = true;
         blink.Simple = true;
@@ -110,27 +102,35 @@ public class Drop : Area2D
         }
         if(area is Obstacle)
         {
-            if(_invincible)
-            {
-
-            }
-            else
+            if(_invincible == false)
             {
                 Hurt();
-                EmitSignal(nameof(HitObstacle));
                 (area as Obstacle).Fall();
+                Particles2D n = Global.Instance("DropBurst") as Particles2D;
+                GetParent().AddChild(n);
+                n.Position = new Vector2(Position);
+                n.OneShot = true;
             }
         }
-        if(area is Platform)
+        if(area is Platform && _ghost == false)
         {
             Global.SoundEffects.Play("HitPlatform");
             EmitSignal(nameof(HitPlatform), area as Platform);
+            (area as Platform).Impact(this);
         }
         if(area is Portal)
         {
             Scale = _originalScale;
             _health = 1;
             (area as Portal).Teleport();
+        }
+    }
+
+    private void _on_Drop_area_exited(object area)
+    {
+        if(area is Platform)
+        {
+            (area as Platform).UnImpact();
         }
     }
 
@@ -155,7 +155,12 @@ public class Drop : Area2D
         _lastBlinker = null;
         Modulate = new Color(1, 1, 1, 1);
     }
+
+    private void OnGameOverSoundFinished()
+    {
+        _gameOver.Visible = true;
+        QueueFree();        
+        GetTree().Paused = false;
+        Global.HUD.QueueFree();        
+    }
 }
-
-
-

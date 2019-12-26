@@ -10,6 +10,7 @@ public class SoundEffects : Node
     public override void _Ready()
     {
         Global.SoundEffects = this;
+        PauseMode = PauseModeEnum.Process;
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -18,9 +19,13 @@ public class SoundEffects : Node
 //      
 //  }
 
-    public void Play(string soundId)
+    public AudioStreamPlayer Play(string soundId)
     {
-        if (Mute || Global.Settings.PlaySounds == false) return;
-        (FindNode(soundId) as AudioStreamPlayer).Play();
+        AudioStreamPlayer p = (FindNode(soundId) as AudioStreamPlayer);
+        if (Mute || Global.Settings.PlaySounds != false)
+        {
+            p.Play();
+        }
+        return p;      
     }
 }

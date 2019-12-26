@@ -10,7 +10,8 @@ public class MainScene : Node2D
     public delegate void TeleportFinished();
     [Signal]
     public delegate void Message(string message);
-    PackedScene _dropScene;
+    private PackedScene _dropScene;
+    private Drop _drop;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -25,19 +26,31 @@ public class MainScene : Node2D
         pl.Load(GetSongs(), "Audio/Music/");
         pl.Shuffle();
         pl.Start();
+
+        Global.LoadSceneCache(new List<string>()
+        {
+            "Locations/GameOver",
+            "Effects/BlinkerEffect",
+            "DropBurst",
+            "Obstacle",
+            "Portal"
+        });
     }
 
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+    // Called every frame. 'delta' is the elapsed time since the previous frame.
+    public override void _Process(float delta)
+    {
+        if(Input.IsActionJustPressed("ui_cancel") && _drop != null)
+        {
+            _drop.ToggleDevMode();
+        }
+    }
 
     private void OnStartButtonPressed()
     {
-        Drop d = _dropScene.Instance() as Drop;
-        d.Position = new Vector2(300, 50);
-        AddChild(d);
+        _drop = _dropScene.Instance() as Drop;
+        _drop.Position = new Vector2(300, 50);
+        AddChild(_drop);
     }
 
     private List<string> GetSongs()

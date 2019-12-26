@@ -25,3 +25,4 @@ shape = SubResource( 1 )
 
 [node name="SpriteTrail" parent="." instance=ExtResource( 4 )]
 [connection signal="area_entered" from="." to="." method="_on_Drop_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_Drop_area_exited"]
