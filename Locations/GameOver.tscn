@@ -11,8 +11,10 @@ script = ExtResource( 1 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
-margin_right = 600.0
-margin_bottom = 800.0
+margin_left = -83.0
+margin_top = 383.0
+margin_right = 698.0
+margin_bottom = 596.0
 color = Color( 0, 0, 0, 1 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]

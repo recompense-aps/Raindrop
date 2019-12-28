@@ -10,6 +10,7 @@ namespace RainDrop
     {
         public static HUD HUD { get; set; }
         public static Drop Drop { get; set; }
+        public static GameOver GameOver { get; set; }
         public static SoundEffects SoundEffects {get; set;}
         public static string CurrentLocation { get; set; }
         public static string NextLocation
@@ -29,12 +30,14 @@ namespace RainDrop
             }
         }
         public static int FinalScore = 0;
+        public static int PreviousHighScore = 0;
         public static GlobalSettings Settings = new GlobalSettings();
 
         private static List<string> _locations = new List<string>() { "City", "Desert", "Ocean" };
         private static string _saveFilePath = "save.raindrop";
         private static SaveFile<SaveFileContents> _saveFile;
         private static Dictionary<string, PackedScene> _sceneCache;
+        private static RandomNumberGenerator _randomGen = new RandomNumberGenerator();
 
         public static SaveFile<SaveFileContents> SaveFile
         {
@@ -54,6 +57,12 @@ namespace RainDrop
             {
                 return _sceneCache;
             }
+        }
+
+        public static float GetRandomFloat(float from, float to)
+        {
+            _randomGen.Randomize();
+            return _randomGen.RandfRange(from, to);
         }
 
         public static void Log(object message)
@@ -133,7 +142,6 @@ namespace RainDrop
 
     class GlobalSettings
     {
-        public bool PlaySounds = false;
         public bool DevLogActive = true;
         public bool TraceLog = true;
     }
@@ -141,5 +149,6 @@ namespace RainDrop
     class SaveFileContents
     {
         public int Score = 0;
+        public bool PlaySounds = true;
     }
 }

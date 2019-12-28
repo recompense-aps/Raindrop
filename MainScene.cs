@@ -19,7 +19,7 @@ public class MainScene : Node2D
         FindNode("HUD").Connect("StartButtonPressed", this, nameof(OnStartButtonPressed));
         _dropScene = GD.Load<PackedScene>("res://Drop.tscn");
         Global.ChangeLocation("City", this);
-        Global.Settings.PlaySounds = true;
+        Global.PreviousHighScore = Global.SaveFile.Contents.Score;
 
         Playlist pl = new Playlist();
         AddChild(pl);
@@ -33,7 +33,8 @@ public class MainScene : Node2D
             "Effects/BlinkerEffect",
             "DropBurst",
             "Obstacle",
-            "Portal"
+            "Portal",
+            "PowerUp"
         });
     }
 
@@ -62,5 +63,5 @@ public class MainScene : Node2D
             "mellow-garden-loop.wav",
             "someday.ogg"
         };
-    }
+    }    
 }

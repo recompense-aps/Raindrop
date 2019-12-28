@@ -12,13 +12,18 @@ public class Spawner : Node2D
     public bool RandomizeInterval = true;
     [Export]
     public bool On = true;
+    [Export]
+    public bool SpawnPowerUps = false;
 
     private static int _scoreToSpawnPortal = 10;
     private static int _scoreToSpawnPortalIncrement = 10;
+    private static int _scoreToPowerUp = 1;
+    private static int _scoreToPowerUpIncrement = 1;
 
     private float _elapsed;
     private PickBag<string> _obstaclePickBag;
     private PickBag<float> _obstacleSizes;
+    private PickBag<PowerUpType> _powerUpPickBag;
     private RandomNumberGenerator _random = new RandomNumberGenerator();
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -28,6 +33,11 @@ public class Spawner : Node2D
         _obstacleSizes.Add(50, 1);
         _obstacleSizes.Add(25, 1.2f);
         _obstacleSizes.Add(25, 0.8f);
+
+        _powerUpPickBag = new PickBag<PowerUpType>();
+        _powerUpPickBag.Add(33, PowerUpType.Ghost);
+        _powerUpPickBag.Add(33, PowerUpType.Invincibility);
+        _powerUpPickBag.Add(34, PowerUpType.Health);
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -55,6 +65,11 @@ public class Spawner : Node2D
             _scoreToSpawnPortal += _scoreToSpawnPortalIncrement;
             SpawnPortal();
         }
+        if(Global.HUD.Score >= _scoreToPowerUp)
+        {
+            _scoreToPowerUp += _scoreToPowerUpIncrement;
+            SpawnPowerUp();
+        }
     }
 
     public void ChangeSpawnLocation(string location)
@@ -80,6 +95,16 @@ public class Spawner : Node2D
         p.Position = new Vector2(300, 600);
         GetParent().AddChild(p);
         p.Spawn(Global.NextLocation);
+    }
+
+    private void SpawnPowerUp()
+    {
+        if(On && SpawnPowerUps)
+        {
+            PowerUp pu = Global.Instance("PowerUp") as PowerUp;
+            GetParent().AddChild(pu);
+            pu.Spawn(_powerUpPickBag.Pick());
+        }
     }
 
     private void FillObstaclePickBag(string location)

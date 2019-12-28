@@ -26,6 +26,7 @@ editor/display_folded = true
 "spawners",
 ] instance=ExtResource( 4 )]
 position = Vector2( 31.9579, 821.032 )
+SpawnPowerUps = true
 
 [node name="Spawner2" parent="." groups=[
 "spawners",

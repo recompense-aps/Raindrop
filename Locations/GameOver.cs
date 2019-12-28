@@ -17,23 +17,30 @@ public class GameOver : Node2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        RandomNumberGenerator g = new RandomNumberGenerator();
-        PauseMode = PauseModeEnum.Process;
-        g.Randomize();
-        string fact = _facts[g.RandiRange(0, _facts.Length - 1)];
-        (FindNode("FactText") as Label).Text = fact;
-        (FindNode("FinalScoreText") as Label).Text = Global.FinalScore.ToString();
-        if(Global.FinalScore > Global.SaveFile.Contents.Score)
-        {
-            Global.SaveFile.Contents.Score = Global.FinalScore;
-            Global.SaveFile.Save();
-        }
-        (FindNode("HighScoreText") as Label).Text = Global.SaveFile.Contents.Score.ToString();
+        Global.GameOver = this;
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
 
+    }
+
+    public void ApplyValues()
+    {
+        RandomNumberGenerator g = new RandomNumberGenerator();
+        PauseMode = PauseModeEnum.Process;
+        g.Randomize();
+        string fact = _facts[g.RandiRange(0, _facts.Length - 1)];
+        if (Global.HUD.Score > Global.PreviousHighScore)
+        {
+            Global.PreviousHighScore = Global.HUD.Score;
+            Global.SaveFile.Contents.Score = Global.PreviousHighScore;
+            //new high score!
+        }
+        (FindNode("FactText") as Label).Text = fact;
+        (FindNode("FinalScoreText") as Label).Text = Global.FinalScore.ToString();
+        (FindNode("HighScoreText") as Label).Text = Global.SaveFile.Contents.Score.ToString();
+        Global.SaveFile.Save();
     }
 }

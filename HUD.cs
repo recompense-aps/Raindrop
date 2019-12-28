@@ -37,6 +37,14 @@ public class HUD : CanvasLayer
         _muteButton = FindNode("MuteButton") as LabelButton;
         _scoreText.Visible = false;
         _healthText.Visible = false;
+        if(Global.SaveFile.Contents.PlaySounds == true)
+        {
+            _muteButton.Text = _muteButton.BaseText = "MUTE";
+        }
+        else
+        {
+            _muteButton.Text = _muteButton.BaseText = "UNMUTE";
+        }
     }
 
     //  // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -72,14 +80,15 @@ public class HUD : CanvasLayer
     {
         if(_muteButton.BaseText == "MUTE")
         {
-            Global.Settings.PlaySounds = false;
+            Global.SaveFile.Contents.PlaySounds = false;
             _muteButton.Text = _muteButton.BaseText = "UNMUTE";
         }
         else
         {
-            Global.Settings.PlaySounds = true;
+            Global.SaveFile.Contents.PlaySounds = true;
             _muteButton.Text = _muteButton.BaseText = "MUTE";
         }
+        Global.SaveFile.Save();
     }
 
     private void Hide()

@@ -15,6 +15,7 @@ public class Drop : Area2D
     private bool paused = false;
     private bool _invincible = false;
     private bool _ghost = false;
+    private bool _recovering = false;
     private SpriteTrail _spriteTrail;
     private BlinkerEffect _lastBlinker;
 
@@ -44,7 +45,14 @@ public class Drop : Area2D
 
     private void Lose()
     {
-        Global.SoundEffects.Play("GameOver").Connect("finished", this, nameof(OnGameOverSoundFinished));
+        if(Global.SaveFile.Contents.PlaySounds)
+        {
+            Global.SoundEffects.Play("GameOver").Connect("finished", this, nameof(OnGameOverSoundFinished));
+        }
+        else
+        {
+            OnGameOverSoundFinished();
+        }
         Global.FinalScore = Global.HUD.Score;
         Portal.PortalIsCurrentlySpawned = false;
         GetTree().Paused = true;
@@ -53,7 +61,7 @@ public class Drop : Area2D
     private void Hurt()
     {
         _spriteTrail.On = false;
-        _invincible = true;
+        _recovering = true;
         ApplyBlinkEffect();
 
         Global.HUD.Score -= 1;
@@ -102,7 +110,7 @@ public class Drop : Area2D
         }
         if(area is Obstacle)
         {
-            if(_invincible == false)
+            if(_invincible == false && _recovering == false)
             {
                 Hurt();
                 (area as Obstacle).Fall();
@@ -123,6 +131,24 @@ public class Drop : Area2D
             Scale = _originalScale;
             _health = 1;
             (area as Portal).Teleport();
+        }
+        if(area is PowerUp)
+        {
+            PowerUp p = area as PowerUp;
+            switch(p.Type)
+            {
+                case PowerUpType.Health:
+                    _health = 1;
+                    Global.HUD.SetHealth(_health);
+                    break;
+                case PowerUpType.Ghost:
+                    _ghost = true;
+                    break;
+                case PowerUpType.Invincibility:
+                    _invincible = true;
+                    break;
+            }
+            p.QueueFree();
         }
     }
 
@@ -150,7 +176,7 @@ public class Drop : Area2D
 
     private void OnBlinkerDied()
     {
-        _invincible = false;
+        _recovering = false;
         _spriteTrail.On = true;
         _lastBlinker = null;
         Modulate = new Color(1, 1, 1, 1);
@@ -158,9 +184,10 @@ public class Drop : Area2D
 
     private void OnGameOverSoundFinished()
     {
-        _gameOver.Visible = true;
+        Global.GameOver.ApplyValues();
+        Global.GameOver.Show();
         QueueFree();        
         GetTree().Paused = false;
-        Global.HUD.QueueFree();        
+        Global.HUD.QueueFree();       
     }
 }

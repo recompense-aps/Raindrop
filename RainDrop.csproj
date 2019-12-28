@@ -78,6 +78,7 @@
     <Compile Include="Platform.cs" />
     <Compile Include="Playlist.cs" />
     <Compile Include="Portal.cs" />
+    <Compile Include="PowerUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SoundEffects.cs" />
     <Compile Include="Spawner.cs" />

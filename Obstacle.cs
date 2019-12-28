@@ -115,7 +115,6 @@ public class Obstacle : Area2D
     {
         string path = $"res://Sprites/{id}.tscn";
         PackedScene s = GD.Load<PackedScene>(path);
-        Global.Log("Loading from path: " + path);
         RemoveChild(_sprite);
         AddChild(s.Instance());
     }
