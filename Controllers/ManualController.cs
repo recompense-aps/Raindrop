@@ -7,6 +7,7 @@ public class ManualController : Node
     private Vector2 _velocity = new Vector2(1, 1);
     private float _horizontalSpeed = 5;
     private float _accel = 0.1f;
+    private bool _justHitPlatform = false;
     private const float CONSTRAINT_LEFT = -5;
     private const float CONSTRAINT_RIGHT = 605;
     private const float CONSTRAINT_TOP = 32;
@@ -32,7 +33,14 @@ public class ManualController : Node
 
         if(Input.IsActionPressed("drop_control_up"))
         {
-            _velocity.y = -_horizontalSpeed;
+            if(_justHitPlatform == false)
+            {
+                _velocity.y = -_horizontalSpeed;
+            }
+            else
+            {
+                _justHitPlatform = false;
+            }
         }
         else if(Input.IsActionPressed("drop_control_down"))
         {
@@ -98,10 +106,11 @@ public class ManualController : Node
     private void OnHitPlatform(Platform p)
     {
         float vY = 6;
-        if(_slave.Position.y <= p.Position.y)
+        if(_slave.Position.y < p.Position.y)
         {
             vY = -6f;
         }
         _velocity = new Vector2(_velocity.x, vY);
+        _justHitPlatform = true;
     }
 }

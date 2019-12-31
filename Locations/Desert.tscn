@@ -33,21 +33,17 @@ stretch_mode = 2
 [node name="PlatformAnchor" type="Node2D" parent="."]
 
 [node name="Platform" parent="PlatformAnchor" instance=ExtResource( 4 )]
-position = Vector2( 249.695, 375.324 )
+position = Vector2( 230, 370 )
 PlatformType = "Desert"
 
 [node name="Platform2" parent="PlatformAnchor" instance=ExtResource( 4 )]
-position = Vector2( 247.239, 478.817 )
+position = Vector2( 11.513, 370 )
 PlatformType = "Desert"
 
 [node name="Platform3" parent="PlatformAnchor" instance=ExtResource( 4 )]
-position = Vector2( 247.239, 255.368 )
+position = Vector2( 230, 223.447 )
 PlatformType = "Desert"
 
 [node name="Platform4" parent="PlatformAnchor" instance=ExtResource( 4 )]
-position = Vector2( 438.766, 373.231 )
-PlatformType = "Desert"
-
-[node name="Platform5" parent="PlatformAnchor" instance=ExtResource( 4 )]
-position = Vector2( 74.1282, 376.914 )
+position = Vector2( 438.766, 370 )
 PlatformType = "Desert"

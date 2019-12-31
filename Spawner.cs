@@ -17,8 +17,8 @@ public class Spawner : Node2D
 
     private static int _scoreToSpawnPortal = 10;
     private static int _scoreToSpawnPortalIncrement = 10;
-    private static int _scoreToPowerUp = 1;
-    private static int _scoreToPowerUpIncrement = 1;
+    private static int _scoreToPowerUp = 15;
+    private static int _scoreToPowerUpIncrement = 15;
 
     private float _elapsed;
     private PickBag<string> _obstaclePickBag;
