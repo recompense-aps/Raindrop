@@ -12,6 +12,7 @@ public class PowerUp : Area2D
 
     public override void _Ready()
     {
+        PauseMode = PauseModeEnum.Stop;
         Position = new Vector2(Global.GetRandomFloat(200,500), 0);
     }
 

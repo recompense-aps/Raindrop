@@ -28,6 +28,7 @@ public class Spawner : Node2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        PauseMode = PauseModeEnum.Stop;
         FillObstaclePickBag(Global.CurrentLocation);
         _obstacleSizes = new PickBag<float>();
         _obstacleSizes.Add(50, 1);

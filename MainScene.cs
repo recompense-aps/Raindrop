@@ -16,6 +16,7 @@ public class MainScene : Node2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        PauseMode = PauseModeEnum.Process;
         FindNode("HUD").Connect("StartButtonPressed", this, nameof(OnStartButtonPressed));
         _dropScene = GD.Load<PackedScene>("res://Drop.tscn");
         Global.ChangeLocation("City", this);
@@ -44,6 +45,10 @@ public class MainScene : Node2D
         if(Input.IsActionJustPressed("ui_cancel") && _drop != null)
         {
             _drop.ToggleDevMode();
+        }
+        if(Input.IsActionJustPressed("pause"))
+        {
+            GetTree().Paused = !GetTree().Paused;
         }
     }
 

@@ -1,7 +1,6 @@
 C:\dev\granite-vault\RainDrop\.mono\temp\bin\Tools\RainDrop.dll
 C:\dev\granite-vault\RainDrop\.mono\temp\bin\Tools\RainDrop.pdb
 C:\dev\granite-vault\RainDrop\.mono\temp\obj\Tools\RainDrop.csprojAssemblyReference.cache
-C:\dev\granite-vault\RainDrop\.mono\temp\obj\Tools\RainDrop.csproj.CoreCompileInputs.cache
 C:\dev\granite-vault\RainDrop\.mono\temp\obj\Tools\RainDrop.dll
 C:\dev\granite-vault\RainDrop\.mono\temp\obj\Tools\RainDrop.pdb
 C:\dev\granite-vault\RainDrop\.mono\temp\bin\Tools\Newtonsoft.Json.dll

@@ -59,7 +59,7 @@ class TrailSprite : Sprite
     public override void _Process(float delta)
     {
         _alpha -= _alphaStep;
-        Modulate = Color.Color8(255, 255, 255, (byte)_alpha);
+        Modulate = Color.Color8((byte)Modulate.r8, (byte)Modulate.g8, (byte)Modulate.b8, (byte)_alpha);
         if(_alpha <= 0)
         {
             QueueFree();

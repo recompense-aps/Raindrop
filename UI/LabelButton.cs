@@ -28,13 +28,15 @@ public class LabelButton : Label
 
     private void _on_LabelButton_mouse_entered()
     {
-        Text = ">" + BaseText;
+        //Text = ">" + BaseText;
+        Modulate = Color.ColorN("white", 0.6f);
     }
 
 
     private void _on_LabelButton_mouse_exited()
     {
-        Text = "" + BaseText;
+        //Text = "" + BaseText;
+        Modulate = Color.ColorN("white", 1f);
     }
 
     private void _on_LabelButton_gui_input(object @event)

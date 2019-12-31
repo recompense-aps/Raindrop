@@ -43,4 +43,10 @@ public class GameOver : Node2D
         (FindNode("HighScoreText") as Label).Text = Global.SaveFile.Contents.Score.ToString();
         Global.SaveFile.Save();
     }
+
+    private void _on_LabelButton_Pressed(object labelButton)
+    {
+        GetTree().Paused = false;
+    }
 }
+

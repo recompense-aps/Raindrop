@@ -7,6 +7,7 @@ public class Drop : Area2D
     public delegate void HitPlatform(Platform p);
 
     public float Speed = 1;
+    private float _powerUpDuration = 5;
     private float _health = 1;
     private float _scaleDelta = 0.1f;
     private float _obstacleDamage = 0.25f;
@@ -16,17 +17,39 @@ public class Drop : Area2D
     private bool _invincible = false;
     private bool _ghost = false;
     private bool _recovering = false;
+    private float _invincibleCounter = 0;
+    private float _ghostCounter = 0;
     private SpriteTrail _spriteTrail;
     private BlinkerEffect _lastBlinker;
+    private Color BasicModulate = Color.Color8(255, 255, 255, 255);
+    private Color CurrentModulate;
+
+    private bool IsInvincible
+    {
+        get
+        {
+            return (_invincibleCounter > 0 || _invincible);
+        }
+    }
+
+    private bool IsGhost
+    {
+        get
+        {
+            return (_ghostCounter > 0 || _ghost);
+        }
+    }
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         Global.Drop = this;
+        PauseMode = PauseModeEnum.Stop;
         GetParent().Connect("TeleportStarted", this, nameof(OnTeleportStarted));
         GetParent().Connect("TeleportFinished", this, nameof(OnTeleportFinished));
         _originalScale = new Vector2(Scale);
         _spriteTrail = FindNode("SpriteTrail") as SpriteTrail;
+        CurrentModulate = BasicModulate;
     }
 
     public override void _Process(float delta)
@@ -35,12 +58,30 @@ public class Drop : Area2D
         {
             Position = _pausePosition;
         }
+        ProcessPowerUps(delta);
     }
 
     public void ToggleDevMode()
     {
         _invincible = !_invincible;
         _ghost = !_ghost;
+    }
+
+    private void ProcessPowerUps(float delta)
+    {
+        if(_invincibleCounter > 0)
+        {
+            _invincibleCounter -= delta;
+        }
+        if(_ghostCounter > 0)
+        {
+            _ghostCounter -= delta;
+        }
+        if(_invincibleCounter <= 0 && _ghostCounter <= 0)
+        {
+            Modulate = BasicModulate;
+            CurrentModulate = BasicModulate;
+        }
     }
 
     private void Lose()
@@ -95,7 +136,7 @@ public class Drop : Area2D
                 n.QueueFree();
             }
         }
-        Modulate = new Color(1, 1, 1, 1);
+        Modulate = CurrentModulate;
     }
 
     private void _on_Drop_area_entered(Area2D area)
@@ -103,14 +144,14 @@ public class Drop : Area2D
         if(area.Name == "DeathArea")
         {
             Position = new Vector2(300, 50);
-            if(!_invincible)
+            if(IsInvincible == false)
             {
                 Hurt();
             }
         }
         if(area is Obstacle)
         {
-            if(_invincible == false && _recovering == false)
+            if(IsInvincible == false && _recovering == false)
             {
                 Hurt();
                 (area as Obstacle).Fall();
@@ -120,7 +161,7 @@ public class Drop : Area2D
                 n.OneShot = true;
             }
         }
-        if(area is Platform && _ghost == false)
+        if(area is Platform && IsGhost == false)
         {
             Global.SoundEffects.Play("HitPlatform");
             EmitSignal(nameof(HitPlatform), area as Platform);
@@ -135,19 +176,24 @@ public class Drop : Area2D
         if(area is PowerUp)
         {
             PowerUp p = area as PowerUp;
-            switch(p.Type)
+            switch (p.Type)
             {
                 case PowerUpType.Health:
                     _health = 1;
                     Global.HUD.SetHealth(_health);
                     break;
                 case PowerUpType.Ghost:
-                    _ghost = true;
+                    Modulate = p.Modulate;
+                    _ghostCounter = _powerUpDuration;
+                    _invincibleCounter = 0;
                     break;
                 case PowerUpType.Invincibility:
-                    _invincible = true;
+                    Modulate = p.Modulate;
+                    _ghostCounter = 0;
+                    _invincibleCounter = _powerUpDuration;
                     break;
             }
+            CurrentModulate = Modulate;          
             p.QueueFree();
         }
     }

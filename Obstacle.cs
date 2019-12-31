@@ -15,6 +15,7 @@ public class Obstacle : Area2D
     {
         _sprite = FindNode("Sprite") as Sprite;
         _tween = FindNode("Tween") as Tween;
+        PauseMode = PauseModeEnum.Stop;
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
