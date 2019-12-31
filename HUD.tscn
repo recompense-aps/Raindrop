@@ -40,9 +40,9 @@ text = "HEALTH:100"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="."]
 margin_left = 2.0
-margin_top = 188.0
+margin_top = 131.228
 margin_right = 630.0
-margin_bottom = 388.0
+margin_bottom = 331.228
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer2"]
@@ -104,11 +104,10 @@ SceneTarget = "EXIT"
 BaseText = "EXIT"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="."]
-editor/display_folded = true
 margin_left = 3.0
-margin_top = 106.0
+margin_top = 55.0
 margin_right = 602.0
-margin_bottom = 221.0
+margin_bottom = 170.0
 alignment = 1
 
 [node name="GameTitle" type="TextureRect" parent="HBoxContainer3"]

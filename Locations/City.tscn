@@ -33,7 +33,7 @@ stretch_mode = 2
 position = Vector2( -35, -1 )
 
 [node name="Platform" parent="PlatformAnchor" instance=ExtResource( 4 )]
-position = Vector2( 279.268, 341.949 )
+position = Vector2( 279.268, 368.949 )
 
 [node name="Platform2" parent="PlatformAnchor" instance=ExtResource( 4 )]
 position = Vector2( 431.696, 460 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Graphics/city-sky-4.PNG" type="Texture" id=1]
 [ext_resource path="res://Locations/Environment/Sun.tscn" type="PackedScene" id=2]
@@ -14,13 +14,15 @@
 [ext_resource path="res://Graphics/Obstacles/car.png" type="Texture" id=12]
 [ext_resource path="res://Graphics/portal/1.png" type="Texture" id=13]
 [ext_resource path="res://UI/LabelButton.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Graphics/RealRaindropGray.png" type="Texture" id=15]
 
 [node name="Tutorial" type="Node2D"]
 position = Vector2( 2, -13 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
+margin_top = 1.43195
 margin_right = 610.0
-margin_bottom = 798.0
+margin_bottom = 799.432
 texture = ExtResource( 1 )
 expand = true
 
@@ -28,6 +30,7 @@ expand = true
 position = Vector2( 248, 647 )
 
 [node name="Buildings" type="Node2D" parent="."]
+editor/display_folded = true
 scale = Vector2( 4, 4 )
 
 [node name="TextureRect" type="TextureRect" parent="Buildings"]
@@ -40,15 +43,12 @@ expand = true
 stretch_mode = 2
 
 [node name="Controls" type="Node2D" parent="."]
-editor/display_folded = true
 position = Vector2( -1, -161 )
 
 [node name="WASD" type="Node2D" parent="Controls"]
-editor/display_folded = true
-position = Vector2( 24, 324 )
+position = Vector2( 2.52, 260 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Controls/WASD"]
-editor/display_folded = true
 margin_right = 40.0
 margin_bottom = 40.0
 
@@ -118,16 +118,13 @@ text = "D"
 align = 1
 
 [node name="ARROWS" type="Node2D" parent="Controls"]
-editor/display_folded = true
-position = Vector2( 381, 320 )
+position = Vector2( 374, 260 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Controls/ARROWS"]
-editor/display_folded = true
 margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Controls/ARROWS/VBoxContainer"]
-editor/display_folded = true
 margin_right = 200.0
 margin_bottom = 64.0
 alignment = 1
@@ -294,20 +291,23 @@ text = "STAY ABOVE THE GROUND!"
 [node name="BlinkerEffect" parent="GroundWarning" instance=ExtResource( 8 )]
 
 [node name="TextureRect2" type="TextureRect" parent="."]
-margin_left = 284.888
-margin_top = 260.77
-margin_right = 324.888
-margin_bottom = 305.77
+margin_left = 269.212
+margin_top = 349.025
+margin_right = 309.212
+margin_bottom = 394.025
 texture = ExtResource( 9 )
 
 [node name="Label" type="Label" parent="."]
-margin_left = -75.3671
-margin_top = 316.542
-margin_right = 716.633
-margin_bottom = 379.542
+margin_left = -288.411
+margin_top = 240.647
+margin_right = 503.589
+margin_bottom = 402.647
 custom_fonts/font = ExtResource( 7 )
-text = "Move left, right, up, or down 
-with any of the three control sets"
+text = "Move left, right, 
+up, or down 
+with any of 
+the three 
+control sets"
 align = 1
 
 [node name="Obstacles" type="Node2D" parent="."]
@@ -315,18 +315,18 @@ editor/display_folded = true
 position = Vector2( 244.189, 438.636 )
 
 [node name="TextureRect" type="TextureRect" parent="Obstacles"]
-margin_left = 36.1762
-margin_top = -18.0881
-margin_right = 164.176
-margin_bottom = 68.9119
+margin_left = -105.514
+margin_top = -37.6836
+margin_right = 22.4862
+margin_bottom = 49.3164
 rect_rotation = 43.64
 texture = ExtResource( 10 )
 
 [node name="TextureRect2" type="TextureRect" parent="Obstacles"]
-margin_left = 184.968
-margin_top = 40.3524
-margin_right = 203.968
-margin_bottom = 64.3524
+margin_left = 230.188
+margin_top = 44.8745
+margin_right = 249.188
+margin_bottom = 68.8745
 rect_rotation = 300.0
 rect_scale = Vector2( 5, 5 )
 texture = ExtResource( 11 )
@@ -341,10 +341,10 @@ rect_scale = Vector2( 3, 3 )
 texture = ExtResource( 12 )
 
 [node name="Label" type="Label" parent="Obstacles"]
-margin_left = -244.189
-margin_top = 72.3524
-margin_right = 61.8107
-margin_bottom = 135.352
+margin_left = -52.7568
+margin_top = 34.6688
+margin_right = 253.244
+margin_bottom = 97.6688
 custom_fonts/font = ExtResource( 7 )
 text = "Avoid all the objects
  for as long as possible!"
@@ -376,3 +376,66 @@ custom_fonts/font = ExtResource( 7 )
 text = "BACK"
 SceneTarget = "res://MainScene.tscn"
 BaseText = "BACK"
+
+[node name="Powerups" type="Node2D" parent="."]
+editor/display_folded = true
+
+[node name="TextureRect" type="TextureRect" parent="Powerups"]
+modulate = Color( 0, 0, 1, 1 )
+margin_left = 33.1615
+margin_top = 563.745
+margin_right = 73.1615
+margin_bottom = 608.745
+texture = ExtResource( 15 )
+
+[node name="TextureRect2" type="TextureRect" parent="Powerups"]
+modulate = Color( 1, 0, 0, 1 )
+margin_left = 9.04407
+margin_top = 602.936
+margin_right = 49.0441
+margin_bottom = 647.936
+texture = ExtResource( 15 )
+
+[node name="TextureRect3" type="TextureRect" parent="Powerups"]
+modulate = Color( 0, 1, 0, 1 )
+margin_left = 48.2349
+margin_top = 610.473
+margin_right = 88.2349
+margin_bottom = 655.473
+texture = ExtResource( 15 )
+
+[node name="Label" type="Label" parent="Powerups"]
+margin_left = 64.8156
+margin_top = 568.267
+margin_right = 306.816
+margin_bottom = 631.267
+custom_fonts/font = ExtResource( 7 )
+text = "Get Power drops 
+for a boost!"
+
+[node name="TextureRect4" type="TextureRect" parent="."]
+margin_left = 214.435
+margin_top = 240.572
+margin_right = 374.435
+margin_bottom = 304.572
+texture = ExtResource( 4 )
+expand = true
+
+[node name="Label" type="Label" parent="TextureRect4"]
+margin_right = 160.0
+margin_bottom = 70.0
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+text = "ENTER"
+align = 1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Label3" type="Label" parent="."]
+margin_left = 320.762
+margin_top = 316.466
+margin_right = 587.762
+margin_bottom = 346.466
+custom_fonts/font = ExtResource( 7 )
+text = "Press Enter to Pause"
