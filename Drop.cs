@@ -175,6 +175,7 @@ public class Drop : Area2D
         }
         if(area is PowerUp)
         {
+            Global.SoundEffects.Play("PowerUp");
             PowerUp p = area as PowerUp;
             switch (p.Type)
             {

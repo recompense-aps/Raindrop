@@ -2,11 +2,11 @@
 
 [ext_resource path="res://HUD.cs" type="Script" id=1]
 [ext_resource path="res://Fonts/pixel_block.tres" type="DynamicFont" id=2]
-[ext_resource path="res://UI/LabelButton.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Fonts/min-pixel-24.tres" type="DynamicFont" id=4]
-[ext_resource path="res://Graphics/title-2.png" type="Texture" id=5]
-[ext_resource path="res://Fonts/fipps-28.tres" type="DynamicFont" id=6]
-[ext_resource path="res://Effects/BlinkerEffect.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Graphics/title-2.png" type="Texture" id=3]
+[ext_resource path="res://Fonts/fipps-28.tres" type="DynamicFont" id=4]
+[ext_resource path="res://Effects/BlinkerEffect.tscn" type="PackedScene" id=5]
+[ext_resource path="res://UI/LabelButton.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Fonts/min-pixel-24.tres" type="DynamicFont" id=7]
 [ext_resource path="res://Graphics/RealRaindrop.png" type="Texture" id=8]
 
 [node name="HUD" type="CanvasLayer"]
@@ -38,76 +38,11 @@ margin_bottom = 44.0
 custom_fonts/font = ExtResource( 2 )
 text = "HEALTH:100"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="."]
-margin_left = 2.0
-margin_top = 131.228
-margin_right = 630.0
-margin_bottom = 331.228
-alignment = 1
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer2"]
-margin_left = 263.0
-margin_right = 365.0
-margin_bottom = 184.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-
-[node name="LabelButton3" parent="HBoxContainer2/VBoxContainer" instance=ExtResource( 3 )]
-margin_right = 102.0
-
-[node name="StartButton" parent="HBoxContainer2/VBoxContainer" instance=ExtResource( 3 )]
-margin_top = 18.0
-margin_right = 102.0
-margin_bottom = 48.0
-custom_fonts/font = ExtResource( 4 )
-text = "START"
-align = 1
-BaseText = "START"
-
-[node name="MuteButton" parent="HBoxContainer2/VBoxContainer" instance=ExtResource( 3 )]
-margin_top = 52.0
-margin_right = 102.0
-margin_bottom = 82.0
-custom_fonts/font = ExtResource( 4 )
-text = "MUTE"
-align = 1
-BaseText = "MUTE"
-
-[node name="LabelButton" parent="HBoxContainer2/VBoxContainer" instance=ExtResource( 3 )]
-margin_top = 86.0
-margin_right = 102.0
-margin_bottom = 116.0
-custom_fonts/font = ExtResource( 4 )
-text = "TUTORIAL"
-SceneTarget = "res://Locations/Tutorial.tscn"
-BaseText = "TUTORIAL"
-
-[node name="CreditsButton" parent="HBoxContainer2/VBoxContainer" instance=ExtResource( 3 )]
-margin_top = 120.0
-margin_right = 102.0
-margin_bottom = 150.0
-custom_fonts/font = ExtResource( 4 )
-text = "CREDITS"
-SceneTarget = "res://Locations/Credits.tscn"
-BaseText = "CREDITS"
-
-[node name="LabelButton2" parent="HBoxContainer2/VBoxContainer" instance=ExtResource( 3 )]
-margin_top = 154.0
-margin_right = 102.0
-margin_bottom = 184.0
-custom_fonts/font = ExtResource( 4 )
-text = "EXIT"
-align = 1
-SceneTarget = "EXIT"
-BaseText = "EXIT"
-
 [node name="HBoxContainer3" type="HBoxContainer" parent="."]
 margin_left = 3.0
 margin_top = 55.0
 margin_right = 602.0
-margin_bottom = 170.0
+margin_bottom = 125.0
 alignment = 1
 
 [node name="GameTitle" type="TextureRect" parent="HBoxContainer3"]
@@ -115,17 +50,80 @@ visible = false
 margin_left = 3.0
 margin_right = 328.0
 margin_bottom = 115.0
-texture = ExtResource( 5 )
+texture = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="HBoxContainer3"]
 margin_left = 168.0
-margin_top = 22.0
 margin_right = 431.0
-margin_bottom = 92.0
-custom_fonts/font = ExtResource( 6 )
+margin_bottom = 70.0
+custom_fonts/font = ExtResource( 4 )
 text = "SUPER DROP"
 
-[node name="BlinkerEffect" parent="HBoxContainer3" instance=ExtResource( 7 )]
+[node name="BlinkerEffect" parent="HBoxContainer3" instance=ExtResource( 5 )]
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+margin_top = 135.0
+margin_right = 600.0
+margin_bottom = 335.0
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer2"]
+margin_left = 249.0
+margin_right = 351.0
+margin_bottom = 184.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="LabelButton3" parent="HBoxContainer2/VBoxContainer" instance=ExtResource( 6 )]
+margin_right = 102.0
+
+[node name="StartButton" parent="HBoxContainer2/VBoxContainer" instance=ExtResource( 6 )]
+margin_top = 18.0
+margin_right = 102.0
+margin_bottom = 48.0
+custom_fonts/font = ExtResource( 7 )
+text = "START"
+align = 1
+BaseText = "START"
+
+[node name="MuteButton" parent="HBoxContainer2/VBoxContainer" instance=ExtResource( 6 )]
+margin_top = 52.0
+margin_right = 102.0
+margin_bottom = 82.0
+custom_fonts/font = ExtResource( 7 )
+text = "MUTE"
+align = 1
+BaseText = "MUTE"
+
+[node name="LabelButton" parent="HBoxContainer2/VBoxContainer" instance=ExtResource( 6 )]
+margin_top = 86.0
+margin_right = 102.0
+margin_bottom = 116.0
+custom_fonts/font = ExtResource( 7 )
+text = "TUTORIAL"
+SceneTarget = "res://Locations/Tutorial.tscn"
+BaseText = "TUTORIAL"
+
+[node name="CreditsButton" parent="HBoxContainer2/VBoxContainer" instance=ExtResource( 6 )]
+margin_top = 120.0
+margin_right = 102.0
+margin_bottom = 150.0
+custom_fonts/font = ExtResource( 7 )
+text = "CREDITS"
+SceneTarget = "res://Locations/Credits.tscn"
+BaseText = "CREDITS"
+
+[node name="LabelButton2" parent="HBoxContainer2/VBoxContainer" instance=ExtResource( 6 )]
+margin_top = 154.0
+margin_right = 102.0
+margin_bottom = 184.0
+custom_fonts/font = ExtResource( 7 )
+text = "EXIT"
+align = 1
+SceneTarget = "EXIT"
+BaseText = "EXIT"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 editor/display_folded = true

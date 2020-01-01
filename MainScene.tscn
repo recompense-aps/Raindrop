@@ -13,7 +13,6 @@
 extents = Vector2( 381.807, 25.1293 )
 
 [node name="MainScene" type="Node2D"]
-editor/display_folded = true
 script = ExtResource( 1 )
 
 [node name="LocationAnchor" type="Node2D" parent="."]
