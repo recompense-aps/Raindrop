@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Viscosity.wav-5dbbb62de8d606e833dd2902814eb294.sample"
+
+[deps]
+
+source_file="res://Audio/Music/Viscosity.wav"
+dest_files=[ "res://.import/Viscosity.wav-5dbbb62de8d606e833dd2902814eb294.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

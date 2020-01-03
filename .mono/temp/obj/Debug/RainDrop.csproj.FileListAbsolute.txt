@@ -7,3 +7,13 @@ C:\dev\granite-vault\RainDrop\.mono\temp\obj\Debug\RainDrop.dll
 C:\dev\granite-vault\RainDrop\.mono\temp\obj\Debug\RainDrop.pdb
 C:\dev\granite-vault\RainDrop\.mono\temp\bin\Debug\Guero.dll
 C:\dev\granite-vault\RainDrop\.mono\temp\bin\Debug\Guero.pdb
+C:\dev\rmv-studios\RainDrop\.mono\temp\bin\Debug\RainDrop.dll
+C:\dev\rmv-studios\RainDrop\.mono\temp\bin\Debug\RainDrop.pdb
+C:\dev\rmv-studios\RainDrop\.mono\temp\bin\Debug\Guero.dll
+C:\dev\rmv-studios\RainDrop\.mono\temp\bin\Debug\Newtonsoft.Json.dll
+C:\dev\rmv-studios\RainDrop\.mono\temp\bin\Debug\Guero.pdb
+C:\dev\rmv-studios\RainDrop\.mono\temp\bin\Debug\Newtonsoft.Json.xml
+C:\dev\rmv-studios\RainDrop\.mono\temp\obj\Debug\RainDrop.csprojAssemblyReference.cache
+C:\dev\rmv-studios\RainDrop\.mono\temp\obj\Debug\RainDrop.csproj.CopyComplete
+C:\dev\rmv-studios\RainDrop\.mono\temp\obj\Debug\RainDrop.dll
+C:\dev\rmv-studios\RainDrop\.mono\temp\obj\Debug\RainDrop.pdb

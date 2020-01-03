@@ -15,10 +15,10 @@ public class Spawner : Node2D
     [Export]
     public bool SpawnPowerUps = false;
 
-    private static int _scoreToSpawnPortal = 10;
-    private static int _scoreToSpawnPortalIncrement = 10;
-    private static int _scoreToPowerUp = 15;
-    private static int _scoreToPowerUpIncrement = 15;
+    private static int _scoreToSpawnPortal = 20;
+    private static int _scoreToSpawnPortalIncrement = 20;
+    private static int _scoreToPowerUp = 5;
+    private static int _scoreToPowerUpIncrement = 5;
 
     private float _elapsed;
     private PickBag<string> _obstaclePickBag;
@@ -60,13 +60,21 @@ public class Spawner : Node2D
         {
             SpawnPortal();
         }
+        if (Input.IsActionJustPressed("dev_powerup"))
+        {
+            SpawnPowerUp();
+        }
+        if(Input.IsActionJustPressed("dev_obstacle"))
+        {
+            SpawnDevObstacle();
+        }
 
-        if(Global.HUD.Score >= _scoreToSpawnPortal)
+        if (Global.HUD.Score >= _scoreToSpawnPortal)
         {
             _scoreToSpawnPortal += _scoreToSpawnPortalIncrement;
             SpawnPortal();
         }
-        if(Global.HUD.Score >= _scoreToPowerUp)
+        if(Global.HUD.Score >= _scoreToPowerUp && SpawnPowerUps)
         {
             _scoreToPowerUp += _scoreToPowerUpIncrement;
             SpawnPowerUp();
@@ -100,11 +108,24 @@ public class Spawner : Node2D
 
     private void SpawnPowerUp()
     {
-        if(On && SpawnPowerUps)
+        if(On)
         {
             PowerUp pu = Global.Instance("PowerUp") as PowerUp;
             GetParent().AddChild(pu);
             pu.Spawn(_powerUpPickBag.Pick());
+        }
+    }
+
+    private void SpawnDevObstacle()
+    {
+        if(On)
+        {
+            float pickedScale = _obstacleSizes.Pick();
+            Obstacle o = Global.Instance("Obstacle") as Obstacle;
+            o.Position = new Vector2(Position);
+            GetParent().AddChild(o);
+            o.Spawn("ufo");
+            o.Scale *= new Vector2(pickedScale, pickedScale);
         }
     }
 

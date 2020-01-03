@@ -8,6 +8,7 @@ public class HUD : CanvasLayer
     LabelButton _muteButton;
     private int _score = 0;
     private bool _scoring = false;
+    private float _powerUpTimer = 0;
 
     [Signal]
     public delegate void StartButtonPressed();
@@ -20,8 +21,29 @@ public class HUD : CanvasLayer
         }
         set
         {
+            float prevScore = _score;
             _score = value;
-            if (_score < 0 || _scoring == false) _score = 0;
+            float delta = _score - prevScore;
+            if (_score < 0 || _scoring == false)
+            {
+                _score = 0;
+            }
+            else
+            {
+                ScoreChangeEffect ef = Global.Instance("Effects/ScoreChangeEffect") as ScoreChangeEffect;
+                _scoreText.AddChild(ef);
+                if(_score < prevScore)
+                {
+                    ef.SetColor(Color.ColorN("red"));
+                    ef.SetText(delta.ToString());
+                }
+                else
+                {
+                    ef.SetColor(Color.ColorN("green"));
+                    ef.SetText(delta.ToString());
+                    Global.SoundEffects.Play("Score");
+                }
+            }
             _scoreText.Text = "Score:" + _score;
         }
 
@@ -47,11 +69,10 @@ public class HUD : CanvasLayer
         }
     }
 
-    //  // Called every frame. 'delta' is the elapsed time since the previous frame.
-    //  public override void _Process(float delta)
-    //  {
-    //      
-    //  }
+    // Called every frame. 'delta' is the elapsed time since the previous frame.
+    public override void _Process(float delta)
+    {
+    }
 
     public void Reset()
     {
@@ -62,7 +83,27 @@ public class HUD : CanvasLayer
 
     public void SetHealth(float health)
     {
-        _healthText.Text = "Health:" + (health * 100);
+        //pretty wak like this
+        float prev = float.Parse(_healthText.Text.Split(":")[1]);
+        float n = health * 100;
+        _healthText.Text = "Health:" + n;
+        ScoreChangeEffect ef = Global.Instance("Effects/ScoreChangeEffect") as ScoreChangeEffect;
+        _healthText.AddChild(ef);
+        if (n < prev)
+        {
+            ef.SetColor(Color.ColorN("red"));
+            ef.SetText((n-prev).ToString());
+        }
+        else
+        {
+            ef.SetColor(Color.ColorN("green"));
+            ef.SetText((n-prev).ToString());
+        }
+    }
+
+    public void SetScoring(bool scoring)
+    {
+        _scoring = scoring;
     }
 
     private void _on_StartButton_Pressed(object labelButton)
@@ -72,6 +113,7 @@ public class HUD : CanvasLayer
         Hide();
         GetTree().CallGroup("obstacles", "queue_free");
         Global.SoundEffects.Play("Ready");
+        Global.GameState = GameState.Playing;
         _scoreText.Visible = true;
         _healthText.Visible = true;
     }

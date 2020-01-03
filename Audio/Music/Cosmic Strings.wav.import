@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Cosmic Strings.wav-b2f763da7597b0e330b7ae2352de61bc.sample"
+
+[deps]
+
+source_file="res://Audio/Music/Cosmic Strings.wav"
+dest_files=[ "res://.import/Cosmic Strings.wav-b2f763da7597b0e330b7ae2352de61bc.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

@@ -21,6 +21,7 @@ public class MainScene : Node2D
         _dropScene = GD.Load<PackedScene>("res://Drop.tscn");
         Global.ChangeLocation("City", this);
         Global.PreviousHighScore = Global.SaveFile.Contents.Score;
+        Global.GameState = GameState.MainMenu;
 
         Playlist pl = new Playlist();
         AddChild(pl);
@@ -32,6 +33,7 @@ public class MainScene : Node2D
         {
             "Locations/GameOver",
             "Effects/BlinkerEffect",
+            "Effects/ScoreChangeEffect",
             "DropBurst",
             "Obstacle",
             "Portal",
@@ -63,10 +65,8 @@ public class MainScene : Node2D
     {
         return new List<string>()
         {
-            "destiny-loop.wav",
-            "funky-loop.wav",
-            "mellow-garden-loop.wav",
-            "someday.ogg"
+            "Viscosity.wav",
+            "Cosmic Strings.wav",
         };
     }    
 }

@@ -43,6 +43,7 @@ expand = true
 stretch_mode = 2
 
 [node name="Controls" type="Node2D" parent="."]
+editor/display_folded = true
 position = Vector2( -1, -161 )
 
 [node name="WASD" type="Node2D" parent="Controls"]
@@ -365,7 +366,9 @@ margin_right = 577.659
 margin_bottom = 635.79
 custom_fonts/font = ExtResource( 7 )
 text = "Use the portals
- to go to new areas"
+ to go to new areas
+and to get a
+ point bonus"
 
 [node name="LabelButton" parent="." instance=ExtResource( 14 )]
 margin_left = 15.0

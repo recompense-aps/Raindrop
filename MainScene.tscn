@@ -37,7 +37,7 @@ SpawnInterval = 2.0
 [node name="Spawner3" parent="." groups=[
 "spawners",
 ] instance=ExtResource( 4 )]
-position = Vector2( 292.424, -30.1468 )
+position = Vector2( 292.424, -29.1468 )
 
 [node name="HUD" parent="." instance=ExtResource( 5 )]
 

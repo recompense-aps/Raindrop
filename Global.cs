@@ -13,6 +13,7 @@ namespace RainDrop
         public static GameOver GameOver { get; set; }
         public static SoundEffects SoundEffects {get; set;}
         public static string CurrentLocation { get; set; }
+        public static GameState GameState { get; set; }
         public static string NextLocation
         {
             get
@@ -32,6 +33,7 @@ namespace RainDrop
         public static int FinalScore = 0;
         public static int PreviousHighScore = 0;
         public static GlobalSettings Settings = new GlobalSettings();
+        public static GlobalColors Colors = new GlobalColors();
 
         private static List<string> _locations = new List<string>() { "City", "Desert", "Ocean" };
         private static string _saveFilePath = "save.raindrop";
@@ -123,6 +125,14 @@ namespace RainDrop
             }
         }
 
+        public static void RemoveChildren(Node n)
+        {
+            foreach(Node nd in n.GetChildren())
+            {
+                nd.QueueFree();
+            }
+        }
+
         public static void ShuffleList<T>(this IList<T> list)
         {
             Random rng = new Random();
@@ -146,9 +156,24 @@ namespace RainDrop
         public bool TraceLog = true;
     }
 
+    class GlobalColors
+    {
+        public Color Red = new Color(1, 0, 0, 1);
+        public Color Green = new Color(0, 1, 0, 1);
+        public Color Blue = new Color(0, 0, 1, 1);
+        public Color Gray = new Color(0.5f, 0.5f, 0.5f, 1);
+    }
+
     class SaveFileContents
     {
         public int Score = 0;
         public bool PlaySounds = true;
+    }
+
+    enum GameState
+    {
+        MainMenu,
+        Playing,
+        GameOver
     }
 }

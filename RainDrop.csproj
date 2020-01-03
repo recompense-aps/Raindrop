@@ -11,6 +11,8 @@
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <BaseIntermediateOutputPath>.mono\temp\obj</BaseIntermediateOutputPath>
     <IntermediateOutputPath>$(BaseIntermediateOutputPath)\$(Configuration)</IntermediateOutputPath>
+    <ApiConfiguration Condition=" '$(Configuration)' != 'Release' ">Debug</ApiConfiguration>
+    <ApiConfiguration Condition=" '$(Configuration)' == 'Release' ">Release</ApiConfiguration>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,14 +41,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="GodotSharp">
-      <HintPath>$(ProjectDir)\.mono\assemblies\GodotSharp.dll</HintPath>
       <Private>False</Private>
+      <HintPath>$(ProjectDir)/.mono/assemblies/$(ApiConfiguration)/GodotSharp.dll</HintPath>
     </Reference>
     <Reference Include="GodotSharpEditor" Condition=" '$(Configuration)' == 'Tools' ">
-      <HintPath>$(ProjectDir)\.mono\assemblies\GodotSharpEditor.dll</HintPath>
       <Private>False</Private>
+      <HintPath>$(ProjectDir)/.mono/assemblies/$(ApiConfiguration)/GodotSharpEditor.dll</HintPath>
     </Reference>
-    <Reference Include="Guero">
+    <Reference Include="Guero, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\prototypes\lib\Guero\Guero\bin\Debug\Guero.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -67,6 +70,7 @@
     <Compile Include="Data\ObstacleData.cs" />
     <Compile Include="Drop.cs" />
     <Compile Include="Effects\BlinkerEffect.cs" />
+    <Compile Include="Effects\ScoreChangeEffect.cs" />
     <Compile Include="Effects\StretchEffect.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="HUD.cs" />

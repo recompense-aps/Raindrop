@@ -7,7 +7,8 @@ public class Drop : Area2D
     public delegate void HitPlatform(Platform p);
 
     public float Speed = 1;
-    private float _powerUpDuration = 5;
+    private float _powerUpDuration = 20;
+    private float _recoveryDuration = 2.5f;
     private float _health = 1;
     private float _scaleDelta = 0.1f;
     private float _obstacleDamage = 0.25f;
@@ -17,8 +18,6 @@ public class Drop : Area2D
     private bool _invincible = false;
     private bool _ghost = false;
     private bool _recovering = false;
-    private float _invincibleCounter = 0;
-    private float _ghostCounter = 0;
     private SpriteTrail _spriteTrail;
     private BlinkerEffect _lastBlinker;
     private Color BasicModulate = Color.Color8(255, 255, 255, 255);
@@ -28,7 +27,7 @@ public class Drop : Area2D
     {
         get
         {
-            return (_invincibleCounter > 0 || _invincible);
+            return  _invincible;
         }
     }
 
@@ -36,7 +35,15 @@ public class Drop : Area2D
     {
         get
         {
-            return (_ghostCounter > 0 || _ghost);
+            return _ghost;
+        }
+    }
+
+    private bool IsPoweredUp
+    {
+        get
+        {
+            return _ghost || _invincible;
         }
     }
 
@@ -58,7 +65,6 @@ public class Drop : Area2D
         {
             Position = _pausePosition;
         }
-        ProcessPowerUps(delta);
     }
 
     public void ToggleDevMode()
@@ -67,25 +73,9 @@ public class Drop : Area2D
         _ghost = !_ghost;
     }
 
-    private void ProcessPowerUps(float delta)
-    {
-        if(_invincibleCounter > 0)
-        {
-            _invincibleCounter -= delta;
-        }
-        if(_ghostCounter > 0)
-        {
-            _ghostCounter -= delta;
-        }
-        if(_invincibleCounter <= 0 && _ghostCounter <= 0)
-        {
-            Modulate = BasicModulate;
-            CurrentModulate = BasicModulate;
-        }
-    }
-
     private void Lose()
     {
+        Global.GameState = GameState.GameOver;
         if(Global.SaveFile.Contents.PlaySounds)
         {
             Global.SoundEffects.Play("GameOver").Connect("finished", this, nameof(OnGameOverSoundFinished));
@@ -103,12 +93,15 @@ public class Drop : Area2D
     {
         _spriteTrail.On = false;
         _recovering = true;
-        ApplyBlinkEffect();
+        ApplyRecoveryBlinkEffect();
+        Particles2D n = Global.Instance("DropBurst") as Particles2D;
+        GetParent().AddChild(n);
+        n.Position = new Vector2(Position);
+        n.OneShot = true;
 
         Global.HUD.Score -= 1;
         _health -= _obstacleDamage;
         Scale = new Vector2(Scale.x - _scaleDelta, Scale.x - _scaleDelta);
-        Global.SoundEffects.Play("HitObstacle");
         if (_health <= 0)
         {
             Lose();
@@ -116,15 +109,31 @@ public class Drop : Area2D
         Global.HUD.SetHealth(_health);
     }
 
-    private void ApplyBlinkEffect()
+    private void ApplyRecoveryBlinkEffect()
     {
-        RemoveBlinkers();
         BlinkerEffect blink = Global.Instance("Effects/BlinkerEffect") as BlinkerEffect;
+        blink.TimeToLive = _recoveryDuration;
         blink.Period = 0.05f;
         blink.Die = true;
         blink.Simple = true;
-        blink.Connect("Died", this, nameof(OnBlinkerDied));
+        blink.Connect("Died", this, nameof(OnRecoveryBlinkerDied));
         AddChild(blink);
+    }
+
+    private void ApplyPowerUpEffect(Color c)
+    {
+        RemoveBlinkers();
+        Modulate = c;
+        _ghost = _invincible = false;
+        BlinkerEffect blink = Global.Instance("Effects/BlinkerEffect") as BlinkerEffect;
+        blink.TimeToLive = _powerUpDuration;
+        blink.Period = 0.1f;
+        blink.Die = true;
+        blink.Simple = true;
+        blink.Delay = _powerUpDuration - 3;
+        AddChild(blink);
+        blink.SetCustomBlink(BasicModulate);
+        blink.Connect("Died", this, nameof(OnPowerUpBlinkerDied));      
     }
 
     private void RemoveBlinkers()
@@ -146,20 +155,21 @@ public class Drop : Area2D
             Position = new Vector2(300, 50);
             if(IsInvincible == false)
             {
+                Global.SoundEffects.Play("HitGround");
                 Hurt();
             }
         }
         if(area is Obstacle)
         {
-            if(IsInvincible == false && _recovering == false)
+            if (!_recovering)
             {
-                Hurt();
                 (area as Obstacle).Fall();
-                Particles2D n = Global.Instance("DropBurst") as Particles2D;
-                GetParent().AddChild(n);
-                n.Position = new Vector2(Position);
-                n.OneShot = true;
+                Global.SoundEffects.Play("HitObstacle");
             }
+            if (IsInvincible == false && _recovering == false)
+            {
+                Hurt();               
+            }      
         }
         if(area is Platform && IsGhost == false)
         {
@@ -169,33 +179,12 @@ public class Drop : Area2D
         }
         if(area is Portal)
         {
-            Scale = _originalScale;
-            _health = 1;
+            Global.HUD.Score += 25;
             (area as Portal).Teleport();
         }
         if(area is PowerUp)
         {
-            Global.SoundEffects.Play("PowerUp");
-            PowerUp p = area as PowerUp;
-            switch (p.Type)
-            {
-                case PowerUpType.Health:
-                    _health = 1;
-                    Global.HUD.SetHealth(_health);
-                    break;
-                case PowerUpType.Ghost:
-                    Modulate = p.Modulate;
-                    _ghostCounter = _powerUpDuration;
-                    _invincibleCounter = 0;
-                    break;
-                case PowerUpType.Invincibility:
-                    Modulate = p.Modulate;
-                    _ghostCounter = 0;
-                    _invincibleCounter = _powerUpDuration;
-                    break;
-            }
-            CurrentModulate = Modulate;          
-            p.QueueFree();
+            HandleCollision_PowerUp(area as PowerUp);
         }
     }
 
@@ -205,6 +194,29 @@ public class Drop : Area2D
         {
             (area as Platform).UnImpact();
         }
+    }
+
+    private void HandleCollision_PowerUp(PowerUp p)
+    {
+        Global.SoundEffects.Play("PowerUp");
+        _recovering = false;
+        switch (p.Type)
+        {
+            case PowerUpType.Health:
+                _health = 1;
+                Scale = _originalScale;
+                Global.HUD.SetHealth(_health);
+                break;
+            case PowerUpType.Ghost:
+                ApplyPowerUpEffect(p.Modulate);
+                _ghost = true;
+                break;
+            case PowerUpType.Invincibility:
+                ApplyPowerUpEffect(p.Modulate);
+                _invincible = true;
+                break;
+        }
+        p.QueueFree();
     }
 
     private void OnTeleportStarted()
@@ -221,12 +233,27 @@ public class Drop : Area2D
         Visible = true;
     }
 
-    private void OnBlinkerDied()
+    private void OnRecoveryBlinkerDied(BlinkerEffect blinker)
     {
-        _recovering = false;
-        _spriteTrail.On = true;
-        _lastBlinker = null;
-        Modulate = new Color(1, 1, 1, 1);
+        if(blinker.IsInsideTree())
+        {
+            _recovering = false;
+            _spriteTrail.On = true;
+            _lastBlinker = null;
+            if(IsPoweredUp == false)
+            {
+                Modulate = BasicModulate;
+            }          
+        }
+    }
+
+    private void OnPowerUpBlinkerDied(BlinkerEffect blinker)
+    {
+        if (blinker.IsInsideTree())
+        {
+            _ghost = _invincible = false;
+            Modulate = BasicModulate;
+        }
     }
 
     private void OnGameOverSoundFinished()

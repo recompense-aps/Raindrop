@@ -41,6 +41,7 @@ public class Portal : Area2D
     {
         Visible = false;
         GetTree().CallGroup("obstacles", "queue_free");
+        GetTree().CallGroup("powerups", "queue_free");
         Global.SoundEffects.Play("Teleport");
 
         TeleportCover teleportTransition = GetParent().FindNode("TeleportCover") as TeleportCover;
@@ -54,6 +55,7 @@ public class Portal : Area2D
     {
         GetParent().EmitSignal("TeleportFinished");
         GetTree().CallGroup("obstacles", "queue_free");
+        GetTree().CallGroup("powerups", "queue_free");
         Global.ChangeLocation(_destination, GetParent());
         QueueFree();
         PortalIsCurrentlySpawned = false;

@@ -17,7 +17,7 @@ _global_script_class_icons={
 
 config/name="RainDrop"
 run/main_scene="res://MainScene.tscn"
-boot_splash/image="res://Graphics/RMV STUDIOS Logo.png"
+boot_splash/image="res://Graphics/rmv-studios-logo.png"
 boot_splash/bg_color=Color( 1, 1, 1, 1 )
 config/icon="res://remv_croppped_icon_png.png"
 
@@ -71,6 +71,16 @@ pause={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777221,"unicode":0,"echo":false,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777222,"unicode":0,"echo":false,"script":null)
+ ]
+}
+dev_powerup={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":80,"unicode":0,"echo":false,"script":null)
+ ]
+}
+dev_obstacle={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":79,"unicode":0,"echo":false,"script":null)
  ]
 }
 

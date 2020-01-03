@@ -19,26 +19,31 @@ margin_right = 602.0
 margin_bottom = 62.0
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScoreContainer"]
-margin_left = 258.0
-margin_right = 344.0
-margin_bottom = 44.0
+[node name="VBoxContainer" type="HBoxContainer" parent="ScoreContainer"]
+editor/display_folded = true
+margin_left = 63.0
+margin_right = 538.0
+margin_bottom = 40.0
+custom_constants/separation = 250
 
 [node name="ScoreText" type="Label" parent="ScoreContainer/VBoxContainer"]
-margin_right = 86.0
-margin_bottom = 20.0
+margin_top = 5.0
+margin_right = 96.0
+margin_bottom = 35.0
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Score:0"
 
 [node name="HealthText" type="Label" parent="ScoreContainer/VBoxContainer"]
-margin_top = 24.0
-margin_right = 86.0
-margin_bottom = 44.0
+margin_left = 346.0
+margin_top = 5.0
+margin_right = 475.0
+margin_bottom = 35.0
 custom_fonts/font = ExtResource( 2 )
 text = "HEALTH:100"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="."]
+editor/display_folded = true
 margin_left = 3.0
 margin_top = 55.0
 margin_right = 602.0
@@ -62,6 +67,7 @@ text = "SUPER DROP"
 [node name="BlinkerEffect" parent="HBoxContainer3" instance=ExtResource( 5 )]
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="."]
+editor/display_folded = true
 margin_top = 135.0
 margin_right = 600.0
 margin_bottom = 335.0

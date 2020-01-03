@@ -7,6 +7,7 @@
 [ext_resource path="res://Fonts/pixel_block.tres" type="DynamicFont" id=5]
 
 [node name="GameOver" type="Node2D"]
+z_index = 1000
 script = ExtResource( 1 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -122,21 +123,21 @@ alignment = 1
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer2"]
 margin_left = 51.0
 margin_right = 551.0
-margin_bottom = 136.0
+margin_bottom = 262.0
 rect_min_size = Vector2( 500, 0 )
 
 [node name="Label" type="Label" parent="HBoxContainer2/VBoxContainer"]
 margin_right = 500.0
-margin_bottom = 20.0
+margin_bottom = 30.0
 custom_fonts/font = ExtResource( 5 )
 custom_colors/font_color = Color( 0, 0.368627, 1, 1 )
 text = "DID YOU KNOW?"
 align = 1
 
 [node name="FactText" type="Label" parent="HBoxContainer2/VBoxContainer"]
-margin_top = 24.0
+margin_top = 34.0
 margin_right = 500.0
-margin_bottom = 136.0
+margin_bottom = 262.0
 custom_fonts/font = ExtResource( 5 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Rain occurs on other planets in our Solar System but it is different to the rain we experience here on Earth. For example, rain on Venus is made of sulfuric acid and due to the intense heat it evaporates before it even reaches the surface!"

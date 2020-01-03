@@ -4,16 +4,14 @@ using RainDrop;
 public class PowerUp : Area2D
 {
     private Vector2 _velocity = new Vector2(0, 5);
-    private Color _dropGreen = Color.Color8(0, 255, 0, 255);
-    private Color _dropRed = Color.Color8(255, 0, 0, 255);
-    private Color _dropBlue = Color.Color8(0, 0, 255, 255);
 
     public PowerUpType Type { get; set; }
 
     public override void _Ready()
     {
         PauseMode = PauseModeEnum.Stop;
-        Position = new Vector2(Global.GetRandomFloat(200,500), 0);
+        Position = new Vector2(Global.GetRandomFloat(200,500), -100);
+        AddToGroup("powerups");
     }
 
     public override void _Process(float delta)
@@ -27,13 +25,13 @@ public class PowerUp : Area2D
         switch(Type)
         {
             case PowerUpType.Ghost:
-                Modulate = _dropBlue;
+                Modulate = Global.Colors.Gray;
                 break;
             case PowerUpType.Health:
-                Modulate = _dropGreen;
+                Modulate = Global.Colors.Green;
                 break;
             case PowerUpType.Invincibility:
-                Modulate = _dropRed;
+                Modulate = Global.Colors.Red;
                 break;
         }
     }

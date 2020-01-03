@@ -21,10 +21,13 @@ public class Obstacle : Area2D
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
-        if(Position.y <= -32 || Position.y >= 1500)
+        if(Position.y <= -32 || Position.y >= 1500 || Position.x < -200 || Position.x > 1000)
         {
             QueueFree();
-            Global.HUD.Score += 1;
+            if(Global.GameState == GameState.Playing)
+            {
+                Global.HUD.Score += 1;
+            }
         }
     }
 

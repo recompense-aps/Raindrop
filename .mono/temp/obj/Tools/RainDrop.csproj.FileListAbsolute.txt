@@ -8,3 +8,13 @@ C:\dev\granite-vault\RainDrop\.mono\temp\bin\Tools\Newtonsoft.Json.xml
 C:\dev\granite-vault\RainDrop\.mono\temp\obj\Tools\RainDrop.csproj.CopyComplete
 C:\dev\granite-vault\RainDrop\.mono\temp\bin\Tools\Guero.dll
 C:\dev\granite-vault\RainDrop\.mono\temp\bin\Tools\Guero.pdb
+C:\dev\rmv-studios\RainDrop\.mono\temp\bin\Tools\RainDrop.dll
+C:\dev\rmv-studios\RainDrop\.mono\temp\bin\Tools\RainDrop.pdb
+C:\dev\rmv-studios\RainDrop\.mono\temp\bin\Tools\Guero.dll
+C:\dev\rmv-studios\RainDrop\.mono\temp\bin\Tools\Newtonsoft.Json.dll
+C:\dev\rmv-studios\RainDrop\.mono\temp\bin\Tools\Guero.pdb
+C:\dev\rmv-studios\RainDrop\.mono\temp\bin\Tools\Newtonsoft.Json.xml
+C:\dev\rmv-studios\RainDrop\.mono\temp\obj\Tools\RainDrop.csprojAssemblyReference.cache
+C:\dev\rmv-studios\RainDrop\.mono\temp\obj\Tools\RainDrop.csproj.CopyComplete
+C:\dev\rmv-studios\RainDrop\.mono\temp\obj\Tools\RainDrop.dll
+C:\dev\rmv-studios\RainDrop\.mono\temp\obj\Tools\RainDrop.pdb

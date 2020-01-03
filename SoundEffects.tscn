@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://SoundEffects.cs" type="Script" id=1]
 [ext_resource path="res://Audio/PP_Heavy_Impact_1_3.wav" type="AudioStream" id=2]
@@ -7,10 +7,11 @@
 [ext_resource path="res://Audio/Effects/PP_Skill_Unlock.wav" type="AudioStream" id=5]
 [ext_resource path="res://Audio/PP_UI_Swap.wav" type="AudioStream" id=6]
 [ext_resource path="res://Audio/8 bit Shiny Swell 01_3.wav" type="AudioStream" id=7]
-[ext_resource path="res://Audio/Effects/Pickup_Coin22.wav" type="AudioStream" id=8]
+[ext_resource path="res://Audio/Effects/Pickup_Coin25.wav" type="AudioStream" id=8]
 [ext_resource path="res://Audio/270329__littlerobotsoundfactory__jingle-lose-00.wav" type="AudioStream" id=9]
 [ext_resource path="res://Audio/Effects/PP_Cute_Impact_1_3.wav" type="AudioStream" id=10]
 [ext_resource path="res://Audio/Effects/Powerup75.wav" type="AudioStream" id=11]
+[ext_resource path="res://Audio/Effects/PP_Destroy_1_2.wav" type="AudioStream" id=12]
 
 [node name="SoundEffects" type="Node"]
 script = ExtResource( 1 )
@@ -44,3 +45,6 @@ stream = ExtResource( 10 )
 
 [node name="PowerUp" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
+
+[node name="HitGround" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )

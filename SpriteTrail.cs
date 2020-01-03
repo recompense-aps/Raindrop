@@ -1,5 +1,6 @@
 using Godot;
 using RainDrop;
+using System;
 
 public class SpriteTrail : Node
 {
@@ -31,7 +32,7 @@ public class SpriteTrail : Node
     {
         if(_spawnTimer >= 0 && On)
         {
-            TrailSprite s = new TrailSprite(3);
+            TrailSprite s = new TrailSprite(3, _parent);
             s.Texture = _texture;
             s.Position = new Vector2(_parent.Position);
             s.Scale = new Vector2(_parent.Scale);
@@ -49,20 +50,30 @@ class TrailSprite : Sprite
     private float _timeToLive;
     private float _alphaStep;
     private float _alpha = 150;
+    private CanvasItem _trailedNode;
     
-    public TrailSprite(float timeToLive)
+    public TrailSprite(float timeToLive, CanvasItem parent)
     {
         _timeToLive = timeToLive;
         _alphaStep = _alpha / timeToLive;
+        _trailedNode = parent;
+        _trailedNode.Connect("tree_exiting", this, nameof(OnTrailedNodeExitingTree));
     }
 
     public override void _Process(float delta)
     {
         _alpha -= _alphaStep;
-        Modulate = Color.Color8((byte)Modulate.r8, (byte)Modulate.g8, (byte)Modulate.b8, (byte)_alpha);
+        Modulate = Color.Color8((byte)_trailedNode.Modulate.r8, (byte)_trailedNode.Modulate.g8,
+        (byte)_trailedNode.Modulate.b8, (byte)_alpha);
+
         if(_alpha <= 0)
         {
             QueueFree();
         }
+    }
+
+    private void OnTrailedNodeExitingTree()
+    {
+        QueueFree();
     }
 }
