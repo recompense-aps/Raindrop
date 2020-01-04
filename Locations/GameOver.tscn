@@ -28,7 +28,7 @@ alignment = 1
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
 margin_left = 178.0
 margin_right = 421.0
-margin_bottom = 138.0
+margin_bottom = 172.0
 alignment = 1
 
 [node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
@@ -39,10 +39,19 @@ custom_colors/font_color = Color( 1, 0, 0, 1 )
 text = "GAME OVER"
 align = 1
 
-[node name="LabelButton" parent="HBoxContainer/VBoxContainer" instance=ExtResource( 3 )]
+[node name="LabelButton3" parent="HBoxContainer/VBoxContainer" instance=ExtResource( 3 )]
 margin_top = 74.0
 margin_right = 243.0
 margin_bottom = 104.0
+custom_fonts/font = ExtResource( 4 )
+text = "RESTART"
+align = 1
+BaseText = "RESTART"
+
+[node name="LabelButton" parent="HBoxContainer/VBoxContainer" instance=ExtResource( 3 )]
+margin_top = 108.0
+margin_right = 243.0
+margin_bottom = 138.0
 custom_fonts/font = ExtResource( 4 )
 text = "MENU"
 align = 1
@@ -50,9 +59,9 @@ SceneTarget = "res://MainScene.tscn"
 BaseText = "MENU"
 
 [node name="LabelButton2" parent="HBoxContainer/VBoxContainer" instance=ExtResource( 3 )]
-margin_top = 108.0
+margin_top = 142.0
 margin_right = 243.0
-margin_bottom = 138.0
+margin_bottom = 172.0
 custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "EXIT"
@@ -61,11 +70,13 @@ SceneTarget = "EXIT"
 BaseText = "EXIT"
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="."]
-editor/display_folded = true
-margin_top = 247.0
+margin_top = 276.0
 margin_right = 600.0
-margin_bottom = 307.0
+margin_bottom = 336.0
 alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label2" type="Label" parent="HBoxContainer3"]
 margin_left = 220.0
@@ -87,11 +98,13 @@ text = "score"
 align = 1
 
 [node name="HBoxContainer4" type="HBoxContainer" parent="."]
-editor/display_folded = true
 margin_top = 303.0
 margin_right = 600.0
 margin_bottom = 363.0
 alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label" type="Label" parent="HBoxContainer4"]
 margin_left = 163.0
@@ -113,7 +126,6 @@ text = "HIGH SCORE:"
 align = 1
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="."]
-editor/display_folded = true
 margin_left = -1.0
 margin_top = 414.0
 margin_right = 602.0
@@ -143,4 +155,5 @@ custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "Rain occurs on other planets in our Solar System but it is different to the rain we experience here on Earth. For example, rain on Venus is made of sulfuric acid and due to the intense heat it evaporates before it even reaches the surface!"
 align = 1
 autowrap = true
+[connection signal="Pressed" from="HBoxContainer/VBoxContainer/LabelButton3" to="." method="_on_LabelButton3_Pressed"]
 [connection signal="Pressed" from="HBoxContainer/VBoxContainer/LabelButton" to="." method="_on_LabelButton_Pressed"]

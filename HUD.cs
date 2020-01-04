@@ -5,9 +5,9 @@ public class HUD : CanvasLayer
 {
     Label _scoreText;
     Label _healthText;
+    Label _highScoreText;
     LabelButton _muteButton;
     private int _score = 0;
-    private bool _scoring = false;
     private float _powerUpTimer = 0;
 
     [Signal]
@@ -24,11 +24,11 @@ public class HUD : CanvasLayer
             float prevScore = _score;
             _score = value;
             float delta = _score - prevScore;
-            if (_score < 0 || _scoring == false)
+            if (_score < 0 || Global.GameState != GameState.Playing)
             {
                 _score = 0;
             }
-            else
+            else if(delta != 0)
             {
                 ScoreChangeEffect ef = Global.Instance("Effects/ScoreChangeEffect") as ScoreChangeEffect;
                 _scoreText.AddChild(ef);
@@ -53,12 +53,17 @@ public class HUD : CanvasLayer
     public override void _Ready()
     {
         Global.HUD = this;
+        Global.PreviousHighScore = Global.SaveFile.Contents.Score;
         PauseMode = PauseModeEnum.Process;
         _scoreText = FindNode("ScoreText") as Label;
         _healthText = FindNode("HealthText") as Label;
+        _highScoreText = FindNode("HighScoreText") as Label;
         _muteButton = FindNode("MuteButton") as LabelButton;
+        _highScoreText.Text = Global.PreviousHighScore.ToString();
         _scoreText.Visible = false;
         _healthText.Visible = false;
+        _highScoreText.Visible = false;
+
         if(Global.SaveFile.Contents.PlaySounds == true)
         {
             _muteButton.Text = _muteButton.BaseText = "MUTE";
@@ -72,13 +77,18 @@ public class HUD : CanvasLayer
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
+        if(_score > Global.PreviousHighScore)
+        {
+            _highScoreText.Text = _score.ToString();
+            Global.PreviousHighScore = _score;
+            Global.SaveFile.Contents.Score = _score;
+        }
     }
 
     public void Reset()
     {
-        Show();
+        ShowHUD();
         Score = 0;
-        _scoring = false;
     }
 
     public void SetHealth(float health)
@@ -87,35 +97,30 @@ public class HUD : CanvasLayer
         float prev = float.Parse(_healthText.Text.Split(":")[1]);
         float n = health * 100;
         _healthText.Text = "Health:" + n;
-        ScoreChangeEffect ef = Global.Instance("Effects/ScoreChangeEffect") as ScoreChangeEffect;
-        _healthText.AddChild(ef);
-        if (n < prev)
+        if(n-prev != 0)
         {
-            ef.SetColor(Color.ColorN("red"));
-            ef.SetText((n-prev).ToString());
+            ScoreChangeEffect ef = Global.Instance("Effects/ScoreChangeEffect") as ScoreChangeEffect;
+            _healthText.AddChild(ef);
+            if (n < prev)
+            {
+                ef.SetColor(Color.ColorN("red"));
+                ef.SetText((n - prev).ToString());
+            }
+            else
+            {
+                ef.SetColor(Color.ColorN("green"));
+                ef.SetText((n - prev).ToString());
+            }
         }
-        else
-        {
-            ef.SetColor(Color.ColorN("green"));
-            ef.SetText((n-prev).ToString());
-        }
-    }
-
-    public void SetScoring(bool scoring)
-    {
-        _scoring = scoring;
     }
 
     private void _on_StartButton_Pressed(object labelButton)
     {
-        EmitSignal(nameof(StartButtonPressed));
-        _scoring = true;
-        Hide();
-        GetTree().CallGroup("obstacles", "queue_free");
-        Global.SoundEffects.Play("Ready");
-        Global.GameState = GameState.Playing;
+        Global.StartGame(this);
+        HideHUD();
         _scoreText.Visible = true;
         _healthText.Visible = true;
+        _highScoreText.Visible = true;
     }
 
     private void _on_MuteButton_Pressed(object labelButton)
@@ -133,14 +138,15 @@ public class HUD : CanvasLayer
         Global.SaveFile.Save();
     }
 
-    private void Hide()
+    public void HideHUD()
     {
         foreach (Node n in GetChildren())
         {
             if(n is Control)
             {
                 Control c = n as Control;
-                if(c.Name != "ScoreContainer" && c.Name != "ScoreText" && c.Name != "HealthText")
+                if(c.Name != "ScoreContainer" && c.Name != "ScoreText" && c.Name != "HighScoreContainer"
+                   && c.Name != "HealthText" && c.Name != "HighScoreText")
                 {
                     (n as CanvasItem).Visible = false;
                 }
@@ -148,7 +154,7 @@ public class HUD : CanvasLayer
         }
     }
 
-    private void Show()
+    public void ShowHUD()
     {
         foreach (Node n in GetChildren())
         {

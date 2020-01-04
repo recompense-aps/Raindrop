@@ -7,7 +7,7 @@ public class Drop : Area2D
     public delegate void HitPlatform(Platform p);
 
     public float Speed = 1;
-    private float _powerUpDuration = 20;
+    private float _powerUpDuration = 12;
     private float _recoveryDuration = 2.5f;
     private float _health = 1;
     private float _scaleDelta = 0.1f;
@@ -19,7 +19,6 @@ public class Drop : Area2D
     private bool _ghost = false;
     private bool _recovering = false;
     private SpriteTrail _spriteTrail;
-    private BlinkerEffect _lastBlinker;
     private Color BasicModulate = Color.Color8(255, 255, 255, 255);
     private Color CurrentModulate;
 
@@ -84,7 +83,6 @@ public class Drop : Area2D
         {
             OnGameOverSoundFinished();
         }
-        Global.FinalScore = Global.HUD.Score;
         Portal.PortalIsCurrentlySpawned = false;
         GetTree().Paused = true;
     }
@@ -99,7 +97,6 @@ public class Drop : Area2D
         n.Position = new Vector2(Position);
         n.OneShot = true;
 
-        Global.HUD.Score -= 1;
         _health -= _obstacleDamage;
         Scale = new Vector2(Scale.x - _scaleDelta, Scale.x - _scaleDelta);
         if (_health <= 0)
@@ -239,7 +236,6 @@ public class Drop : Area2D
         {
             _recovering = false;
             _spriteTrail.On = true;
-            _lastBlinker = null;
             if(IsPoweredUp == false)
             {
                 Modulate = BasicModulate;
@@ -258,10 +254,9 @@ public class Drop : Area2D
 
     private void OnGameOverSoundFinished()
     {
+        QueueFree();
         Global.GameOver.ApplyValues();
-        Global.GameOver.Show();
-        QueueFree();        
-        GetTree().Paused = false;
-        Global.HUD.QueueFree();       
+        Global.GameOver.Show();        
+        GetTree().Paused = false;       
     }
 }

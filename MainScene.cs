@@ -10,55 +10,44 @@ public class MainScene : Node2D
     public delegate void TeleportFinished();
     [Signal]
     public delegate void Message(string message);
-    private PackedScene _dropScene;
-    private Drop _drop;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        OS.WindowFullscreen = true;
         PauseMode = PauseModeEnum.Process;
-        FindNode("HUD").Connect("StartButtonPressed", this, nameof(OnStartButtonPressed));
-        _dropScene = GD.Load<PackedScene>("res://Drop.tscn");
-        Global.ChangeLocation("City", this);
-        Global.PreviousHighScore = Global.SaveFile.Contents.Score;
-        Global.GameState = GameState.MainMenu;
-
-        Playlist pl = new Playlist();
-        AddChild(pl);
-        pl.Load(GetSongs(), "Audio/Music/");
-        pl.Shuffle();
-        pl.Start();
+        Global.Playlist = new Playlist();
+        AddChild(Global.Playlist);
+        Global.Playlist.Load(GetSongs(), "Audio/Music/");
+        Global.Playlist.Shuffle();
+        Global.Playlist.Start();
 
         Global.LoadSceneCache(new List<string>()
         {
             "Locations/GameOver",
+            "Locations/City",
+            "Locations/Desert",
+            "Locations/Ocean",
             "Effects/BlinkerEffect",
             "Effects/ScoreChangeEffect",
             "DropBurst",
             "Obstacle",
             "Portal",
-            "PowerUp"
+            "PowerUp",
+            "Drop"
         });
+        Global.MainScene = this;
+        Global.ChangeLocation("City", this);
+        Global.GameState = GameState.MainMenu;
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
-        if(Input.IsActionJustPressed("ui_cancel") && _drop != null)
-        {
-            _drop.ToggleDevMode();
-        }
         if(Input.IsActionJustPressed("pause"))
         {
             GetTree().Paused = !GetTree().Paused;
         }
-    }
-
-    private void OnStartButtonPressed()
-    {
-        _drop = _dropScene.Instance() as Drop;
-        _drop.Position = new Vector2(300, 50);
-        AddChild(_drop);
     }
 
     private List<string> GetSongs()

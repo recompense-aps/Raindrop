@@ -28,4 +28,17 @@ public class SoundEffects : Node
         }
         return p;      
     }
+
+    public void AdjustEffectsVolume(float delta)
+    {
+        foreach(Node n in GetChildren())
+        {
+            AudioStreamPlayer p;
+            if (n is AudioStreamPlayer)
+            {
+                p = n as AudioStreamPlayer;
+                p.VolumeDb += delta;
+            }
+        }
+    }
 }

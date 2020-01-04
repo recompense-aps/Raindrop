@@ -48,10 +48,16 @@ public class Playlist : Node
     public void Start()
     {
         _current = _songs[0];
+        _current.VolumeDb = 0;
         if (Global.SaveFile.Contents.PlaySounds == false) return;
 
         _current.Play();
         _current.Connect("finished", this, nameof(OnFinished));
+    }
+
+    public void Mute()
+    {
+        _current.VolumeDb = -1000000;
     }
 
     private void OnFinished()

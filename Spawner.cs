@@ -17,8 +17,8 @@ public class Spawner : Node2D
 
     private static int _scoreToSpawnPortal = 20;
     private static int _scoreToSpawnPortalIncrement = 20;
-    private static int _scoreToPowerUp = 5;
-    private static int _scoreToPowerUpIncrement = 5;
+    private static int _scoreToPowerUp = 10;
+    private static int _scoreToPowerUpIncrement = 10;
 
     private float _elapsed;
     private PickBag<string> _obstaclePickBag;
@@ -71,18 +71,19 @@ public class Spawner : Node2D
 
         if (Global.HUD.Score >= _scoreToSpawnPortal)
         {
-            _scoreToSpawnPortal += _scoreToSpawnPortalIncrement;
+            _scoreToSpawnPortal = Global.HUD.Score + _scoreToSpawnPortalIncrement;
             SpawnPortal();
         }
         if(Global.HUD.Score >= _scoreToPowerUp && SpawnPowerUps)
         {
-            _scoreToPowerUp += _scoreToPowerUpIncrement;
+            _scoreToPowerUp = Global.HUD.Score + _scoreToPowerUpIncrement;
             SpawnPowerUp();
         }
     }
 
     public void ChangeSpawnLocation(string location)
     {
+        _elapsed = 0;
         FillObstaclePickBag(location);
     }
     

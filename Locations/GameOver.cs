@@ -17,7 +17,7 @@ public class GameOver : Node2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        Global.GameOver = this;
+        Global.GameOver = this;       
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -28,18 +28,13 @@ public class GameOver : Node2D
 
     public void ApplyValues()
     {
+        Global.Playlist.Mute();
         RandomNumberGenerator g = new RandomNumberGenerator();
         PauseMode = PauseModeEnum.Process;
         g.Randomize();
         string fact = _facts[g.RandiRange(0, _facts.Length - 1)];
-        if (Global.HUD.Score > Global.PreviousHighScore)
-        {
-            Global.PreviousHighScore = Global.HUD.Score;
-            Global.SaveFile.Contents.Score = Global.PreviousHighScore;
-            //new high score!
-        }
         (FindNode("FactText") as Label).Text = fact;
-        (FindNode("FinalScoreText") as Label).Text = Global.FinalScore.ToString();
+        (FindNode("FinalScoreText") as Label).Text = Global.HUD.Score.ToString();
         (FindNode("HighScoreText") as Label).Text = Global.SaveFile.Contents.Score.ToString();
         Global.SaveFile.Save();
     }
@@ -48,5 +43,12 @@ public class GameOver : Node2D
     {
         GetTree().Paused = false;
     }
-}
 
+    private void _on_LabelButton3_Pressed(object labelButton)
+    {
+        Hide();
+        Global.Playlist.Start();
+        Global.ChangeLocation("City", this);
+        Global.StartGame(this);
+    }
+}

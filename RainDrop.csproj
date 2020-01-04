@@ -74,9 +74,7 @@
     <Compile Include="Effects\StretchEffect.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="HUD.cs" />
-    <Compile Include="Locations\Environment\OceanWave.cs" />
     <Compile Include="Locations\GameOver.cs" />
-    <Compile Include="Locations\Ocean.cs" />
     <Compile Include="MainScene.cs" />
     <Compile Include="Obstacle.cs" />
     <Compile Include="Platform.cs" />
@@ -92,6 +90,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Locations\Environment\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

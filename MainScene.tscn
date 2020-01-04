@@ -55,6 +55,9 @@ margin_right = 600.0
 margin_bottom = 800.0
 texture = ExtResource( 7 )
 expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="GameOver" parent="." instance=ExtResource( 8 )]
 visible = false

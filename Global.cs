@@ -12,6 +12,8 @@ namespace RainDrop
         public static Drop Drop { get; set; }
         public static GameOver GameOver { get; set; }
         public static SoundEffects SoundEffects {get; set;}
+        public static MainScene MainScene { get; set; }
+        public static Playlist Playlist { get; set; }
         public static string CurrentLocation { get; set; }
         public static GameState GameState { get; set; }
         public static string NextLocation
@@ -21,7 +23,7 @@ namespace RainDrop
                 int index = _locations.IndexOf(CurrentLocation);
                 if(index < 0 )
                 {
-                    throw new System.Exception($"Location: {CurrentLocation} is invalid!");
+                    throw new Exception($"Location: {CurrentLocation} is invalid!");
                 }
                 if(index + 1 == _locations.Count)
                 {
@@ -30,7 +32,6 @@ namespace RainDrop
                 return _locations[index+1];
             }
         }
-        public static int FinalScore = 0;
         public static int PreviousHighScore = 0;
         public static GlobalSettings Settings = new GlobalSettings();
         public static GlobalColors Colors = new GlobalColors();
@@ -40,6 +41,7 @@ namespace RainDrop
         private static SaveFile<SaveFileContents> _saveFile;
         private static Dictionary<string, PackedScene> _sceneCache;
         private static RandomNumberGenerator _randomGen = new RandomNumberGenerator();
+        private static Node _anchor;
 
         public static SaveFile<SaveFileContents> SaveFile
         {
@@ -59,6 +61,25 @@ namespace RainDrop
             {
                 return _sceneCache;
             }
+        }
+
+        public static void StartGame(Node context)
+        {
+            context.GetTree().CallGroup("obstacles", "queue_free");
+            context.GetTree().Paused = false;
+            SoundEffects.Play("Ready");
+            GameState = GameState.Playing;
+            CreateDrop(context);
+            HUD.Score = 0;
+            HUD.SetHealth(1);
+            HUD.HideHUD();
+        }
+
+        public static void CreateDrop(Node context)
+        {
+            Drop drop = Instance("Drop") as Drop;
+            drop.Position = new Vector2(300, 50);
+            MainScene.AddChild(drop);
         }
 
         public static float GetRandomFloat(float from, float to)
@@ -90,7 +111,7 @@ namespace RainDrop
 
                 if(ps == null)
                 {
-                    Global.Log("Unable to load: " + path);
+                    Log("Unable to load: " + path);
                 }
             }
         }
@@ -102,18 +123,26 @@ namespace RainDrop
 
         public static void ChangeLocation(string location, Node context)
         {
-            PackedScene scene = GD.Load<PackedScene>("res://Locations/" + location + ".tscn");
-            Node anchor = context.FindNode("LocationAnchor");
-            if(anchor == null)
+            Node anchor;
+            if (_anchor == null)
             {
-                anchor = context.GetTree().Root.FindNode("LocationAnchor");
-                if(anchor == null)
+                anchor = context.FindNode("LocationAnchor");
+                if (anchor == null)
                 {
-                    throw new System.Exception("Unable to find anchor!");
-                }               
+                    anchor = context.GetTree().Root.FindNode("LocationAnchor");
+                    if (anchor == null)
+                    {
+                        throw new Exception("Unable to find anchor!");
+                    }
+                }
+                _anchor = anchor;
+            }
+            else
+            {
+                anchor = _anchor;
             }
             anchor.RemoveChild(anchor.GetChild(0));
-            anchor.AddChild(scene.Instance());
+            anchor.AddChild(Instance("Locations/" + location));
             CurrentLocation = location;
 
             foreach(Node child in context.GetChildren())
