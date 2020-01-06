@@ -16,15 +16,6 @@ public class Playlist : Node
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
-        if(Global.SaveFile.Contents.PlaySounds == false && _current.Playing)
-        {
-            _current.Playing = false;
-        }
-        else if(Global.SaveFile.Contents.PlaySounds && _current.Playing == false)
-        {
-            _current.Playing = true;
-            OnFinished();
-        }
     }
 
     public void Load(List<string> songs, string root)
@@ -58,6 +49,19 @@ public class Playlist : Node
     public void Mute()
     {
         _current.VolumeDb = -1000000;
+    }
+
+    public void UnMute()
+    {
+        if(_current != null)
+        {
+            _current.VolumeDb = 0;
+            _current.Playing = true;
+        }
+        else
+        {
+            Start();
+        }
     }
 
     private void OnFinished()

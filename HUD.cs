@@ -129,14 +129,29 @@ public class HUD : CanvasLayer
         {
             Global.SaveFile.Contents.PlaySounds = false;
             _muteButton.Text = _muteButton.BaseText = "UNMUTE";
+            Global.Playlist.Mute();
         }
         else
         {
             Global.SaveFile.Contents.PlaySounds = true;
             _muteButton.Text = _muteButton.BaseText = "MUTE";
+            Global.Playlist.UnMute();
         }
         Global.SaveFile.Save();
     }
+
+    private void _on_LabelButton_Pressed(object labelButton)
+    {
+        Global.MainScene.DisplayMenu("Locations/Tutorial");
+        CompleteHideHUD();
+    }
+
+    private void _on_CreditsButton_Pressed(object labelButton)
+    {
+        Global.MainScene.DisplayMenu("Locations/Credits");
+        CompleteHideHUD();
+    }
+
 
     public void HideHUD()
     {
@@ -161,6 +176,17 @@ public class HUD : CanvasLayer
             if (n is Control)
             {
                 (n as CanvasItem).Visible = true;
+            }
+        }
+    }
+
+    public void CompleteHideHUD()
+    {
+        foreach (Node n in GetChildren())
+        {
+            if (n is CanvasItem)
+            {
+                (n as CanvasItem).Visible = false;
             }
         }
     }

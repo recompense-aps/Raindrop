@@ -74,7 +74,9 @@
     <Compile Include="Effects\StretchEffect.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="HUD.cs" />
+    <Compile Include="Locations\Credits.cs" />
     <Compile Include="Locations\GameOver.cs" />
+    <Compile Include="Locations\Tutorial.cs" />
     <Compile Include="MainScene.cs" />
     <Compile Include="Obstacle.cs" />
     <Compile Include="Platform.cs" />

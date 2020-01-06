@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/remv_croppped_icon_png.png-9f1e2966f22bcf58777a8ccbc50dc75c.stex"
+path="res://.import/rmv_croppped_icon_png.png-dbdd1d03be5849693c2e48e520ffe0fb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://remv_croppped_icon_png.png"
-dest_files=[ "res://.import/remv_croppped_icon_png.png-9f1e2966f22bcf58777a8ccbc50dc75c.stex" ]
+source_file="res://rmv_croppped_icon_png.png"
+dest_files=[ "res://.import/rmv_croppped_icon_png.png-dbdd1d03be5849693c2e48e520ffe0fb.stex" ]
 
 [params]
 

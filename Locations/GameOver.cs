@@ -28,7 +28,6 @@ public class GameOver : Node2D
 
     public void ApplyValues()
     {
-        Global.Playlist.Mute();
         RandomNumberGenerator g = new RandomNumberGenerator();
         PauseMode = PauseModeEnum.Process;
         g.Randomize();

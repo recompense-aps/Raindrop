@@ -15,4 +15,5 @@ C:\dev\rmv-studios\RainDrop\.mono\temp\bin\Debug\Guero.pdb
 C:\dev\rmv-studios\RainDrop\.mono\temp\bin\Debug\Newtonsoft.Json.xml
 C:\dev\rmv-studios\RainDrop\.mono\temp\obj\Debug\RainDrop.dll
 C:\dev\rmv-studios\RainDrop\.mono\temp\obj\Debug\RainDrop.pdb
-C:\dev\rmv-studios\RainDrop\.mono\temp\obj\Debug\RainDrop.csprojResolveAssemblyReference.cache
+C:\dev\rmv-studios\RainDrop\.mono\temp\obj\Debug\RainDrop.csprojAssemblyReference.cache
+C:\dev\rmv-studios\RainDrop\.mono\temp\obj\Debug\RainDrop.csproj.CopyComplete

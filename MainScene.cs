@@ -28,6 +28,8 @@ public class MainScene : Node2D
             "Locations/City",
             "Locations/Desert",
             "Locations/Ocean",
+            "Locations/Tutorial",
+            "Locations/Credits",
             "Effects/BlinkerEffect",
             "Effects/ScoreChangeEffect",
             "DropBurst",
@@ -48,6 +50,11 @@ public class MainScene : Node2D
         {
             GetTree().Paused = !GetTree().Paused;
         }
+    }
+
+    public void DisplayMenu(string locationPath)
+    {
+        FindNode("Menus").AddChild(Global.Instance(locationPath));
     }
 
     private List<string> GetSongs()

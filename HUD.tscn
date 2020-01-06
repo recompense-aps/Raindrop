@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://HUD.cs" type="Script" id=1]
 [ext_resource path="res://Fonts/pixel_block.tres" type="DynamicFont" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://Effects/BlinkerEffect.tscn" type="PackedScene" id=5]
 [ext_resource path="res://UI/LabelButton.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Fonts/min-pixel-24.tres" type="DynamicFont" id=7]
-[ext_resource path="res://Graphics/RealRaindrop.png" type="Texture" id=8]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -108,7 +107,7 @@ margin_right = 102.0
 margin_bottom = 116.0
 custom_fonts/font = ExtResource( 7 )
 text = "TUTORIAL"
-SceneTarget = "res://Locations/Tutorial.tscn"
+SceneTarget = "Null"
 BaseText = "TUTORIAL"
 
 [node name="CreditsButton" parent="HBoxContainer2/VBoxContainer" instance=ExtResource( 6 )]
@@ -117,7 +116,6 @@ margin_right = 102.0
 margin_bottom = 150.0
 custom_fonts/font = ExtResource( 7 )
 text = "CREDITS"
-SceneTarget = "res://Locations/Credits.tscn"
 BaseText = "CREDITS"
 
 [node name="LabelButton2" parent="HBoxContainer2/VBoxContainer" instance=ExtResource( 6 )]
@@ -129,29 +127,6 @@ text = "EXIT"
 align = 1
 SceneTarget = "EXIT"
 BaseText = "EXIT"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-visible = false
-margin_left = 23.0
-margin_top = 19.0
-margin_right = 624.0
-margin_bottom = 59.0
-
-[node name="Node2D" type="Node2D" parent="HBoxContainer"]
-
-[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Node2D"]
-modulate = Color( 0.0313726, 1, 0, 1 )
-margin_right = 32.0
-margin_bottom = 45.0
-texture = ExtResource( 8 )
-
-[node name="Label" type="Label" parent="HBoxContainer/Node2D"]
-margin_left = -7.87598
-margin_top = 13.1468
-margin_right = 48.124
-margin_bottom = 33.1468
-custom_fonts/font = ExtResource( 2 )
-text = "HEALTH"
 
 [node name="HighScoreContainer" type="HBoxContainer" parent="."]
 margin_top = 22.0
@@ -171,3 +146,5 @@ custom_colors/font_color = Color( 1, 0, 0, 1 )
 text = "HIGHSCORE"
 [connection signal="Pressed" from="HBoxContainer2/VBoxContainer/StartButton" to="." method="_on_StartButton_Pressed"]
 [connection signal="Pressed" from="HBoxContainer2/VBoxContainer/MuteButton" to="." method="_on_MuteButton_Pressed"]
+[connection signal="Pressed" from="HBoxContainer2/VBoxContainer/LabelButton" to="." method="_on_LabelButton_Pressed"]
+[connection signal="Pressed" from="HBoxContainer2/VBoxContainer/CreditsButton" to="." method="_on_CreditsButton_Pressed"]

@@ -1,16 +1,22 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Fonts/fipps-28.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Fonts/min-pixel-24.tres" type="DynamicFont" id=2]
 [ext_resource path="res://Graphics/rmv-studios-logo-inverted.png" type="Texture" id=3]
 [ext_resource path="res://UI/LabelButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Locations/Credits.cs" type="Script" id=5]
 
-[node name="Credits" type="Node2D"]
+[node name="Credits" type="CanvasLayer"]
+script = ExtResource( 5 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
+margin_top = -63.0
 margin_right = 607.0
 margin_bottom = 802.0
 color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_top = 62.0
@@ -152,5 +158,5 @@ margin_bottom = 55.0
 custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "BACK"
-SceneTarget = "res://MainScene.tscn"
 BaseText = "BACK"
+[connection signal="Pressed" from="LabelButton" to="." method="_on_LabelButton_Pressed"]

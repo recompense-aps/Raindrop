@@ -9,6 +9,8 @@ public class Spawner : Node2D
     [Export]
     public float SpawnInterval = 1;
     [Export]
+    public float PowerUpSpawnInterval = 25;
+    [Export]
     public bool RandomizeInterval = true;
     [Export]
     public bool On = true;
@@ -21,6 +23,7 @@ public class Spawner : Node2D
     private static int _scoreToPowerUpIncrement = 10;
 
     private float _elapsed;
+    private float _elapsedSinceLastPowerUp;
     private PickBag<string> _obstaclePickBag;
     private PickBag<float> _obstacleSizes;
     private PickBag<PowerUpType> _powerUpPickBag;
@@ -45,6 +48,7 @@ public class Spawner : Node2D
     public override void _Process(float delta)
     {
         _elapsed += delta;
+        _elapsedSinceLastPowerUp += delta;
         if(_elapsed >= SpawnInterval)
         {
             SpawnObstacle();
@@ -74,7 +78,7 @@ public class Spawner : Node2D
             _scoreToSpawnPortal = Global.HUD.Score + _scoreToSpawnPortalIncrement;
             SpawnPortal();
         }
-        if(Global.HUD.Score >= _scoreToPowerUp && SpawnPowerUps)
+        if(Global.HUD.Score >= _scoreToPowerUp && SpawnPowerUps && _elapsedSinceLastPowerUp > PowerUpSpawnInterval)
         {
             _scoreToPowerUp = Global.HUD.Score + _scoreToPowerUpIncrement;
             SpawnPowerUp();
@@ -114,6 +118,7 @@ public class Spawner : Node2D
             PowerUp pu = Global.Instance("PowerUp") as PowerUp;
             GetParent().AddChild(pu);
             pu.Spawn(_powerUpPickBag.Pick());
+            _elapsedSinceLastPowerUp = 0;
         }
     }
 

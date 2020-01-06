@@ -46,7 +46,6 @@ public class Drop : Area2D
         }
     }
 
-    // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         Global.Drop = this;
@@ -77,6 +76,7 @@ public class Drop : Area2D
         Global.GameState = GameState.GameOver;
         if(Global.SaveFile.Contents.PlaySounds)
         {
+            Global.Playlist.Mute();
             Global.SoundEffects.Play("GameOver").Connect("finished", this, nameof(OnGameOverSoundFinished));
         }
         else

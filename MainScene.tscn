@@ -61,3 +61,5 @@ __meta__ = {
 
 [node name="GameOver" parent="." instance=ExtResource( 8 )]
 visible = false
+
+[node name="Menus" type="Node2D" parent="."]
