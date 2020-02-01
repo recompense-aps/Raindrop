@@ -87,7 +87,7 @@ public class Drop : Area2D
         GetTree().Paused = true;
     }
 
-    private void Hurt()
+    private void Hurt(float amountDelta = 0)
     {
         _spriteTrail.On = false;
         _recovering = true;
@@ -97,7 +97,7 @@ public class Drop : Area2D
         n.Position = new Vector2(Position);
         n.OneShot = true;
 
-        _health -= _obstacleDamage;
+        _health -= _obstacleDamage + amountDelta;
         Scale = new Vector2(Scale.x - _scaleDelta, Scale.x - _scaleDelta);
         if (_health <= 0)
         {
@@ -153,7 +153,7 @@ public class Drop : Area2D
             if(IsInvincible == false)
             {
                 Global.SoundEffects.Play("HitGround");
-                Hurt();
+                Hurt(0.75f);
             }
         }
         if(area is Obstacle)
