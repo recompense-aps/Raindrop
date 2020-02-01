@@ -14,7 +14,7 @@ public class MainScene : Node2D
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
-        OS.WindowFullscreen = true;
+        //OS.WindowFullscreen = true;
         PauseMode = PauseModeEnum.Process;
         Global.Playlist = new Playlist();
         AddChild(Global.Playlist);
