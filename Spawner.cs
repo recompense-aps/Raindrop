@@ -138,7 +138,6 @@ public class Spawner : Node2D
     private void FillObstaclePickBag(string location)
     {
         _obstaclePickBag = new PickBag<string>();
-        //FillBagTest();return;
         switch(location)
         {
             case "Desert":
@@ -172,6 +171,6 @@ public class Spawner : Node2D
 
     private void FillBagTest()
     {
-        _obstaclePickBag.Add(100, "speedboat");
+        _obstaclePickBag.Add(100, "superhero");
     }
 }

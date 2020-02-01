@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using RainDrop;
 
 public class BasicController : Node
 {
@@ -16,6 +17,6 @@ public class BasicController : Node
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
-        _obstacle.Position = new Vector2(_obstacle.Position.x, _obstacle.Position.y - Speed);
+        _obstacle.Position = new Vector2(_obstacle.Position.x, _obstacle.Position.y - Speed * Global.GetTimeDelta());
     }
 }

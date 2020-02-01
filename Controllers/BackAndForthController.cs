@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using RainDrop;
 
 public class BackAndForthController : Node
 {
@@ -23,7 +24,7 @@ public class BackAndForthController : Node
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
-        _obstacle.Position = new Vector2(_obstacle.Position.x + Speed * directionX, _obstacle.Position.y + Speed * directionY);
+        _obstacle.Position = new Vector2(_obstacle.Position.x + Speed * directionX * Global.GetTimeDelta(), _obstacle.Position.y + Speed * directionY * Global.GetTimeDelta());
         if(_obstacle.Position.x <= 5 || _obstacle.Position.x >= 600)
         {
             directionX *= -1;

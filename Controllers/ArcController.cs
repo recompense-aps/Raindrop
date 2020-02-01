@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using RainDrop;
 
 public class ArcController : Node
 {
@@ -25,7 +26,7 @@ public class ArcController : Node
     public override void _Process(float delta)
     {
         _velocity += _accel;
-        _obstacle.Position += _velocity;
+        _obstacle.Position += _velocity * Global.GetTimeDelta();
         _obstacle.Rotation = _velocity.Angle() + (float)Math.PI / 2;
     }
 }

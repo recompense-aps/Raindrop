@@ -1,5 +1,5 @@
 using Godot;
-using System;
+using RainDrop;
 
 public class SideInController : Node
 {
@@ -20,6 +20,6 @@ public class SideInController : Node
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
-        _slave.Position += _veloctiy;
+        _slave.Position += _veloctiy * Global.GetTimeDelta();
     }
 }

@@ -38,10 +38,12 @@ namespace RainDrop
 
         private static List<string> _locations = new List<string>() { "City", "Desert", "Ocean" };
         private static string _saveFilePath = "save.raindrop";
+        private static uint _gameStartTicks;
         private static SaveFile<SaveFileContents> _saveFile;
         private static Dictionary<string, PackedScene> _sceneCache;
         private static RandomNumberGenerator _randomGen = new RandomNumberGenerator();
         private static Node _anchor;
+        private const float DIFFICULTY_TIME_CONSTANT = 0.2f;
 
         public static SaveFile<SaveFileContents> SaveFile
         {
@@ -73,6 +75,7 @@ namespace RainDrop
             HUD.Score = 0;
             HUD.SetHealth(1);
             HUD.HideHUD();
+            _gameStartTicks = OS.GetTicksMsec();
         }
 
         public static void CreateDrop(Node context)
@@ -160,6 +163,13 @@ namespace RainDrop
             {
                 nd.QueueFree();
             }
+        }
+
+        public static float GetTimeDelta()
+        {
+            float baseInput = (OS.GetTicksMsec() - _gameStartTicks);
+            float output = Mathf.Log(baseInput) * DIFFICULTY_TIME_CONSTANT;
+            return output;
         }
 
         public static void ShuffleList<T>(this IList<T> list)
