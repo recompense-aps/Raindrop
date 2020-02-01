@@ -288,6 +288,9 @@ margin_bottom = 723.175
 custom_fonts/font = ExtResource( 7 )
 custom_colors/font_color = Color( 1, 0.0156863, 0.0156863, 1 )
 text = "STAY ABOVE THE GROUND!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="BlinkerEffect" parent="GroundWarning" instance=ExtResource( 8 )]
 
@@ -299,10 +302,11 @@ margin_bottom = 394.025
 texture = ExtResource( 9 )
 
 [node name="Label" type="Label" parent="."]
-margin_left = -288.411
-margin_top = 240.647
-margin_right = 503.589
-margin_bottom = 402.647
+modulate = Color( 0, 0, 0, 1 )
+margin_left = -280.811
+margin_top = 242.547
+margin_right = 511.189
+margin_bottom = 404.547
 custom_fonts/font = ExtResource( 7 )
 text = "Move left, right, 
 up, or down 
@@ -315,18 +319,18 @@ align = 1
 position = Vector2( 244.189, 438.636 )
 
 [node name="TextureRect" type="TextureRect" parent="Obstacles"]
-margin_left = -105.514
+margin_left = -83.6639
 margin_top = -37.6836
-margin_right = 22.4862
+margin_right = 44.3363
 margin_bottom = 49.3164
 rect_rotation = 43.64
 texture = ExtResource( 10 )
 
 [node name="TextureRect2" type="TextureRect" parent="Obstacles"]
-margin_left = 230.188
-margin_top = 44.8745
-margin_right = 249.188
-margin_bottom = 68.8745
+margin_left = -26.3127
+margin_top = 45.8245
+margin_right = -7.31274
+margin_bottom = 69.8245
 rect_rotation = 300.0
 rect_scale = Vector2( 5, 5 )
 texture = ExtResource( 11 )
@@ -341,28 +345,33 @@ rect_scale = Vector2( 3, 3 )
 texture = ExtResource( 12 )
 
 [node name="Label" type="Label" parent="Obstacles"]
-margin_left = -52.7568
-margin_top = 34.6688
-margin_right = 253.244
-margin_bottom = 97.6688
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 32.7435
+margin_top = -47.0314
+margin_right = 338.744
+margin_bottom = 15.9686
 custom_fonts/font = ExtResource( 7 )
 text = "Avoid all the objects
  for as long as possible!"
 align = 1
 
 [node name="TextureRect3" type="TextureRect" parent="."]
-margin_left = 379.85
-margin_top = 569.775
-margin_right = 419.85
-margin_bottom = 609.775
+margin_left = 409.3
+margin_top = 618.225
+margin_right = 449.3
+margin_bottom = 658.225
 rect_scale = Vector2( 4, 4 )
 texture = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Label2" type="Label" parent="."]
-margin_left = 340.659
-margin_top = 572.79
-margin_right = 577.659
-margin_bottom = 635.79
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 384.359
+margin_top = 489.19
+margin_right = 621.359
+margin_bottom = 618.19
 custom_fonts/font = ExtResource( 7 )
 text = "Use the portals
  to go to new areas
@@ -406,6 +415,7 @@ margin_bottom = 655.473
 texture = ExtResource( 15 )
 
 [node name="Label" type="Label" parent="Powerups"]
+modulate = Color( 0, 0, 0, 1 )
 margin_left = 64.8156
 margin_top = 568.267
 margin_right = 306.816
@@ -434,10 +444,14 @@ __meta__ = {
 }
 
 [node name="Label3" type="Label" parent="."]
+modulate = Color( 0, 0, 0, 1 )
 margin_left = 320.762
 margin_top = 316.466
 margin_right = 587.762
 margin_bottom = 346.466
 custom_fonts/font = ExtResource( 7 )
 text = "Press Enter to Pause"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="Pressed" from="LabelButton" to="." method="_on_LabelButton_Pressed"]
