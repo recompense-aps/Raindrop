@@ -149,12 +149,8 @@ public class Drop : Area2D
     {
         if(area.Name == "DeathArea")
         {
-            Position = new Vector2(300, 50);
-            if(IsInvincible == false)
-            {
-                Global.SoundEffects.Play("HitGround");
-                Hurt(0.75f);
-            }
+            Global.SoundEffects.Play("HitGround");
+            Hurt(0.75f);
         }
         if(area is Obstacle)
         {
