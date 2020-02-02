@@ -47,7 +47,7 @@ public class GameOver : Node2D
     {
         Hide();
         Global.Playlist.Start();
-        Global.ChangeLocation("City", this);
+        Global.ChangeLocation("City",this);
         Global.StartGame(this);
     }
 }

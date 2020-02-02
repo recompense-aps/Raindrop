@@ -87,6 +87,7 @@ public class Spawner : Node2D
 
     public void ChangeSpawnLocation(string location)
     {
+        Global.Log("Changed Location to: " + location);
         _elapsed = 0;
         FillObstaclePickBag(location);
     }
