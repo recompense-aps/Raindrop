@@ -43,7 +43,6 @@ namespace RainDrop
         private static Dictionary<string, PackedScene> _sceneCache;
         private static RandomNumberGenerator _randomGen = new RandomNumberGenerator();
         private static Node _anchor;
-        private static Node _spawnContext;
         private const float DIFFICULTY_TIME_CONSTANT = 0.2f;
 
         public static SaveFile<SaveFileContents> SaveFile
@@ -52,7 +51,7 @@ namespace RainDrop
             {
                 if(_saveFile == null)
                 {
-                    _saveFile = new SaveFile<SaveFileContents>(_saveFilePath);
+                    _saveFile = new SaveFile<SaveFileContents>(_saveFilePath, true);
                 }
                 return _saveFile;
             }
@@ -128,10 +127,6 @@ namespace RainDrop
         public static void ChangeLocation(string location, Node context)
         {
             Node anchor;
-            if(_spawnContext == null)
-            {
-                _spawnContext = context;
-            }
             if (_anchor == null)
             {
                 anchor = context.FindNode("LocationAnchor");
@@ -153,7 +148,8 @@ namespace RainDrop
             anchor.AddChild(Instance("Locations/" + location));
             CurrentLocation = location;
 
-            foreach(Node child in _spawnContext.GetChildren())
+            Log((context.GetViewport().GetChildren()[0] as Node2D).Name);
+            foreach(Node child in context.GetViewport().GetChild<MainScene>(0).GetChildren())
             {
                 if(child is Spawner)
                 {
