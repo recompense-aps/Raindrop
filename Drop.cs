@@ -252,7 +252,7 @@ public class Drop : Area2D
     {
         QueueFree();
         Global.GameOver.ApplyValues();
-        Global.GameOver.Show();        
-        GetTree().Paused = false;       
+        Global.GameOver.Show();
+        GetTree().Paused = false; 
     }
 }

@@ -213,6 +213,7 @@ namespace RainDrop
     {
         MainMenu,
         Playing,
-        GameOver
+        GameOver,
+        RestartMenu
     }
 }

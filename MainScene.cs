@@ -46,7 +46,7 @@ public class MainScene : Node2D
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
-        if(Input.IsActionJustPressed("pause"))
+        if(Input.IsActionJustPressed("pause") && Global.GameState == GameState.Playing)
         {
             GetTree().Paused = !GetTree().Paused;
         }
