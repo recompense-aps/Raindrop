@@ -46,7 +46,7 @@ expand = true
 stretch_mode = 2
 
 [node name="Controls" type="Node2D" parent="."]
-position = Vector2( -1, -161 )
+position = Vector2( 17, -161 )
 
 [node name="WASD" type="Node2D" parent="Controls"]
 position = Vector2( 2.52, 260 )
@@ -303,9 +303,9 @@ texture = ExtResource( 9 )
 
 [node name="Label" type="Label" parent="."]
 modulate = Color( 0, 0, 0, 1 )
-margin_left = -280.811
+margin_left = -284.811
 margin_top = 242.547
-margin_right = 511.189
+margin_right = 507.189
 margin_bottom = 404.547
 custom_fonts/font = ExtResource( 7 )
 text = "Move left, right, 
@@ -314,6 +314,9 @@ with any of
 the three 
 control sets"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Obstacles" type="Node2D" parent="."]
 position = Vector2( 244.189, 438.636 )
@@ -368,15 +371,18 @@ __meta__ = {
 
 [node name="Label2" type="Label" parent="."]
 modulate = Color( 0, 0, 0, 1 )
-margin_left = 384.359
+margin_left = 352.059
 margin_top = 489.19
-margin_right = 621.359
+margin_right = 589.059
 margin_bottom = 618.19
 custom_fonts/font = ExtResource( 7 )
 text = "Use the portals
  to go to new areas
 and to get a
  point bonus"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="LabelButton" parent="." instance=ExtResource( 14 )]
 margin_left = 15.0
@@ -391,12 +397,14 @@ BaseText = "BACK"
 [node name="Powerups" type="Node2D" parent="."]
 
 [node name="TextureRect" type="TextureRect" parent="Powerups"]
-modulate = Color( 0, 0, 1, 1 )
 margin_left = 33.1615
 margin_top = 563.745
 margin_right = 73.1615
 margin_bottom = 608.745
 texture = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TextureRect2" type="TextureRect" parent="Powerups"]
 modulate = Color( 1, 0, 0, 1 )
@@ -416,13 +424,16 @@ texture = ExtResource( 15 )
 
 [node name="Label" type="Label" parent="Powerups"]
 modulate = Color( 0, 0, 0, 1 )
-margin_left = 64.8156
-margin_top = 568.267
-margin_right = 306.816
-margin_bottom = 631.267
+margin_left = 80.0156
+margin_top = 566.367
+margin_right = 322.016
+margin_bottom = 629.367
 custom_fonts/font = ExtResource( 7 )
 text = "Get Power drops 
 for a boost!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TextureRect4" type="TextureRect" parent="."]
 margin_left = 214.435

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Godot;
 using Guero;
 using System;
@@ -75,7 +75,10 @@ namespace RainDrop
             HUD.Score = 0;
             HUD.SetHealth(1);
             HUD.HideHUD();
+            Playlist.Shuffle();
+            Playlist.Start();
             _gameStartTicks = OS.GetTicksMsec();
+            Portal.DumpInstance();
         }
 
         public static void CreateDrop(Node context)
@@ -148,7 +151,6 @@ namespace RainDrop
             anchor.AddChild(Instance("Locations/" + location));
             CurrentLocation = location;
 
-            Log((context.GetViewport().GetChildren()[0] as Node2D).Name);
             foreach(Node child in context.GetViewport().GetChild<MainScene>(0).GetChildren())
             {
                 if(child is Spawner)

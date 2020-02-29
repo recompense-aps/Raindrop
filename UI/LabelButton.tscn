@@ -7,6 +7,9 @@ margin_right = 40.0
 margin_bottom = 14.0
 mouse_filter = 1
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="gui_input" from="." to="." method="_on_LabelButton_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_LabelButton_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_LabelButton_mouse_exited"]

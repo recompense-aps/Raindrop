@@ -4,10 +4,20 @@ using RainDrop;
 public class Portal : Area2D
 {
     public static bool PortalIsCurrentlySpawned;
+    private static Portal _instance;
 
     public string Destination { get; }
 
     private string _destination;
+
+    public static void DumpInstance()
+    {
+        if(_instance != null)
+        {
+            _instance.QueueFree();
+            _instance = null;
+        }
+    }
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -34,6 +44,7 @@ public class Portal : Area2D
         else
         {
             PortalIsCurrentlySpawned = true;
+            _instance = this;
         }
     }
 

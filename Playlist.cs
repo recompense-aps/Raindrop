@@ -38,16 +38,24 @@ public class Playlist : Node
 
     public void Start()
     {
-        _current = _songs[0];
-        _current.VolumeDb = 0;
         if (Global.SaveFile.Contents.PlaySounds == false) return;
 
+        if (_current != null && _current.Playing)
+        {
+            _current.EmitSignal("finished");
+            return;
+        }
+
+        _current = _songs[0];
+        _current.VolumeDb = 0;
+
         _current.Play();
-        _current.Connect("finished", this, nameof(OnFinished));
+        _current.Connect("finished", this, nameof(OnFinished), null, (uint)ConnectFlags.Oneshot);
     }
 
     public void Mute()
     {
+        if (_current == null) return;
         _current.VolumeDb = -1000000;
     }
 
@@ -70,6 +78,7 @@ public class Playlist : Node
         int index = _songs.IndexOf(_current);
         _current = index == _songs.Count - 1 ? _songs[0] : _songs[index + 1];
         _current.Play();
-        System.Diagnostics.Debug.WriteLine("next song");
+        _current.Connect("finished", this, nameof(OnFinished), null, (uint)ConnectFlags.Oneshot);
+        Global.Log("next song");
     }
 }

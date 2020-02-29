@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Reverie.wav-1166d3446dc7f87e2cf9b9f30611bc29.sample"
+
+[deps]
+
+source_file="res://Audio/Music/Reverie.wav"
+dest_files=[ "res://.import/Reverie.wav-1166d3446dc7f87e2cf9b9f30611bc29.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

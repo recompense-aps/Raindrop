@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class MainScene : Node2D
 {
+    private AudioStreamPlayer _titleMusic;
     [Signal]
     public delegate void TeleportStarted();
     [Signal]
@@ -15,12 +16,11 @@ public class MainScene : Node2D
     public override void _Ready()
     {
         //OS.WindowFullscreen = true;
+        _titleMusic = FindNode("TitleMusic") as AudioStreamPlayer;
         PauseMode = PauseModeEnum.Process;
         Global.Playlist = new Playlist();
         AddChild(Global.Playlist);
         Global.Playlist.Load(GetSongs(), "Audio/Music/");
-        Global.Playlist.Shuffle();
-        Global.Playlist.Start();
 
         Global.LoadSceneCache(new List<string>()
         {
@@ -50,6 +50,18 @@ public class MainScene : Node2D
         {
             GetTree().Paused = !GetTree().Paused;
         }
+        if(Global.GameState != GameState.MainMenu)
+        {
+            _titleMusic.Stop();
+        }
+        else if (_titleMusic.Playing == false && Global.SaveFile.Contents.PlaySounds)
+        {
+            _titleMusic.Play();
+        }
+        if(_titleMusic.Playing && Global.SaveFile.Contents.PlaySounds == false)
+        {
+            _titleMusic.Stop();
+        }
     }
 
     public void DisplayMenu(string locationPath)
@@ -63,6 +75,8 @@ public class MainScene : Node2D
         {
             "Viscosity.wav",
             "Cosmic Strings.wav",
+            "Reverie.wav",
+            "Isolated.wav"
         };
     }    
 }

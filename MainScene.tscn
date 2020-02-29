@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://MainScene.cs" type="Script" id=1]
 [ext_resource path="res://Locations/City.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://TeleportCover.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Graphics/frame.png" type="Texture" id=7]
 [ext_resource path="res://Locations/GameOver.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Audio/Music/Title Theme.wav" type="AudioStream" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 381.807, 25.1293 )
@@ -63,3 +64,6 @@ __meta__ = {
 visible = false
 
 [node name="Menus" type="Node2D" parent="."]
+
+[node name="TitleMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )

@@ -62,15 +62,15 @@ public class Spawner : Node2D
 
         if (Input.IsActionJustPressed("ui_accept"))
         {
-            SpawnPortal();
+            //SpawnPortal();
         }
         if (Input.IsActionJustPressed("dev_powerup"))
         {
-            SpawnPowerUp();
+            //SpawnPowerUp();
         }
         if(Input.IsActionJustPressed("dev_obstacle"))
         {
-            SpawnDevObstacle();
+            //SpawnDevObstacle();
         }
 
         if (Global.HUD.Score >= _scoreToSpawnPortal)
@@ -87,7 +87,6 @@ public class Spawner : Node2D
 
     public void ChangeSpawnLocation(string location)
     {
-        Global.Log("Changed Location to: " + location);
         _elapsed = 0;
         FillObstaclePickBag(location);
     }

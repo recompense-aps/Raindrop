@@ -46,7 +46,6 @@ public class GameOver : Node2D
     private void _on_LabelButton3_Pressed(object labelButton)
     {
         Hide();
-        Global.Playlist.Start();
         Global.ChangeLocation("City",this);
         Global.StartGame(this);
     }

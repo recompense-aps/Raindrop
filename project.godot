@@ -19,7 +19,8 @@ config/name="RainDrop"
 run/main_scene="res://MainScene.tscn"
 boot_splash/image="res://Graphics/rmv-studios-logo.png"
 boot_splash/bg_color=Color( 1, 1, 1, 1 )
-config/icon="res://rmv_croppped_icon_png.png"
+config/icon="res://cover-icon-png.png"
+config/windows_native_icon="res://cover-icon-ico.ico"
 
 [debug]
 

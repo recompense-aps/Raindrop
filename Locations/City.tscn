@@ -13,6 +13,9 @@ margin_right = 600.0
 margin_bottom = 798.0
 texture = ExtResource( 1 )
 expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Sun" parent="." instance=ExtResource( 2 )]
 position = Vector2( 248, 647 )
@@ -35,13 +38,13 @@ __meta__ = {
 position = Vector2( -35, -1 )
 
 [node name="Platform" parent="PlatformAnchor" instance=ExtResource( 4 )]
-position = Vector2( 279.268, 368.949 )
+position = Vector2( 268, 350 )
 
 [node name="Platform2" parent="PlatformAnchor" instance=ExtResource( 4 )]
-position = Vector2( 431.696, 460 )
+position = Vector2( 440, 460 )
 
 [node name="Platform3" parent="PlatformAnchor" instance=ExtResource( 4 )]
-position = Vector2( 128.801, 460 )
+position = Vector2( 96, 460 )
 
 [node name="Clouds" parent="." instance=ExtResource( 5 )]
 position = Vector2( -59.2288, 565.048 )
