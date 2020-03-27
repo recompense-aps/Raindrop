@@ -70,16 +70,8 @@ __meta__ = {
 
 [node name="PlatformAnchor" type="Node2D" parent="."]
 
-[node name="Platform" parent="PlatformAnchor" instance=ExtResource( 9 )]
-position = Vector2( 236, 353.509 )
-PlatformType = "Ocean"
-
 [node name="Platform2" parent="PlatformAnchor" instance=ExtResource( 9 )]
 position = Vector2( 236, 457.705 )
-PlatformType = "Ocean"
-
-[node name="Platform3" parent="PlatformAnchor" instance=ExtResource( 9 )]
-position = Vector2( 236, 250 )
 PlatformType = "Ocean"
 
 [node name="Platform4" parent="PlatformAnchor" instance=ExtResource( 9 )]
