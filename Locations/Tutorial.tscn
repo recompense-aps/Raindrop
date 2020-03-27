@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Graphics/city-sky-4.PNG" type="Texture" id=1]
 [ext_resource path="res://Locations/Environment/Sun.tscn" type="PackedScene" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://UI/LabelButton.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Graphics/RealRaindropGray.png" type="Texture" id=15]
 [ext_resource path="res://Locations/Tutorial.cs" type="Script" id=16]
+[ext_resource path="res://Graphics/cross.png" type="Texture" id=17]
 
 [node name="Tutorial" type="CanvasLayer"]
 script = ExtResource( 16 )
@@ -397,6 +398,7 @@ BaseText = "BACK"
 [node name="Powerups" type="Node2D" parent="."]
 
 [node name="TextureRect" type="TextureRect" parent="Powerups"]
+modulate = Color( 0.470588, 0.470588, 0.470588, 1 )
 margin_left = 33.1615
 margin_top = 563.745
 margin_right = 73.1615
@@ -415,12 +417,19 @@ margin_bottom = 647.936
 texture = ExtResource( 15 )
 
 [node name="TextureRect3" type="TextureRect" parent="Powerups"]
-modulate = Color( 0, 1, 0, 1 )
 margin_left = 48.2349
 margin_top = 610.473
 margin_right = 88.2349
 margin_bottom = 655.473
 texture = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Powerups/TextureRect3"]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 17 )
 
 [node name="Label" type="Label" parent="Powerups"]
 modulate = Color( 0, 0, 0, 1 )

@@ -151,13 +151,17 @@ namespace RainDrop
             anchor.AddChild(Instance("Locations/" + location));
             CurrentLocation = location;
 
-            foreach(Node child in context.GetViewport().GetChild<MainScene>(0).GetChildren())
+            if(context.GetViewport().GetChild(0) is MainScene)
             {
-                if(child is Spawner)
+                foreach (Node child in context.GetViewport().GetChild<MainScene>(0).GetChildren())
                 {
-                    (child as Spawner).ChangeSpawnLocation(CurrentLocation);
+                    if (child is Spawner)
+                    {
+                        (child as Spawner).ChangeSpawnLocation(CurrentLocation);
+                    }
                 }
             }
+
         }
 
         public static void RemoveChildren(Node n)
@@ -201,7 +205,7 @@ namespace RainDrop
     class GlobalColors
     {
         public Color Red = new Color(1, 0, 0, 1);
-        public Color Green = new Color(0, 1, 0, 1);
+        public Color White = new Color(1, 1, 1, 1);
         public Color Blue = new Color(0, 0, 1, 1);
         public Color Gray = new Color(0.5f, 0.5f, 0.5f, 1);
     }

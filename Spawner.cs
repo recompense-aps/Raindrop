@@ -62,7 +62,7 @@ public class Spawner : Node2D
 
         if (Input.IsActionJustPressed("ui_accept"))
         {
-            //SpawnPortal();
+            SpawnPortal();
         }
         if (Input.IsActionJustPressed("dev_powerup"))
         {

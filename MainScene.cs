@@ -57,6 +57,7 @@ public class MainScene : Node2D
         else if (_titleMusic.Playing == false && Global.SaveFile.Contents.PlaySounds)
         {
             _titleMusic.Play();
+            Global.Playlist.Mute();
         }
         if(_titleMusic.Playing && Global.SaveFile.Contents.PlaySounds == false)
         {
