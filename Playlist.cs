@@ -39,18 +39,7 @@ public class Playlist : Node
     public void Start()
     {
         if (Global.SaveFile.Contents.PlaySounds == false) return;
-
-        if (_current != null && _current.Playing)
-        {
-            _current.EmitSignal("finished");
-            return;
-        }
-
-        _current = _songs[0];
-        _current.VolumeDb = 0;
-
-        _current.Play();
-        _current.Connect("finished", this, nameof(OnFinished), null, (uint)ConnectFlags.Oneshot);
+        PlayNextSong();
     }
 
     public void Mute()
@@ -72,13 +61,18 @@ public class Playlist : Node
         }
     }
 
-    private void OnFinished()
+    private void PlayNextSong()
     {
-        _current.Stop();
-        int index = _songs.IndexOf(_current);
+        int index = 0;
+        if(_current != null)
+        {
+            _current.Disconnect("finished", this, nameof(PlayNextSong));
+            _current.Stop();
+            index = _songs.IndexOf(_current);
+        }
         _current = index == _songs.Count - 1 ? _songs[0] : _songs[index + 1];
+        _current.VolumeDb = 0;
         _current.Play();
-        _current.Connect("finished", this, nameof(OnFinished), null, (uint)ConnectFlags.Oneshot);
-        Global.Log("next song");
+        _current.Connect("finished", this, nameof(PlayNextSong), null, (uint)ConnectFlags.Oneshot);
     }
 }
