@@ -38,7 +38,7 @@ public class Playlist : Node
 
     public void Start()
     {
-        if (Global.SaveFile.Contents.PlaySounds == false) return;
+        if (Global.SaveFile.PlaySounds == false) return;
         PlayNextSong();
     }
 

@@ -22,7 +22,7 @@ public class SoundEffects : Node
     public AudioStreamPlayer Play(string soundId)
     {
         AudioStreamPlayer p = (FindNode(soundId) as AudioStreamPlayer);
-        if (Mute || Global.SaveFile.Contents.PlaySounds != false)
+        if (Mute || Global.SaveFile.PlaySounds != false)
         {
             p.Play();
         }

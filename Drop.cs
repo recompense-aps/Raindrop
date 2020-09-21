@@ -74,7 +74,7 @@ public class Drop : Area2D
     private void Lose()
     {
         Global.GameState = GameState.GameOver;
-        if(Global.SaveFile.Contents.PlaySounds)
+        if(Global.SaveFile.PlaySounds)
         {
             Global.Playlist.Mute();
             Global.SoundEffects.Play("GameOver").Connect("finished", this, nameof(OnGameOverSoundFinished));

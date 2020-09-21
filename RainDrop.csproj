@@ -84,6 +84,7 @@
     <Compile Include="Portal.cs" />
     <Compile Include="PowerUp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RainDropSave.cs" />
     <Compile Include="SoundEffects.cs" />
     <Compile Include="Spawner.cs" />
     <Compile Include="SpriteTrail.cs" />

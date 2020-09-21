@@ -34,7 +34,7 @@ public class GameOver : Node2D
         string fact = _facts[g.RandiRange(0, _facts.Length - 1)];
         (FindNode("FactText") as Label).Text = fact;
         (FindNode("FinalScoreText") as Label).Text = Global.HUD.Score.ToString();
-        (FindNode("HighScoreText") as Label).Text = Global.SaveFile.Contents.Score.ToString();
+        (FindNode("HighScoreText") as Label).Text = Global.SaveFile.Score.ToString();
         Global.SaveFile.Save();
     }
 

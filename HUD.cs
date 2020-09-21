@@ -53,7 +53,7 @@ public class HUD : CanvasLayer
     public override void _Ready()
     {
         Global.HUD = this;
-        Global.PreviousHighScore = Global.SaveFile.Contents.Score;
+        Global.PreviousHighScore = Global.SaveFile.Score;
         PauseMode = PauseModeEnum.Process;
         _scoreText = FindNode("ScoreText") as Label;
         _healthText = FindNode("HealthText") as Label;
@@ -64,7 +64,7 @@ public class HUD : CanvasLayer
         _healthText.Visible = false;
         _highScoreText.Visible = false;
 
-        if(Global.SaveFile.Contents.PlaySounds == true)
+        if(Global.SaveFile.PlaySounds == true)
         {
             _muteButton.Text = _muteButton.BaseText = "MUTE";
         }
@@ -81,7 +81,7 @@ public class HUD : CanvasLayer
         {
             _highScoreText.Text = _score.ToString();
             Global.PreviousHighScore = _score;
-            Global.SaveFile.Contents.Score = _score;
+            Global.SaveFile.Score = _score;
         }
     }
 
@@ -127,13 +127,13 @@ public class HUD : CanvasLayer
     {
         if(_muteButton.BaseText == "MUTE")
         {
-            Global.SaveFile.Contents.PlaySounds = false;
+            Global.SaveFile.PlaySounds = false;
             _muteButton.Text = _muteButton.BaseText = "UNMUTE";
             Global.Playlist.Mute();
         }
         else
         {
-            Global.SaveFile.Contents.PlaySounds = true;
+            Global.SaveFile.PlaySounds = true;
             _muteButton.Text = _muteButton.BaseText = "MUTE";
             Global.Playlist.UnMute();
         }

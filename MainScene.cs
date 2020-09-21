@@ -54,12 +54,12 @@ public class MainScene : Node2D
         {
             _titleMusic.Stop();
         }
-        else if (_titleMusic.Playing == false && Global.SaveFile.Contents.PlaySounds)
+        else if (_titleMusic.Playing == false && Global.SaveFile.PlaySounds)
         {
             _titleMusic.Play();
             Global.Playlist.Mute();
         }
-        if(_titleMusic.Playing && Global.SaveFile.Contents.PlaySounds == false)
+        if(_titleMusic.Playing && Global.SaveFile.PlaySounds == false)
         {
             _titleMusic.Stop();
         }

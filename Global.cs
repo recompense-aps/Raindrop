@@ -39,19 +39,20 @@ namespace RainDrop
         private static List<string> _locations = new List<string>() { "City", "Desert", "Ocean" };
         private static string _saveFilePath = "save.raindrop";
         private static uint _gameStartTicks;
-        private static SaveFile<SaveFileContents> _saveFile;
+        private static RainDropSave _saveFile;
         private static Dictionary<string, PackedScene> _sceneCache;
         private static RandomNumberGenerator _randomGen = new RandomNumberGenerator();
         private static Node _anchor;
         private const float DIFFICULTY_TIME_CONSTANT = 0.2f;
 
-        public static SaveFile<SaveFileContents> SaveFile
+        public static RainDropSave SaveFile
         {
             get
             {
                 if(_saveFile == null)
                 {
-                    _saveFile = new SaveFile<SaveFileContents>(_saveFilePath, true);
+                    _saveFile = new RainDropSave();
+                    _saveFile.Load();
                 }
                 return _saveFile;
             }
