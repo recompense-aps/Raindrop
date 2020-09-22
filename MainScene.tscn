@@ -67,3 +67,47 @@ visible = false
 
 [node name="TitleMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
+
+[node name="Node2D" type="Node2D" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+
+[node name="MoveRightButton" type="Button" parent="Node2D"]
+margin_left = 515.0
+margin_top = -2.0
+margin_right = 600.0
+margin_bottom = 713.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MoveLeftButton" type="Button" parent="Node2D"]
+margin_left = -9.0
+margin_top = -10.0
+margin_right = 90.0
+margin_bottom = 714.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MoveUpButton" type="Button" parent="Node2D"]
+margin_left = 89.0
+margin_top = 2.0
+margin_right = 514.0
+margin_bottom = 442.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MoveDownButton" type="Button" parent="Node2D"]
+margin_left = 84.9188
+margin_top = 437.32
+margin_right = 509.919
+margin_bottom = 877.32
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="ready" from="Node2D/MoveRightButton" to="." method="_on_MoveRightButton_ready"]
+[connection signal="ready" from="Node2D/MoveLeftButton" to="." method="_on_MoveLeftButton_ready"]
+[connection signal="ready" from="Node2D/MoveUpButton" to="." method="_on_MoveUpButton_ready"]
+[connection signal="ready" from="Node2D/MoveDownButton" to="." method="_on_MoveUpButton_ready"]
+[connection signal="ready" from="Node2D/MoveDownButton" to="." method="_on_MoveDownButton_ready"]

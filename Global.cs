@@ -16,6 +16,13 @@ namespace RainDrop
         public static Playlist Playlist { get; set; }
         public static string CurrentLocation { get; set; }
         public static GameState GameState { get; set; }
+
+        public static Button MoveRightButton { get; set; }
+        public static Button MoveLeftButton { get; set; }
+        public static Button MoveUpButton { get; set; }
+        public static Button MoveDownButton { get; set; }
+
+
         public static string NextLocation
         {
             get
@@ -37,7 +44,6 @@ namespace RainDrop
         public static GlobalColors Colors = new GlobalColors();
 
         private static List<string> _locations = new List<string>() { "City", "Desert", "Ocean" };
-        private static string _saveFilePath = "save.raindrop";
         private static uint _gameStartTicks;
         private static RainDropSave _saveFile;
         private static Dictionary<string, PackedScene> _sceneCache;

@@ -79,5 +79,27 @@ public class MainScene : Node2D
             "Reverie.wav",
             "Isolated.wav"
         };
-    }    
+    }
+
+    private void _on_MoveRightButton_ready()
+    {
+        Global.MoveRightButton = FindNode("MoveRightButton") as Button;
+    }
+
+    private void _on_MoveLeftButton_ready()
+    {
+        Global.MoveLeftButton = FindNode("MoveLeftButton") as Button;
+    }
+
+
+    private void _on_MoveUpButton_ready()
+    {
+        Global.MoveUpButton = FindNode("MoveUpButton") as Button;
+    }
+
+    private void _on_MoveDownButton_ready()
+    {
+        Global.MoveDownButton = FindNode("MoveDownButton") as Button;
+    }
+
 }
